@@ -18,6 +18,6 @@ cp -R assets status "$OUT"/
 
 # Per-surface security headers (Cloudflare Pages reads _headers from the
 # output directory).
-cp _headers "$OUT"/
+cp _headers _redirects "$OUT"/
 
 echo "built $OUT: $(find "$OUT" -type f | wc -l | tr -d ' ') files"
