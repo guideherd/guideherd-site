@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>GuideHerd — Page not found</title>
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>
+/* Present so unknown paths answer 404 instead of silently rendering
+   the homepage with a 200 (public-surface hardening after #239). */
+:root {
+  --ink: #0E2A3F;
+  --ink-60: rgba(14, 42, 63, 0.60);
+  --paper: #F5F2EA;
+  --accent-ink: #0E6D6A;
+  --serif: "Fraunces", "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter Tight", "Söhne", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: var(--sans); background: var(--paper); color: var(--ink);
+  min-height: 100vh; display: grid; place-items: center; padding: 24px;
+  line-height: 1.6; text-align: center;
+}
+h1 { font-family: var(--serif); font-weight: 550; font-size: clamp(28px, 6vw, 40px); margin-bottom: 10px; }
+p { color: var(--ink-60); max-width: 34em; }
+nav { margin-top: 22px; display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+a { color: var(--accent-ink); }
+</style>
+</head>
+<body>
+<main>
+  <h1>That page isn&rsquo;t here.</h1>
+  <p>The address may be mistyped, or the page may have moved.</p>
+  <nav>
+    <a href="/">GuideHerd home</a>
+    <a href="/status/">Service status</a>
+  </nav>
+</main>
+</body>
+</html>

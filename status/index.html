@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Current availability of the GuideHerd service: API, web application, and core capabilities, observed from outside the platform.">
+<title>GuideHerd — Service Status</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+/* GuideHerd service status (#239). Deliberately self-contained: this
+   page renders ONLY from the externally published status artifact and
+   must stay useful while the platform itself is down. Same visual
+   palette as the main site. */
+:root {
+  --ink:        #0E2A3F;
+  --ink-soft:   #1C3A52;
+  --ink-60:     rgba(14, 42, 63, 0.60);
+  --ink-40:     rgba(14, 42, 63, 0.40);
+  --ink-20:     rgba(14, 42, 63, 0.20);
+  --ink-10:     rgba(14, 42, 63, 0.10);
+  --ink-05:     rgba(14, 42, 63, 0.05);
+  --paper:      #F5F2EA;
+  --cream:      #FBF8F1;
+  --accent-ink: #0E6D6A;
+  --ok:         #1E7C79;
+  --warn:       #B07A1E;
+  --bad:        #A63B2A;
+  --mute:       rgba(14, 42, 63, 0.35);
+  --serif: "Fraunces", "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans:  "Inter Tight", "Söhne", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+  padding: 0 20px 64px;
+}
+main { max-width: 720px; margin: 0 auto; }
+header { padding: 44px 0 8px; }
+.brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.01em; }
+.brand a { color: var(--ink); text-decoration: none; }
+h1 { font-family: var(--serif); font-weight: 550; font-size: clamp(26px, 5vw, 34px); margin: 26px 0 6px; }
+.checked { color: var(--ink-60); font-size: 14px; min-height: 1.4em; }
+.banner {
+  margin: 22px 0 26px; padding: 16px 18px; border-radius: 10px;
+  background: var(--cream); border: 1px solid var(--ink-10);
+  display: flex; align-items: center; gap: 12px; font-size: 17px;
+}
+.banner strong { font-weight: 620; }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--mute); }
+.s-operational .dot { background: var(--ok); }
+.s-degraded    .dot { background: var(--warn); }
+.s-unavailable .dot { background: var(--bad); }
+.s-operational .s-word { color: var(--ok); }
+.s-degraded    .s-word { color: var(--warn); }
+.s-unavailable .s-word { color: var(--bad); }
+.s-unknown     .s-word { color: var(--ink-60); }
+.drill {
+  margin: 0 0 18px; padding: 10px 14px; border-radius: 8px; font-size: 14px;
+  background: #F3E7C9; border: 1px solid #D8C089; display: none;
+}
+.note {
+  margin: 0 0 18px; padding: 10px 14px; border-radius: 8px; font-size: 14px;
+  background: var(--ink-05); border: 1px solid var(--ink-10); color: var(--ink-soft);
+  display: none;
+}
+ul.components { list-style: none; padding: 0; }
+.component {
+  background: var(--cream); border: 1px solid var(--ink-10); border-radius: 10px;
+  padding: 14px 18px 16px; margin-bottom: 12px;
+}
+.component .row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.component .name { font-weight: 600; font-size: 16px; }
+.component .desc { color: var(--ink-60); font-size: 13px; margin-top: 1px; }
+.component .s-word { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.strip { display: flex; gap: 2px; margin-top: 12px; height: 26px; align-items: stretch; }
+.tick { flex: 1 1 0; min-width: 2px; border-radius: 2px; background: var(--ink-05); }
+.t-operational { background: var(--ok); opacity: 0.75; }
+.t-degraded    { background: var(--warn); }
+.t-unavailable { background: var(--bad); }
+.t-unknown     { background: var(--ink-10); }
+.striplabel { display: flex; justify-content: space-between; color: var(--ink-40); font-size: 11px; margin-top: 5px; }
+h2 { font-family: var(--serif); font-weight: 550; font-size: 21px; margin: 34px 0 10px; }
+ul.changes { list-style: none; padding: 0; font-size: 14px; }
+ul.changes li { padding: 8px 2px; border-bottom: 1px solid var(--ink-10); display: flex; gap: 12px; flex-wrap: wrap; }
+ul.changes time { color: var(--ink-60); white-space: nowrap; }
+.quiet { color: var(--ink-60); font-size: 14px; }
+footer { margin-top: 44px; color: var(--ink-40); font-size: 13px; }
+footer a { color: var(--accent-ink); }
+@media (max-width: 480px) { .banner { font-size: 15px; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="brand"><a href="https://guideherd.ai/">GuideHerd</a></p>
+    <h1>Service status</h1>
+    <p class="checked" id="checked" aria-live="polite">Loading current status…</p>
+  </header>
+
+  <p class="drill" id="drill" role="note">Simulated data — this view renders a publish-path drill, not the live service state. <a href="./">View live status</a></p>
+  <p class="note" id="note" role="note"></p>
+
+  <div class="banner s-unknown" id="banner" role="status">
+    <span class="dot" aria-hidden="true"></span>
+    <span><strong>Overall:</strong> <span class="s-word" id="overall">Unknown</span></span>
+  </div>
+
+  <ul class="components" id="components"></ul>
+
+  <h2>Recent changes</h2>
+  <ul class="changes" id="changes"><li class="quiet">No status information loaded yet.</li></ul>
+
+  <footer>
+    <p>Status is observed from outside the GuideHerd platform on a regular interval and published to this independently hosted page, so it stays available and truthful during an outage. Times are shown in your local timezone.</p>
+  </footer>
+</main>
+
+<script>
+'use strict';
+/* This page holds NO connection to the GuideHerd backend: it renders
+   exclusively from the sanitized artifact the external monitor
+   publishes (see monitor/status-artifact.js — the closed vocabulary is
+   enforced at build time AND re-checked here). Anything unexpected
+   renders as Unknown, never as data. */
+(function () {
+  var DRILL = new URLSearchParams(location.search).get('drill') === '1';
+  var DATA_URL = 'https://raw.githubusercontent.com/uasdj25/guideherd-status/refs/heads/status-data/'
+    + (DRILL ? 'status-drill.json' : 'status.json') + '?t=' + Date.now();
+
+  var STATUSES = ['operational', 'degraded', 'unavailable', 'unknown'];
+  var LABELS = { operational: 'Operational', degraded: 'Degraded', unavailable: 'Unavailable', unknown: 'Unknown' };
+  var COMPONENTS = [
+    { key: 'api', name: 'API', desc: 'The service endpoints behind scheduling, intake, and the console.' },
+    { key: 'webApplication', name: 'Web Application', desc: 'The GuideHerd website and signed-in pages.' },
+    { key: 'coreCapabilities', name: 'Core Capabilities', desc: 'The capabilities the service needs to do real work.' }
+  ];
+  var STRIP_TICKS = 48;
+
+  function coarse(value) { return STATUSES.indexOf(value) === -1 ? 'unknown' : value; }
+  function instant(value) {
+    if (typeof value !== 'string') return null;
+    var ms = Date.parse(value);
+    return isFinite(ms) ? ms : null;
+  }
+
+  /* Rebuild the artifact from the closed vocabulary — the same
+     discipline as the publisher, applied a second time at render. */
+  function normalize(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    var generatedAt = instant(raw.generatedAt);
+    if (generatedAt === null) return null;
+    var staleMinutes = (typeof raw.staleAfterMinutes === 'number' && raw.staleAfterMinutes >= 15 && raw.staleAfterMinutes <= 1440)
+      ? raw.staleAfterMinutes : 240;
+    var components = {};
+    COMPONENTS.forEach(function (c) {
+      components[c.key] = coarse(raw.components && raw.components[c.key]);
+    });
+    var history = [];
+    (Array.isArray(raw.history) ? raw.history.slice(-400) : []).forEach(function (entry) {
+      if (!entry || typeof entry === 'string') return;
+      var at = instant(entry.at);
+      if (at === null) return;
+      var row = { at: at, overall: coarse(entry.overall) };
+      COMPONENTS.forEach(function (c) { row[c.key] = coarse(entry[c.key]); });
+      history.push(row);
+    });
+    history.sort(function (a, b) { return a.at - b.at; });
+    return {
+      generatedAt: generatedAt,
+      staleMinutes: staleMinutes,
+      overall: coarse(raw.overall),
+      components: components,
+      history: history,
+      drill: raw.drill === true
+    };
+  }
+
+  function fmt(ms) {
+    return new Date(ms).toLocaleString(undefined, {
+      month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+    });
+  }
+  function ago(ms) {
+    var minutes = Math.max(0, Math.round((Date.now() - ms) / 60000));
+    if (minutes < 1) return 'moments ago';
+    if (minutes < 90) return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago');
+    var hours = Math.round(minutes / 60);
+    if (hours < 36) return hours + (hours === 1 ? ' hour ago' : ' hours ago');
+    return Math.round(hours / 24) + ' days ago';
+  }
+
+  function setWord(el, status) {
+    el.textContent = LABELS[status];
+    el.className = 's-word';
+  }
+
+  function render(data, stale) {
+    var banner = document.getElementById('banner');
+    var overall = stale ? 'unknown' : data.overall;
+    banner.className = 'banner s-' + overall;
+    setWord(document.getElementById('overall'), overall);
+
+    document.getElementById('checked').textContent =
+      'Last checked ' + ago(data.generatedAt) + ' (' + fmt(data.generatedAt) + ').';
+    if (data.drill) document.getElementById('drill').style.display = 'block';
+    if (stale) {
+      var note = document.getElementById('note');
+      note.textContent = 'No sufficiently recent observation — the most recent check ran '
+        + ago(data.generatedAt) + ', so current status is shown as Unknown. The history below reflects the last observations received.';
+      note.style.display = 'block';
+    }
+
+    var list = document.getElementById('components');
+    list.textContent = '';
+    COMPONENTS.forEach(function (c) {
+      var status = stale ? 'unknown' : data.components[c.key];
+      var li = document.createElement('li');
+      li.className = 'component s-' + status;
+
+      var row = document.createElement('div'); row.className = 'row';
+      var left = document.createElement('div');
+      var name = document.createElement('div'); name.className = 'name'; name.textContent = c.name;
+      var desc = document.createElement('div'); desc.className = 'desc'; desc.textContent = c.desc;
+      left.appendChild(name); left.appendChild(desc);
+      var word = document.createElement('span'); setWord(word, status);
+      row.appendChild(left); row.appendChild(word);
+      li.appendChild(row);
+
+      var recent = data.history.slice(-STRIP_TICKS);
+      if (recent.length) {
+        var strip = document.createElement('div');
+        strip.className = 'strip';
+        strip.setAttribute('role', 'img');
+        strip.setAttribute('aria-label', c.name + ' — recent observations, oldest to newest');
+        recent.forEach(function (entry) {
+          var tick = document.createElement('span');
+          tick.className = 'tick t-' + entry[c.key];
+          tick.title = fmt(entry.at) + ' — ' + LABELS[entry[c.key]];
+          strip.appendChild(tick);
+        });
+        li.appendChild(strip);
+        var label = document.createElement('div'); label.className = 'striplabel';
+        var from = document.createElement('span'); from.textContent = fmt(recent[0].at);
+        var to = document.createElement('span'); to.textContent = fmt(recent[recent.length - 1].at);
+        label.appendChild(from); label.appendChild(to);
+        li.appendChild(label);
+      }
+      list.appendChild(li);
+    });
+
+    var changes = [];
+    for (var i = 1; i < data.history.length; i += 1) {
+      COMPONENTS.forEach(function (c) {
+        var was = data.history[i - 1][c.key];
+        var now = data.history[i][c.key];
+        if (was !== now) changes.push({ at: data.history[i].at, text: c.name + ': ' + LABELS[was] + ' → ' + LABELS[now] });
+      });
+    }
+    var changesEl = document.getElementById('changes');
+    changesEl.textContent = '';
+    if (!changes.length) {
+      var quiet = document.createElement('li');
+      quiet.className = 'quiet';
+      quiet.textContent = data.history.length > 1
+        ? 'No status changes in the observed window.'
+        : 'History will appear here as observations accumulate.';
+      changesEl.appendChild(quiet);
+    } else {
+      changes.slice(-10).reverse().forEach(function (change) {
+        var li = document.createElement('li');
+        var time = document.createElement('time'); time.textContent = fmt(change.at);
+        var span = document.createElement('span'); span.textContent = change.text;
+        li.appendChild(time); li.appendChild(span);
+        changesEl.appendChild(li);
+      });
+    }
+  }
+
+  function renderUnavailable() {
+    document.getElementById('checked').textContent = 'Status information is temporarily unavailable.';
+    var note = document.getElementById('note');
+    note.textContent = 'This page could not retrieve the latest published status, so nothing is claimed either way. If GuideHerd also seems unreachable to you, a disruption is likely in progress.';
+    note.style.display = 'block';
+    document.getElementById('banner').className = 'banner s-unknown';
+    setWord(document.getElementById('overall'), 'unknown');
+    var list = document.getElementById('components');
+    list.textContent = '';
+    COMPONENTS.forEach(function (c) {
+      var li = document.createElement('li');
+      li.className = 'component s-unknown';
+      var row = document.createElement('div'); row.className = 'row';
+      var left = document.createElement('div');
+      var name = document.createElement('div'); name.className = 'name'; name.textContent = c.name;
+      left.appendChild(name);
+      var word = document.createElement('span'); setWord(word, 'unknown');
+      row.appendChild(left); row.appendChild(word);
+      li.appendChild(row);
+      list.appendChild(li);
+    });
+  }
+
+  fetch(DATA_URL, { cache: 'no-store' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('unavailable');
+      return res.json();
+    })
+    .then(function (raw) {
+      var data = normalize(raw);
+      if (!data) { renderUnavailable(); return; }
+      var stale = (Date.now() - data.generatedAt) > data.staleMinutes * 60000;
+      render(data, stale);
+    })
+    .catch(renderUnavailable);
+})();
+</script>
+</body>
+</html>
