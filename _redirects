@@ -1,0 +1,19 @@
+# Backward-compatible redirects for product/application paths that were
+# served from the apex (guideherd.ai) before the repository split.
+# Every already-issued link — /manage/<token>, /intake/<token>, staff
+# console paths — keeps working by forwarding, path- and query-preserving,
+# to the product origin app.guideherd.ai.
+#
+# 302 (temporary) on purpose: a permanent 301 would be cached by browsers
+# and intermediaries and make a rollback to the apex hazardous. Marketing
+# routes, /status/, and unknown paths are deliberately NOT listed, so they
+# are served or 404 as normal.
+
+/receptionist/*   https://app.guideherd.ai/receptionist/:splat   302
+/operations/*     https://app.guideherd.ai/operations/:splat     302
+/admin/*          https://app.guideherd.ai/admin/:splat          302
+/manage/*         https://app.guideherd.ai/manage/:splat         302
+/intake/*         https://app.guideherd.ai/intake/:splat         302
+/intake-review/*  https://app.guideherd.ai/intake-review/:splat  302
+/documents/*      https://app.guideherd.ai/documents/:splat      302
+/demo/*           https://app.guideherd.ai/demo/:splat           302
