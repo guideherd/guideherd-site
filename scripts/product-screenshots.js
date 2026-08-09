@@ -144,9 +144,22 @@ function mockApi(page, kind) {
       return json(200, kind === 'admin' ? ADMIN_IDENTITY : OPERATOR_IDENTITY);
     }
     if (url.endsWith('/api/v1/auth/providers')) {
+      // GitLab #303. This mock must mirror a PRODUCTION-EQUIVALENT posture,
+      // because whatever it returns becomes a picture on a public page.
+      //
+      // Microsoft Entra sign-in is implemented but has never been validated
+      // against a real directory (product repo:
+      // docs/operations/entra-id-sso-activation.md), and `entraId` defaults to
+      // { enabled: false, clientId: null, ... } in the console-sign-in domain —
+      // so a real deployment does not offer it and no `entra-id` entry appears
+      // here. Adding one back would put a capability in a marketing screenshot
+      // that we have not validated. Pinned by test/claims.test.js.
+      //
+      // This says nothing about the Microsoft 365 CALENDAR integration, which
+      // is a separate, live-proven capability reached through entirely
+      // different credentials. Do not conflate them.
       return json(200, { providers: [
         { provider: 'local', label: 'Sign-in credential', available: true },
-        { provider: 'entra-id', label: 'Microsoft', startPath: '/api/v1/auth/federated/entra-id/start' },
         { provider: 'google-workspace', label: 'Google Workspace', startPath: '/api/v1/auth/federated/google-workspace/start' },
       ] });
     }

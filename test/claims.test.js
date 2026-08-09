@@ -42,3 +42,48 @@ test('Microsoft is not offered as a staff sign-in method', () => {
   assert.match(index, /Microsoft 365 calendar integration/,
     'the Microsoft 365 calendar claim is separate and must survive');
 });
+
+// ── GitLab #303: the picture must not claim what the copy retracted ──────
+//
+// The sign-in screenshot previously showed a "Continue with Microsoft" button,
+// because the screenshot generator's own mock injected an `entra-id` provider.
+// A real deployment does not: `entraId` defaults to { enabled: false,
+// clientId: null, ... } in the product's console-sign-in domain, so the
+// provider is never emitted by /auth/providers and never rendered.
+//
+// Microsoft Entra sign-in is implemented but has never been validated against
+// a real directory, so it must not appear as an available capability — in copy
+// OR in imagery, where a reader believes the picture over the caption.
+test('the sign-in imagery does not present Microsoft authentication', () => {
+  const index = page('index.html');
+  const figure = index.slice(index.indexOf('/images/entry-dark.png') - 400,
+                             index.indexOf('/images/entry-dark.png') + 900);
+  assert.doesNotMatch(figure, /Microsoft/i,
+    'the entry screenshot’s alt text and caption must not mention Microsoft sign-in — '
+    + 'regenerate the image from a production-equivalent posture instead of annotating it');
+});
+
+test('the screenshot generator mocks a production-equivalent provider set', () => {
+  const gen = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'product-screenshots.js'), 'utf8');
+  // Match the RETURNED ARRAY only. The surrounding comment names `entra-id`
+  // to explain why it is absent, and asserting over the comment would fail on
+  // its own explanation.
+  const start = gen.indexOf('return json(200, { providers: [', gen.indexOf('/api/v1/auth/providers'));
+  const block = gen.slice(start, gen.indexOf('] });', start));
+  assert.ok(start > -1, 'the providers mock still returns a provider array');
+  assert.doesNotMatch(block, /entra-id/,
+    'the generator must not inject an entra-id provider: whatever it returns becomes a picture '
+    + 'on a public page, and Entra sign-in is not validated');
+  assert.match(block, /google-workspace/,
+    'Google Workspace sign-in is live-verified and belongs in the capture');
+});
+
+// The Microsoft 365 CALENDAR integration is a separate, live-proven capability
+// (#95, closed 2026-07-28) reached through entirely different credentials.
+// Correcting the AUTHENTICATION claim must never be done by deleting it.
+test('correcting Microsoft sign-in never removes the Microsoft 365 calendar claim', () => {
+  assert.match(page('index.html'), /Microsoft 365 calendar integration/,
+    'the calendar claim is separate from the sign-in claim and must survive');
+  assert.match(page('index.html'), /Microsoft 365/,
+    'the Microsoft 365 integration card must survive');
+});
