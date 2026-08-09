@@ -771,39 +771,6 @@ p { margin: 0; }
   .footer-meta { flex-direction: column; }
 }
 
-/* ---------- TWEAKS PANEL ---------- */
-#tweaks-panel {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 320px;
-  background: var(--cream);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  box-shadow: 0 20px 60px -20px rgba(14, 42, 63, 0.4);
-  z-index: 100;
-  font-family: var(--sans);
-  display: none;
-}
-#tweaks-panel.visible { display: block; }
-.tweaks-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--ink-20);
-}
-.tweaks-head h4 { font-family: var(--serif); font-size: var(--fs-md); letter-spacing: -0.01em; }
-.tweaks-close { background: transparent; border: 0; color: var(--ink-60); font-size: 20px; line-height: 1; padding: 4px 8px; }
-.tweaks-body { padding: 14px 18px 18px; }
-.tweak-group { margin-bottom: 18px; }
-.tweak-group:last-child { margin-bottom: 0; }
-.tweak-label { font-size: var(--fs-xs); letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-60); margin-bottom: 10px; display: block; font-weight: 500; }
-.tweak-opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.tweak-opts button { background: transparent; border: 1px solid var(--ink-20); padding: 10px 6px; font-size: 11px; color: var(--ink-60); font-family: var(--sans); font-weight: 500; letter-spacing: 0.02em; border-radius: 2px; transition: all .15s; cursor: pointer; }
-.tweak-opts button:hover { border-color: var(--ink); color: var(--ink); }
-.tweak-opts button.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-
 
 /* ---------- MOBILE OVERFLOW FIXES (positioning update) ----------
    Placed last so they win over the earlier breakpoint block. Each of
@@ -835,7 +802,6 @@ p { margin: 0; }
 </style>
 </head>
 <body>
-<script>window.TWEAKS={accent:"teal",heroLayout:"editorial",typePairing:"fraunces-inter"};</script>
 
 <header class="site-header">
   <div class="container header-row">
@@ -919,7 +885,7 @@ p { margin: 0; }
         <ul class="lane-list">
           <li>Firm configuration session</li>
           <li>Microsoft 365 connection, with your IT</li>
-          <li>Receptionist Console walkthrough</li>
+          <li>Reception Console walkthrough</li>
           <li>Administrator walkthrough</li>
           <li>Operations Center orientation</li>
           <li>Written reference material</li>
@@ -1210,6 +1176,7 @@ p { margin: 0; }
       <a href="/#surfaces">The three consoles</a>
       <a href="/#integrations">Integrations</a>
       <a href="/#trust">Trust &amp; control</a>
+      <a href="/status/">Service status</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -1227,89 +1194,5 @@ p { margin: 0; }
   <div class="container footer-meta"><span>© 2026 GuideHerd AI, LLC.</span><span>Privacy, terms, and subscription terms are provided with the service agreement.</span></div>
 </footer>
 
-<div id="tweaks-root"></div>
-<script>
-(function () {
-  const DEFAULTS = window.TWEAKS || {};
-  const STATE = Object.assign({
-    accent: 'teal',
-    heroLayout: 'editorial',
-    typePairing: 'fraunces-inter',
-  }, DEFAULTS);
-
-  const OPTIONS = {
-    accent: [
-      { val: 'teal', label: 'Teal' },
-      { val: 'ink',  label: 'Ink' },
-      { val: 'warm', label: 'Warm' },
-      { val: 'rust', label: 'Rust' },
-    ],
-    typePairing: [
-      { val: 'fraunces-inter',     label: 'Fraunces' },
-      { val: 'instrument-inter',   label: 'Instrument' },
-      { val: 'inter-serif',        label: 'All sans' },
-    ],
-  };
-
-  function apply() {
-    document.documentElement.dataset.accent = STATE.accent;
-    document.documentElement.dataset.pairing = STATE.typePairing;
-  }
-
-  function buildPanel() {
-    const panel = document.createElement('div');
-    panel.id = 'tweaks-panel';
-    panel.innerHTML = `
-      <div class="tweaks-head">
-        <h4>Tweaks</h4>
-        <button class="tweaks-close" aria-label="Close">×</button>
-      </div>
-      <div class="tweaks-body"></div>
-    `;
-    const body = panel.querySelector('.tweaks-body');
-    const groups = [
-      { key: 'accent',      label: 'Accent color' },
-      { key: 'typePairing', label: 'Typography' },
-    ];
-    groups.forEach(g => {
-      const group = document.createElement('div');
-      group.className = 'tweak-group';
-      group.innerHTML = `<span class="tweak-label">${g.label}</span><div class="tweak-opts" data-group="${g.key}"></div>`;
-      const opts = group.querySelector('.tweak-opts');
-      OPTIONS[g.key].forEach(o => {
-        const btn = document.createElement('button');
-        btn.textContent = o.label;
-        btn.dataset.val = o.val;
-        if (STATE[g.key] === o.val) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          STATE[g.key] = o.val;
-          opts.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.val === o.val));
-          apply();
-          try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ...STATE } }, '*'); } catch (_) {}
-        });
-        opts.appendChild(btn);
-      });
-      body.appendChild(group);
-    });
-    panel.querySelector('.tweaks-close').addEventListener('click', () => panel.classList.remove('visible'));
-    document.body.appendChild(panel);
-    return panel;
-  }
-
-  window.addEventListener('message', (e) => {
-    const d = e.data || {};
-    if (d.type === '__activate_edit_mode') document.getElementById('tweaks-panel')?.classList.add('visible');
-    if (d.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel')?.classList.remove('visible');
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    buildPanel();
-    apply();
-    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (_) {}
-  });
-
-  apply();
-})();
-</script>
 </body>
 </html>
