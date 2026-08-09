@@ -22,3 +22,23 @@ test('SSO and calendar remain distinct claims', () => {
   assert.match(index, /Google Workspace, or a firm-issued account/);
   assert.match(index, /Google Calendar integration/);
 });
+// The Clio dialect is validated at rung 3 against the Clio TRIAL tenant.
+// Rungs 4-5 (pilot-firm live validation) are still open, so no page may
+// imply a customer's own Clio account has been used.
+test('the Clio claim stays inside the evidence', () => {
+  for (const name of ['index.html', 'services.html', 'approach.html']) {
+    assert.doesNotMatch(page(name), /real firm|in production at a firm/i,
+      name + ' must not claim Clio ran against a customer firm’s own account');
+  }
+  assert.match(page('index.html'), /validated end to end against a Clio tenant/);
+});
+// Entra ID sign-in is implemented but dark and never validated against a
+// real tenant; the customer reference guide lists it as not available.
+// Microsoft 365 CALENDAR is a separate, live-proven claim and stays.
+test('Microsoft is not offered as a staff sign-in method', () => {
+  const index = page('index.html');
+  assert.doesNotMatch(index, /sign in with Microsoft or Google|Microsoft or Google Workspace/i,
+    'index must not list Microsoft among the available sign-in methods');
+  assert.match(index, /Microsoft 365 calendar integration/,
+    'the Microsoft 365 calendar claim is separate and must survive');
+});
