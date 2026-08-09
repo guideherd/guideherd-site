@@ -13,8 +13,12 @@ mkdir -p "$OUT"
 # rendering the homepage with a 200.
 cp index.html about.html approach.html services.html training.html 404.html "$OUT"/
 
-# Shared assets and the public status page.
-cp -R assets status "$OUT"/
+# Crawler guidance: marketing pages and /status/ only — never app paths.
+cp robots.txt sitemap.xml "$OUT"/
+
+# Shared assets, product screenshots (fictional sample data only), and
+# the public status page.
+cp -R assets images status "$OUT"/
 
 # Per-surface security headers (Cloudflare Pages reads _headers from the
 # output directory).

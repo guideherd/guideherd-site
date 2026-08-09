@@ -1,0 +1,16 @@
+# guideherd.ai — marketing site.
+# Application paths on this host are backward-compatibility redirects to
+# app.guideherd.ai and are not content; keep crawlers on marketing pages
+# and the public status page only.
+User-agent: *
+Allow: /
+Disallow: /receptionist/
+Disallow: /operations/
+Disallow: /admin/
+Disallow: /manage/
+Disallow: /intake/
+Disallow: /intake-review/
+Disallow: /documents/
+Disallow: /demo/
+
+Sitemap: https://guideherd.ai/sitemap.xml

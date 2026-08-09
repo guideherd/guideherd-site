@@ -1299,80 +1299,6 @@ p { margin: 0; }
   .footer-meta { flex-direction: column; }
 }
 
-/* ---------- TWEAKS PANEL ---------- */
-#tweaks-panel {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 320px;
-  background: var(--cream);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  box-shadow: 0 20px 60px -20px rgba(14, 42, 63, 0.4);
-  z-index: 100;
-  font-family: var(--sans);
-  display: none;
-}
-#tweaks-panel.visible { display: block; }
-.tweaks-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--ink-20);
-}
-.tweaks-head h4 {
-  font-family: var(--serif);
-  font-size: var(--fs-md);
-  letter-spacing: -0.01em;
-}
-.tweaks-close {
-  background: transparent;
-  border: 0;
-  color: var(--ink-60);
-  font-size: 20px;
-  line-height: 1;
-  padding: 4px 8px;
-}
-.tweaks-body { padding: 14px 18px 18px; }
-.tweak-group {
-  margin-bottom: 18px;
-}
-.tweak-group:last-child { margin-bottom: 0; }
-.tweak-label {
-  font-size: var(--fs-xs);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-60);
-  margin-bottom: 10px;
-  display: block;
-  font-weight: 500;
-}
-.tweak-opts {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.tweak-opts button {
-  background: transparent;
-  border: 1px solid var(--ink-20);
-  padding: 10px 6px;
-  font-size: 11px;
-  color: var(--ink-60);
-  font-family: var(--sans);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  border-radius: 2px;
-  transition: all .15s;
-  cursor: pointer;
-}
-.tweak-opts button:hover { border-color: var(--ink); color: var(--ink); }
-.tweak-opts button.active {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-
 /* ---------- INNER PAGE STYLES ---------- */
 .page-hero {
   padding: var(--sp-7) 0 var(--sp-6);
@@ -1508,19 +1434,21 @@ p { margin: 0; }
   .step-meta { grid-template-columns: 1fr; gap: 2px; }
 }
 
+/* ---------- PRODUCT SCREENSHOTS (#294) ---------- */
+.product-shots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-5);
+  margin-top: var(--sp-5);
+}
+.product-shots > figure { min-width: 0; }
+@media (max-width: 900px) {
+  .product-shots { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
-
-<!-- TWEAK DEFAULTS ---------------------------------------------------------->
-<script>
-window.TWEAKS = /*EDITMODE-BEGIN*/{
-  "accent": "teal",
-  "heroLayout": "editorial",
-  "typePairing": "fraunces-inter",
-  "density": "comfortable"
-}/*EDITMODE-END*/;
-</script>
 
 <!-- HEADER ------------------------------------------------------------------>
 <header class="site-header">
@@ -1583,22 +1511,12 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       </div>
     </aside>
 
-    <figure class="hero-figure" aria-hidden="true">
-      <div class="hero-figure-inner doc-placeholder">
-        <div class="doc-head">Operations Center &middot; session record</div>
-        <div class="doc-title">Prepared handoff<br><em>&amp; consultation</em></div>
-        <div class="doc-rule"></div>
-        <div class="doc-sec"><span class="doc-sec-label">01 &middot; Intake</span><span class="doc-sec-body">Caller details, practice area, and consultation type captured by the receptionist before the transfer.</span></div>
-        <div class="doc-sec"><span class="doc-sec-label">02 &middot; Scheduling</span><span class="doc-sec-body">Times offered from the attorney&rsquo;s own Outlook calendar. Booked, then written back.</span></div>
-        <div class="doc-sec"><span class="doc-sec-label">03 &middot; Notification</span><span class="doc-sec-body">Confirmation email sent, with a private link the client can use to cancel or reschedule.</span></div>
-        <div class="doc-recovery">
-          <span class="doc-sec-label">Consultation</span>
-          <span class="doc-figure">Thu 2:30</span>
-          <span class="doc-range">Every step above is recorded in the audit history.</span>
-        </div>
-        <div class="doc-foot">GUIDEHERD &middot; SAMPLE RECORD, NOT REAL CLIENT DATA</div>
+    <figure class="hero-figure">
+      <div class="hero-figure-inner" style="border: 1px solid rgba(14,42,63,0.15); border-radius: 6px; overflow: hidden; box-shadow: 0 18px 48px rgba(14,42,63,0.18);">
+        <img src="/images/ops-overview-dark.png" width="1400" height="875" style="display:block; width:100%; height:auto;"
+             alt="The GuideHerd Operations Center in dark mode: today's handoffs as counts, scheduling readiness, and system health, populated with fictional sample data.">
       </div>
-      <figcaption>Sample record &middot; one conversation, coordinated</figcaption>
+      <figcaption>Operations Center &middot; real product, fictional sample firm</figcaption>
     </figure>
   </div>
 
@@ -1610,7 +1528,7 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       <span>Confirmation emails</span><span aria-hidden="true">&middot;</span>
       <span>Cancel &amp; reschedule</span><span aria-hidden="true">&middot;</span>
       <span>Operations Center</span><span aria-hidden="true">&middot;</span>
-      <span>Administration Portal</span><span aria-hidden="true">&middot;</span>
+      <span>Administration Center</span><span aria-hidden="true">&middot;</span>
       <span>Audit history</span><span aria-hidden="true">&middot;</span>
       <span>Prepared handoff</span><span aria-hidden="true">&middot;</span>
       <span>Consultation scheduling</span><span aria-hidden="true">&middot;</span>
@@ -1699,8 +1617,8 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
         <p class="pillar-lede">The half most software skips: knowing what happened, changing how it works, and being able to undo it.</p>
         <ul class="pillar-list">
           <li><span>Operations Center</span><span class="pill-meta">What happened, and when</span></li>
-          <li><span>Administration Portal</span><span class="pill-meta">Configure without a ticket</span></li>
-          <li><span>Receptionist Console</span><span class="pill-meta">The desk-side surface</span></li>
+          <li><span>Administration Center</span><span class="pill-meta">Configure without a ticket</span></li>
+          <li><span>Reception Console</span><span class="pill-meta">The desk-side surface</span></li>
           <li><span>Audit history</span><span class="pill-meta">Who changed what</span></li>
           <li><span>Reversible configuration changes</span><span class="pill-meta">Undo a specific change</span></li>
           <li><span>Provider capability management</span><span class="pill-meta">Turn on deliberately</span></li>
@@ -1732,7 +1650,7 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       <li class="step">
         <div class="step-num">01</div>
         <div class="step-body">
-          <h3 class="step-title">Receptionist Console</h3>
+          <h3 class="step-title">Reception Console</h3>
           <p class="step-desc">For whoever answers the phone. Capture the caller, the practice area, and the consultation type, then hand the call off with that context already attached &mdash; so the attorney is not asking the client to start over.</p>
           <div class="step-meta"><span>Used by</span><span>Reception &middot; intake staff</span></div>
           <div class="step-meta"><span>Produces</span><span>A prepared handoff</span></div>
@@ -1742,7 +1660,7 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
         <div class="step-num">02</div>
         <div class="step-body">
           <h3 class="step-title">Operations Center</h3>
-          <p class="step-desc">For the person who has to answer &ldquo;what happened with that caller?&rdquo; Consultations, notification delivery, booking exceptions, and event history &mdash; filterable by date, exportable, and scoped to your firm alone.</p>
+          <p class="step-desc">For the person who has to answer &ldquo;what happened with that caller?&rdquo; A KPI strip of today&rsquo;s handoffs, then the record behind it: sessions, notification deliveries, booking exceptions, and event history &mdash; searchable across all three, filterable, with column controls and CSV export, and scoped to your firm alone.</p>
           <div class="step-meta"><span>Used by</span><span>Office managers &middot; operations</span></div>
           <div class="step-meta"><span>Produces</span><span>An answer, with the record behind it</span></div>
         </div>
@@ -1750,8 +1668,8 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       <li class="step">
         <div class="step-num">03</div>
         <div class="step-body">
-          <h3 class="step-title">Administration Portal</h3>
-          <p class="step-desc">For the person who owns how it all works. Attorneys, practice areas, consultation types, office hours, notification routing, calendar bindings, and users &mdash; each change versioned, audited, and reversible on its own.</p>
+          <h3 class="step-title">Administration Center</h3>
+          <p class="step-desc">For the person who owns how it all works. Focused workspaces &mdash; setup, firm, scheduling, catalog, notifications, access &mdash; with settings search across all of them. Attorneys, practice areas, consultation types, office hours, notification routing, calendar bindings, and users: each change versioned, audited, and reversible on its own.</p>
           <div class="step-meta"><span>Used by</span><span>Firm administrators</span></div>
           <div class="step-meta"><span>Produces</span><span>Configuration you can change and undo</span></div>
         </div>
@@ -1760,12 +1678,50 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
         <div class="step-num">04</div>
         <div class="step-body">
           <h3 class="step-title">And the client&rsquo;s own page</h3>
-          <p class="step-desc">Your client gets a private link in their confirmation email. They can see the appointment, cancel it, or reschedule it themselves &mdash; and the calendar, the record, and your team&rsquo;s view all stay in step without anyone re-keying anything.</p>
+          <p class="step-desc">Your client gets a private link in their confirmation email. They can see the appointment, cancel it, or reschedule it themselves &mdash; and the calendar, the record, and your team&rsquo;s view all stay in step without anyone re-keying anything. Firms can also choose to activate digital intake forms and secure document upload with malware scanning &mdash; both stay off until your firm turns them on.</p>
           <div class="step-meta"><span>Used by</span><span>Your clients</span></div>
           <div class="step-meta"><span>Produces</span><span>Fewer phone calls about phone calls</span></div>
         </div>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- PRODUCT, AS IT SHIPS ----------------------------------------------------->
+<section class="section" id="product" style="background: var(--paper-2);">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-kicker">The product, as it ships.</h2>
+    </div>
+    <div class="approach-lede">
+      <p>These are real screens from the shipped product &mdash; not mockups &mdash; populated with a fictional sample firm. Every console runs dark by default, with a light theme one click away.</p>
+    </div>
+    <div class="product-shots">
+      <figure style="margin: 0;">
+        <div style="border: 1px solid rgba(14,42,63,0.15); border-radius: 6px; overflow: hidden; box-shadow: 0 12px 32px rgba(14,42,63,0.14);">
+          <img src="/images/entry-dark.png" width="1400" height="875" loading="lazy" style="display:block; width:100%; height:auto;"
+               alt="The GuideHerd sign-in page in dark mode: Continue with Microsoft, Continue with Google Workspace, or a firm-issued account with email and password.">
+        </div>
+        <figcaption style="font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-60); margin-top: var(--sp-2);">Sign-in &middot; Microsoft or Google Workspace, or a firm-issued account</figcaption>
+      </figure>
+      <figure style="margin: 0;">
+        <div style="border: 1px solid rgba(14,42,63,0.15); border-radius: 6px; overflow: hidden; box-shadow: 0 12px 32px rgba(14,42,63,0.14);">
+          <img src="/images/admin-catalog-dark.png" width="1400" height="875" loading="lazy" style="display:block; width:100%; height:auto;"
+               alt="The Administration Center catalog workspace in dark mode: KPI strip, practice areas and attorneys tables with filter, column, and export controls.">
+        </div>
+        <figcaption style="font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-60); margin-top: var(--sp-2);">Administration Center &middot; catalog workspace, dark (the default)</figcaption>
+      </figure>
+    </div>
+    <div style="margin-top: var(--sp-5);">
+      <figure style="margin: 0; max-width: 860px;">
+        <div style="border: 1px solid rgba(14,42,63,0.15); border-radius: 6px; overflow: hidden; box-shadow: 0 12px 32px rgba(14,42,63,0.14);">
+          <img src="/images/admin-catalog-light.png" width="1400" height="875" loading="lazy" style="display:block; width:100%; height:auto;"
+               alt="The same Administration Center catalog workspace in the light theme.">
+        </div>
+        <figcaption style="font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-60); margin-top: var(--sp-2);">The same workspace in light &mdash; every console supports both</figcaption>
+      </figure>
+    </div>
+    <p style="font-size: var(--fs-xs); color: var(--ink-60); margin-top: var(--sp-3);">Sample data shown is fictional (&ldquo;Ashford &amp; Bell, LLP&rdquo;); no client or customer information appears in product imagery.</p>
   </div>
 </section>
 
@@ -1810,6 +1766,10 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
 
     <div class="packages-foot" style="margin-top: var(--sp-6);">
       <div class="pkg-addon">
+        <span class="addon-label">Who gets in, and how</span>
+        <span class="addon-val">Staff sign in with Microsoft or Google Workspace, or with firm-issued accounts protected by verification codes. Each person lands in the workspace their role allows &mdash; reception, operations, or administration.</span>
+      </div>
+      <div class="pkg-addon">
         <span class="addon-label">Human-first by design</span>
         <span class="addon-val">GuideHerd prepares the work and keeps the record. Your people talk to your clients and make the decisions &mdash; the platform never speaks for the firm.</span>
       </div>
@@ -1836,13 +1796,14 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       </article>
 
       <article class="vertical">
-        <div class="vertical-tag">Not currently connected</div>
+        <div class="vertical-tag">Stated per system</div>
         <h3 class="vertical-title">Practice management</h3>
-        <p class="vertical-desc">These are <strong>not connected</strong>. We would rather tell you now than let you find out during onboarding &mdash; ask us where each one stands before you plan around it.</p>
+        <p class="vertical-desc">Each system is labelled with where it actually stands today. We would rather tell you now than let you find out during onboarding &mdash; ask us before you plan around any of them.</p>
         <ul class="vertical-uses">
-          <li>Clio &mdash; planned</li>
-          <li>Filevine &mdash; planned</li>
-          <li>Orion &mdash; planned</li>
+          <li>Clio &mdash; connected; live-validated with a real firm, and disconnectable by the firm at any time</li>
+          <li>Orion &mdash; in active development; reading live firm data today</li>
+          <li>Filevine &mdash; in active development; sign-in shipped</li>
+          <li>Anything else &mdash; planned means planned</li>
         </ul>
       </article>
 
@@ -1958,45 +1919,29 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       </ul>
     </div>
 
-    <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('.form-success').hidden=false; this.querySelector('.form-fields').hidden=true;">
+    <div class="cta-form">
       <div class="form-fields">
         <div class="form-row">
-          <label>Full name<input type="text" name="name" required placeholder="Your name"></label>
+          <h3 style="font-family: var(--serif); font-size: var(--fs-xl); margin-bottom: var(--sp-1);">Email us &mdash; a person replies.</h3>
+          <p style="font-size: var(--fs-sm); line-height: 1.6; color: var(--ink-soft);">
+            No form, no ticket queue. Write to
+            <a href="mailto:hello@guideherd.ai" style="border-bottom: 1px solid var(--accent);">hello@guideherd.ai</a>
+            and it lands with someone who can actually schedule the walkthrough.
+          </p>
         </div>
         <div class="form-row">
-          <label>Work email<input type="email" name="email" required placeholder="you@firm.com"></label>
+          <p style="font-size: var(--fs-sm); line-height: 1.6; color: var(--ink-soft);">
+            Helpful to include, if you have it handy: your firm&rsquo;s name, your role, whether you run on
+            Microsoft&nbsp;365, and a sentence about what happens after a call comes in today.
+          </p>
         </div>
-        <div class="form-row form-row-two">
-          <label>Firm<input type="text" name="company" required placeholder="Your firm"></label>
-          <label>Role<input type="text" name="role" placeholder="Managing partner, administrator&hellip;"></label>
-        </div>
-        <div class="form-row">
-          <label>Calendar system <span style="font-weight:400; text-transform:none; letter-spacing:0; opacity:.7;">(GuideHerd connects to Microsoft 365)</span>
-            <select name="calendar">
-              <option>Microsoft 365 / Outlook</option>
-              <option>Google Workspace</option>
-              <option>Something else</option>
-              <option>Not sure</option>
-            </select>
-          </label>
-        </div>
-        <div class="form-row">
-          <label>What happens after a call comes in today?<textarea name="note" rows="3" placeholder="A sentence or two about how intake and scheduling work now."></textarea></label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">
-          Schedule a demo
+        <a class="btn btn-primary btn-full" href="mailto:hello@guideherd.ai?subject=Demo%20request">
+          Email hello@guideherd.ai
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.25" fill="none"/></svg>
-        </button>
+        </a>
         <p class="form-fine">We reply within two business days. We do not sell or share your information, ever.</p>
       </div>
-      <div class="form-success" hidden>
-        <div class="success-mark" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 12l5 5 11-13" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-        </div>
-        <h3>Request received.</h3>
-        <p>We will reply within two business days to find a time and to ask what your intake looks like today.</p>
-      </div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -2019,6 +1964,7 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
       <a href="/#surfaces">The three consoles</a>
       <a href="/#integrations">Integrations</a>
       <a href="/#trust">Trust &amp; control</a>
+      <a href="/status/">Service status</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -2041,126 +1987,5 @@ window.TWEAKS = /*EDITMODE-BEGIN*/{
   </div>
 </footer>
 
-<!-- TWEAKS PANEL ------------------------------------------------------------>
-<div id="tweaks-root"></div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Tweaks panel for GuideHerd site
-// Exposes: hero layout, accent color, typography pairing.
-
-(function () {
-  const DEFAULTS = window.TWEAKS || {};
-  const STATE = Object.assign({
-    accent: 'teal',
-    heroLayout: 'editorial',
-    typePairing: 'fraunces-inter',
-    density: 'comfortable',
-  }, DEFAULTS);
-
-  const OPTIONS = {
-    heroLayout: [
-      { val: 'editorial', label: 'Editorial' },
-      { val: 'split',     label: 'Split' },
-      { val: 'centered',  label: 'Centered' },
-    ],
-    accent: [
-      { val: 'teal', label: 'Teal' },
-      { val: 'ink',  label: 'Ink' },
-      { val: 'warm', label: 'Warm' },
-      { val: 'rust', label: 'Rust' },
-    ],
-    typePairing: [
-      { val: 'fraunces-inter',     label: 'Fraunces' },
-      { val: 'instrument-inter',   label: 'Instrument' },
-      { val: 'inter-serif',        label: 'All sans' },
-    ],
-  };
-
-  function apply() {
-    // hero layout
-    document.querySelectorAll('.hero').forEach(el => {
-      el.dataset.layout = STATE.heroLayout;
-    });
-    // accent + pairing on <html>
-    document.documentElement.dataset.accent = STATE.accent;
-    document.documentElement.dataset.pairing = STATE.typePairing;
-  }
-
-  function buildPanel() {
-    const panel = document.createElement('div');
-    panel.id = 'tweaks-panel';
-    panel.innerHTML = `
-      <div class="tweaks-head">
-        <h4>Tweaks</h4>
-        <button class="tweaks-close" aria-label="Close">×</button>
-      </div>
-      <div class="tweaks-body"></div>
-    `;
-    const body = panel.querySelector('.tweaks-body');
-
-    const groups = [
-      { key: 'heroLayout',  label: 'Hero layout' },
-      { key: 'accent',      label: 'Accent color' },
-      { key: 'typePairing', label: 'Typography' },
-    ];
-
-    groups.forEach(g => {
-      const group = document.createElement('div');
-      group.className = 'tweak-group';
-      group.innerHTML = `
-        <span class="tweak-label">${g.label}</span>
-        <div class="tweak-opts" data-group="${g.key}"></div>
-      `;
-      const opts = group.querySelector('.tweak-opts');
-      OPTIONS[g.key].forEach(o => {
-        const btn = document.createElement('button');
-        btn.textContent = o.label;
-        btn.dataset.val = o.val;
-        if (STATE[g.key] === o.val) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          STATE[g.key] = o.val;
-          opts.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.val === o.val));
-          apply();
-          persist();
-        });
-        opts.appendChild(btn);
-      });
-      body.appendChild(group);
-    });
-
-    panel.querySelector('.tweaks-close').addEventListener('click', () => {
-      panel.classList.remove('visible');
-    });
-
-    document.body.appendChild(panel);
-    return panel;
-  }
-
-  function persist() {
-    try {
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ...STATE } }, '*');
-    } catch (_) {}
-  }
-
-  function show() { document.getElementById('tweaks-panel')?.classList.add('visible'); }
-  function hide() { document.getElementById('tweaks-panel')?.classList.remove('visible'); }
-
-  window.addEventListener('message', (e) => {
-    const d = e.data || {};
-    if (d.type === '__activate_edit_mode') show();
-    if (d.type === '__deactivate_edit_mode') hide();
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    buildPanel();
-    apply();
-    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (_) {}
-  });
-
-  // apply immediately so first paint is correct
-  apply();
-})();
-
-</script>
-</body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>

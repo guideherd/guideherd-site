@@ -1294,80 +1294,6 @@ p { margin: 0; }
   .footer-meta { flex-direction: column; }
 }
 
-/* ---------- TWEAKS PANEL ---------- */
-#tweaks-panel {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 320px;
-  background: var(--cream);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  box-shadow: 0 20px 60px -20px rgba(14, 42, 63, 0.4);
-  z-index: 100;
-  font-family: var(--sans);
-  display: none;
-}
-#tweaks-panel.visible { display: block; }
-.tweaks-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--ink-20);
-}
-.tweaks-head h4 {
-  font-family: var(--serif);
-  font-size: var(--fs-md);
-  letter-spacing: -0.01em;
-}
-.tweaks-close {
-  background: transparent;
-  border: 0;
-  color: var(--ink-60);
-  font-size: 20px;
-  line-height: 1;
-  padding: 4px 8px;
-}
-.tweaks-body { padding: 14px 18px 18px; }
-.tweak-group {
-  margin-bottom: 18px;
-}
-.tweak-group:last-child { margin-bottom: 0; }
-.tweak-label {
-  font-size: var(--fs-xs);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-60);
-  margin-bottom: 10px;
-  display: block;
-  font-weight: 500;
-}
-.tweak-opts {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.tweak-opts button {
-  background: transparent;
-  border: 1px solid var(--ink-20);
-  padding: 10px 6px;
-  font-size: 11px;
-  color: var(--ink-60);
-  font-family: var(--sans);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  border-radius: 2px;
-  transition: all .15s;
-  cursor: pointer;
-}
-.tweak-opts button:hover { border-color: var(--ink); color: var(--ink); }
-.tweak-opts button.active {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-
 /* ---------- INNER PAGE STYLES ---------- */
 .page-hero {
   padding: var(--sp-7) 0 var(--sp-6);
@@ -1506,7 +1432,6 @@ p { margin: 0; }
 </style>
 </head>
 <body>
-<script>window.TWEAKS={accent:"teal",heroLayout:"editorial",typePairing:"fraunces-inter"};</script>
 
 <header class="site-header">
   <div class="container header-row">
@@ -1537,7 +1462,7 @@ p { margin: 0; }
         <div class="step-num">01</div>
         <div class="step-body">
           <h3 class="step-title">See it working</h3>
-          <p class="step-desc">A walkthrough end to end: a caller arrives at the Receptionist Console, the consultation is booked against a real Outlook calendar, the confirmation goes out, and the client reschedules it themselves &mdash; with the record of all of it in the Operations Center. Bring the person who answers your phones; they will spot in ten minutes what a partner would miss.</p>
+          <p class="step-desc">A walkthrough end to end: a caller arrives at the Reception Console, the consultation is booked against a real Outlook calendar, the confirmation goes out, and the client reschedules it themselves &mdash; with the record of all of it in the Operations Center. Bring the person who answers your phones; they will spot in ten minutes what a partner would miss.</p>
           <div class="step-meta"><span>Time</span><span>About 30 minutes</span></div>
           <div class="step-meta"><span>You get</span><span>A straight answer on fit</span></div>
         </div>
@@ -1547,7 +1472,7 @@ p { margin: 0; }
         <div class="step-body">
           <h3 class="step-title">Configure the firm</h3>
           <p class="step-desc">Attorneys, practice areas, consultation types, office hours, routing, and who uses which console. This is the step that decides whether the platform feels like yours, so we do it with you rather than sending a form. Every setting is versioned and reversible, so nothing here is a one-way door.</p>
-          <div class="step-meta"><span>Where</span><span>Administration Portal</span></div>
+          <div class="step-meta"><span>Where</span><span>Administration Center</span></div>
           <div class="step-meta"><span>Changes later</span><span>Any time, and reversible</span></div>
         </div>
       </li>
@@ -1557,7 +1482,7 @@ p { margin: 0; }
           <h3 class="step-title">Connect Microsoft 365</h3>
           <p class="step-desc">GuideHerd reads availability from your attorneys&rsquo; own calendars and writes appointments back to them. We do this with whoever administers your Microsoft 365 tenant &mdash; not around them &mdash; and the access granted is visible to you afterwards in provider security reporting. Nothing is enabled until you enable it.</p>
           <div class="step-meta"><span>Works with</span><span>Microsoft 365 &middot; Graph &middot; Outlook &middot; Exchange Online</span></div>
-          <div class="step-meta"><span>Not yet</span><span>Clio, Filevine, Orion &mdash; planned</span></div>
+          <div class="step-meta"><span>Practice management</span><span>Clio connected (live-validated) &middot; Orion &amp; Filevine in active development</span></div>
         </div>
       </li>
       <li class="step">
@@ -1607,129 +1532,10 @@ p { margin: 0; }
       <p class="footer-tag">The work between conversations.</p>
       <p class="footer-address">Remote · US &amp; Canada<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c34393030331c3b2935383934392e38723d35">[email&#160;protected]</a></p>
     </div>
-    <div class="footer-col"><h4>Platform</h4><a href="/#platform">What it does</a><a href="/#surfaces">The three consoles</a><a href="/#integrations">Integrations</a><a href="/#trust">Trust &amp; control</a></div><div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/approach">How it works</a><a href="/training">GuideHerd Success</a></div><div class="footer-col"><h4>Talk with us</h4><a href="/#demo">Schedule a demo</a><a href="/services">Pricing</a><a href="/cdn-cgi/l/email-protection#ddb5b8b1b1b29dbaa8b4b9b8b5b8afb9f3bcb4">General inquiry</a></div>
+    <div class="footer-col"><h4>Platform</h4><a href="/#platform">What it does</a><a href="/#surfaces">The three consoles</a><a href="/#integrations">Integrations</a><a href="/#trust">Trust &amp; control</a><a href="/status/">Service status</a></div><div class="footer-col"><h4>Company</h4><a href="/about">About</a><a href="/approach">How it works</a><a href="/training">GuideHerd Success</a></div><div class="footer-col"><h4>Talk with us</h4><a href="/#demo">Schedule a demo</a><a href="/services">Pricing</a><a href="/cdn-cgi/l/email-protection#ddb5b8b1b1b29dbaa8b4b9b8b5b8afb9f3bcb4">General inquiry</a></div>
   </div>
   <div class="container footer-meta"><span>© 2026 GuideHerd AI, LLC.</span><span>Privacy, terms, and subscription terms are provided with the service agreement.</span></div>
 </footer>
 
-<div id="tweaks-root"></div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Tweaks panel for GuideHerd site
-// Exposes: hero layout, accent color, typography pairing.
-
-(function () {
-  const DEFAULTS = window.TWEAKS || {};
-  const STATE = Object.assign({
-    accent: 'teal',
-    heroLayout: 'editorial',
-    typePairing: 'fraunces-inter',
-    density: 'comfortable',
-  }, DEFAULTS);
-
-  const OPTIONS = {
-    heroLayout: [
-      { val: 'editorial', label: 'Editorial' },
-      { val: 'split',     label: 'Split' },
-      { val: 'centered',  label: 'Centered' },
-    ],
-    accent: [
-      { val: 'teal', label: 'Teal' },
-      { val: 'ink',  label: 'Ink' },
-      { val: 'warm', label: 'Warm' },
-      { val: 'rust', label: 'Rust' },
-    ],
-    typePairing: [
-      { val: 'fraunces-inter',     label: 'Fraunces' },
-      { val: 'instrument-inter',   label: 'Instrument' },
-      { val: 'inter-serif',        label: 'All sans' },
-    ],
-  };
-
-  function apply() {
-    // hero layout
-    document.querySelectorAll('.hero').forEach(el => {
-      el.dataset.layout = STATE.heroLayout;
-    });
-    // accent + pairing on <html>
-    document.documentElement.dataset.accent = STATE.accent;
-    document.documentElement.dataset.pairing = STATE.typePairing;
-  }
-
-  function buildPanel() {
-    const panel = document.createElement('div');
-    panel.id = 'tweaks-panel';
-    panel.innerHTML = `
-      <div class="tweaks-head">
-        <h4>Tweaks</h4>
-        <button class="tweaks-close" aria-label="Close">×</button>
-      </div>
-      <div class="tweaks-body"></div>
-    `;
-    const body = panel.querySelector('.tweaks-body');
-
-    const groups = [
-      { key: 'heroLayout',  label: 'Hero layout' },
-      { key: 'accent',      label: 'Accent color' },
-      { key: 'typePairing', label: 'Typography' },
-    ];
-
-    groups.forEach(g => {
-      const group = document.createElement('div');
-      group.className = 'tweak-group';
-      group.innerHTML = `
-        <span class="tweak-label">${g.label}</span>
-        <div class="tweak-opts" data-group="${g.key}"></div>
-      `;
-      const opts = group.querySelector('.tweak-opts');
-      OPTIONS[g.key].forEach(o => {
-        const btn = document.createElement('button');
-        btn.textContent = o.label;
-        btn.dataset.val = o.val;
-        if (STATE[g.key] === o.val) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          STATE[g.key] = o.val;
-          opts.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.val === o.val));
-          apply();
-          persist();
-        });
-        opts.appendChild(btn);
-      });
-      body.appendChild(group);
-    });
-
-    panel.querySelector('.tweaks-close').addEventListener('click', () => {
-      panel.classList.remove('visible');
-    });
-
-    document.body.appendChild(panel);
-    return panel;
-  }
-
-  function persist() {
-    try {
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ...STATE } }, '*');
-    } catch (_) {}
-  }
-
-  function show() { document.getElementById('tweaks-panel')?.classList.add('visible'); }
-  function hide() { document.getElementById('tweaks-panel')?.classList.remove('visible'); }
-
-  window.addEventListener('message', (e) => {
-    const d = e.data || {};
-    if (d.type === '__activate_edit_mode') show();
-    if (d.type === '__deactivate_edit_mode') hide();
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    buildPanel();
-    apply();
-    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (_) {}
-  });
-
-  // apply immediately so first paint is correct
-  apply();
-})();
-
-</script>
-</body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>
