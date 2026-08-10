@@ -45,11 +45,16 @@ const CORS = (origin) => ({
 // ── Fictional firm ─────────────────────────────────────────────────────
 const ORG = 'ashford-bell';
 const ADMIN_IDENTITY = {
+  // organizationName is the #308 field: the real session carries the firm's
+  // display name and the identity chip renders THAT, never the slug. The
+  // mock must match, or the capture shows a retired defect.
   subject: 'dana-whitfield', displayName: 'Dana Whitfield', organizationKey: ORG,
+  organizationName: 'Ashford & Bell, LLP',
   roles: ['administrator'], expiresAt: '2027-01-01T07:00:00.000Z',
 };
 const OPERATOR_IDENTITY = {
   subject: 'sam-okafor', displayName: 'Sam Okafor', organizationKey: ORG,
+  organizationName: 'Ashford & Bell, LLP',
   roles: ['operator'], expiresAt: '2027-01-01T07:00:00.000Z',
 };
 
