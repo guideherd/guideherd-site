@@ -22,7 +22,7 @@ const RULES = fs.readFileSync(path.join(__dirname, '..', '_redirects'), 'utf8')
   .map((l) => { const [from, to, status] = l.split(/\s+/); return { from, to, status }; });
 
 const APP = 'https://app.guideherd.ai';
-const PRODUCT_GROUPS = ['receptionist', 'operations', 'admin', 'manage', 'intake', 'intake-review', 'documents', 'demo'];
+const PRODUCT_GROUPS = ['receptionist', 'operations', 'admin', 'manage', 'intake', 'intake-review', 'documents'];
 
 /** Apply the first matching rule the way Cloudflare Pages does: a
  *  trailing /* captures the splat; query strings are appended by the
@@ -74,7 +74,10 @@ test('a staff console path forwards to the product origin', () => {
 });
 
 test('marketing, status, and unknown paths are NOT redirected', () => {
-  for (const p of ['/', '/about', '/approach', '/services', '/training', '/status/', '/status/?drill=1', '/robots.txt', '/nope-unknown']) {
+  // '/demo/*' is deliberately in this list: the retired sales demo has NO
+  // rule anywhere — not a redirect, not a robots entry — so it 404s like
+  // any unknown path (#304 delete-entirely decision).
+  for (const p of ['/', '/about', '/approach', '/services', '/training', '/status/', '/status/?drill=1', '/robots.txt', '/nope-unknown', '/demo/', '/demo/anything']) {
     assert.equal(resolve(p), null, `${p} must not be redirected`);
   }
 });

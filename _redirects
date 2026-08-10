@@ -16,4 +16,3 @@
 /intake/*         https://app.guideherd.ai/intake/:splat         302
 /intake-review/*  https://app.guideherd.ai/intake-review/:splat  302
 /documents/*      https://app.guideherd.ai/documents/:splat      302
-/demo/*           https://app.guideherd.ai/demo/:splat           302

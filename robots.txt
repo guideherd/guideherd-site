@@ -11,6 +11,5 @@ Disallow: /manage/
 Disallow: /intake/
 Disallow: /intake-review/
 Disallow: /documents/
-Disallow: /demo/
 
 Sitemap: https://guideherd.ai/sitemap.xml
