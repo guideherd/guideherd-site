@@ -87,3 +87,29 @@ test('correcting Microsoft sign-in never removes the Microsoft 365 calendar clai
   assert.match(page('index.html'), /Microsoft 365/,
     'the Microsoft 365 integration card must survive');
 });
+
+// ── GitLab #317: product imagery must depict the CURRENT product ─────────
+//
+// The 2026-08-10 truth audit found the captures showing two retired
+// compositions: the identity chip rendering the tenant SLUG (fixed by
+// product #308 — the session carries organizationName and the chip renders
+// it), and the Operations Overview leading with the removed "Today's
+// handoffs" card (product #314). Both were generator-mock or staleness
+// defects, not product truth. These pins keep the generator's mocks
+// production-equivalent so a regeneration cannot reintroduce either.
+test('the screenshot generator’s identities carry the firm name the real session carries (#308)', () => {
+  const gen = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'product-screenshots.js'), 'utf8');
+  const matches = gen.match(/organizationName: 'Ashford & Bell, LLP'/g) || [];
+  assert.ok(matches.length >= 2,
+    'both mock identities must carry organizationName — without it the identity chip '
+    + 'in every public capture falls back to the tenant slug, a retired defect');
+});
+
+test('the ops screenshot’s alt text describes the current Overview, not the retired handoffs card', () => {
+  const index = page('index.html');
+  const alt = index.slice(index.indexOf('/images/ops-overview-dark.png'),
+                          index.indexOf('/images/ops-overview-dark.png') + 800);
+  assert.doesNotMatch(alt, /handoffs as counts/,
+    'the "Today’s handoffs" card was removed (product #314) — the KPI strip owns the numbers');
+  assert.match(alt, /KPI strip/, 'the alt names the composition the capture actually shows');
+});
