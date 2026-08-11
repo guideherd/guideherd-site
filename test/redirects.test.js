@@ -1,13 +1,15 @@
 'use strict';
 
 /**
- * Existing-link compatibility (repository split, Stage 3). Previously-
- * issued apex product links — the /manage/<token> and /intake/<token>
- * URLs already sitting in customers' inboxes — must keep working after
- * the marketing apex moves. These tests hold the _redirects contract:
- * every product path group forwards, path- and query-preserving, to the
- * product origin; nothing marketing, status, or unknown is touched; and
- * the status is the rollback-safe temporary 302.
+ * The retired redirect posture (#254, owner decision 2026-08-10).
+ *
+ * The apex's legacy product-path 302s existed to keep pre-cutover
+ * caller-held /manage/<token> and /intake/<token> links working. The
+ * owners confirmed no such link needs honoring, so the rules are GONE:
+ * the apex serves marketing and /status/, and every product path is an
+ * ordinary 404 here, exactly like any unknown path. These tests pin
+ * that absence — a compatibility rule reappearing is a deliberate edit
+ * here, not a leftover.
  */
 
 const test = require('node:test');
@@ -21,74 +23,23 @@ const RULES = fs.readFileSync(path.join(__dirname, '..', '_redirects'), 'utf8')
   .filter((l) => l && !l.startsWith('#'))
   .map((l) => { const [from, to, status] = l.split(/\s+/); return { from, to, status }; });
 
-const APP = 'https://app.guideherd.ai';
-const PRODUCT_GROUPS = ['receptionist', 'operations', 'admin', 'manage', 'intake', 'intake-review', 'documents'];
+const RETIRED_GROUPS = ['receptionist', 'operations', 'admin', 'manage', 'intake', 'intake-review', 'documents', 'demo'];
 
-/** Apply the first matching rule the way Cloudflare Pages does: a
- *  trailing /* captures the splat; query strings are appended by the
- *  platform, so we model that a splat rule preserves the tail + query. */
-function resolve(reqPath) {
-  for (const r of RULES) {
-    if (r.from.endsWith('/*')) {
-      const prefix = r.from.slice(0, -1); // keep trailing slash, drop '*'
-      if (reqPath.startsWith(prefix)) {
-        const splat = reqPath.slice(prefix.length);
-        return { location: r.to.replace(':splat', splat), status: Number(r.status) };
-      }
-    } else if (r.from === reqPath) {
-      return { location: r.to, status: Number(r.status) };
-    }
-  }
-  return null;
-}
+test('the apex carries NO redirect rules at all (#254 retirement)', () => {
+  assert.deepEqual(RULES, [],
+    'the legacy apex→app compatibility 302s were retired 2026-08-10; a rule here is a regression');
+});
 
-test('every product path group has a rule to the product origin, path-preserving', () => {
-  for (const g of PRODUCT_GROUPS) {
-    const r = RULES.find((x) => x.from === `/${g}/*`);
-    assert.ok(r, `missing redirect for /${g}/*`);
-    assert.equal(r.to, `${APP}/${g}/:splat`);
-    assert.equal(r.status, '302', 'temporary, so rollback stays safe');
+test('no retired product path group has any rule — old apex product links 404 like any unknown path', () => {
+  const sources = RULES.map((r) => r.from);
+  for (const g of RETIRED_GROUPS) {
+    assert.ok(!sources.some((s) => s === `/${g}/*` || s.startsWith(`/${g}/`) || s === `/${g}`),
+      `/${g} must not be redirected — product surfaces live on app.guideherd.ai only`);
   }
 });
 
-test('a previously-issued manage link maps deterministically to the product origin, token intact', () => {
-  const out = resolve('/manage/mgr_SYNTHETIC_TOKEN');
-  assert.deepEqual(out, { location: `${APP}/manage/mgr_SYNTHETIC_TOKEN`, status: 302 });
-});
-
-test('an intake link with a path tail and query string is preserved', () => {
-  // The token rides the fragment in production, but path + query must
-  // survive regardless; :splat carries the path and Cloudflare appends
-  // the query.
-  const out = resolve('/intake/resume');
-  assert.equal(out.location, `${APP}/intake/resume`);
-  // Query preservation is a platform behaviour; assert the rule doesn't
-  // hardcode or drop a query on the destination.
-  assert.equal(RULES.find((r) => r.from === '/intake/*').to.includes('?'), false,
-    'the destination carries no query of its own, so the original survives');
-});
-
-test('a staff console path forwards to the product origin', () => {
-  assert.equal(resolve('/operations/dashboard').location, `${APP}/operations/dashboard`);
-  assert.equal(resolve('/admin/').location, `${APP}/admin/`);
-});
-
-test('marketing, status, and unknown paths are NOT redirected', () => {
-  // '/demo/*' is deliberately in this list: the retired sales demo has NO
-  // rule anywhere — not a redirect, not a robots entry — so it 404s like
-  // any unknown path (#304 delete-entirely decision).
-  for (const p of ['/', '/about', '/approach', '/services', '/training', '/status/', '/status/?drill=1', '/robots.txt', '/nope-unknown', '/demo/', '/demo/anything']) {
-    assert.equal(resolve(p), null, `${p} must not be redirected`);
-  }
-});
-
-test('no redirect targets the marketing apex or the API — and no loop', () => {
-  for (const r of RULES) {
-    assert.ok(r.to.startsWith(`${APP}/`), `${r.from} must target the product origin`);
-    assert.equal(r.to.includes('api.guideherd.ai'), false, 'never redirect to the API');
-    // A rule whose destination host+path would re-match its own source
-    // would loop; since the destination host is app.guideherd.ai (a
-    // different origin) and this file only runs on the apex, no loop.
-    assert.equal(r.to.startsWith('https://guideherd.ai/'), false, 'never point back at the apex');
-  }
+test('the retirement decision is recorded in the file itself', () => {
+  const text = fs.readFileSync(path.join(__dirname, '..', '_redirects'), 'utf8');
+  assert.match(text, /#254/, 'the file explains why it is empty, so the next editor knows');
+  assert.match(text, /2026-08-10/, 'with the decision date');
 });

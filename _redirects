@@ -1,18 +1,9 @@
-# Backward-compatible redirects for product/application paths that were
-# served from the apex (guideherd.ai) before the repository split.
-# Every already-issued link — /manage/<token>, /intake/<token>, staff
-# console paths — keeps working by forwarding, path- and query-preserving,
-# to the product origin app.guideherd.ai.
+# The marketing apex serves marketing and /status/ — nothing else.
 #
-# 302 (temporary) on purpose: a permanent 301 would be cached by browsers
-# and intermediaries and make a rollback to the apex hazardous. Marketing
-# routes, /status/, and unknown paths are deliberately NOT listed, so they
-# are served or 404 as normal.
-
-/receptionist/*   https://app.guideherd.ai/receptionist/:splat   302
-/operations/*     https://app.guideherd.ai/operations/:splat     302
-/admin/*          https://app.guideherd.ai/admin/:splat          302
-/manage/*         https://app.guideherd.ai/manage/:splat         302
-/intake/*         https://app.guideherd.ai/intake/:splat         302
-/intake-review/*  https://app.guideherd.ai/intake-review/:splat  302
-/documents/*      https://app.guideherd.ai/documents/:splat      302
+# The legacy apex→app compatibility 302s (/receptionist, /operations,
+# /admin, /manage, /intake, /intake-review, /documents) were retired
+# 2026-08-10 (#254): the owners confirmed no pre-cutover caller-held
+# manage/intake link needs honoring, waiving the recorded ~2026-09-08
+# token-expiry window. Product surfaces live on app.guideherd.ai; an
+# old apex product path is now an ordinary 404, like any unknown path.
+# The retired /demo path likewise has no rule anywhere (#304).
