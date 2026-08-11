@@ -105,6 +105,50 @@ test('the screenshot generator’s identities carry the firm name the real sessi
     + 'in every public capture falls back to the tenant slug, a retired defect');
 });
 
+// ── GitLab #332: compliance-claim pins ───────────────────────────────────
+//
+// Standing rule (product repo, docs/security/soc2-readiness-assessment-
+// 2026-08.md): GuideHerd is NOT SOC 2 compliant, certified, attested, or
+// audited, and must not be described as such anywhere — site, sales
+// material, docs, support answers — until an independent auditor issues a
+// report. These pins refuse the vocabulary outright on every public page,
+// so a compliance claim cannot ship by copy-edit: adding one is a
+// deliberate edit here PLUS the auditor's issued report as evidence.
+const PUBLIC_PAGES = ['index.html', 'about.html', 'approach.html',
+  'services.html', 'training.html', '404.html', 'status/index.html'];
+
+test('no public page names a compliance framework (#332)', () => {
+  for (const name of PUBLIC_PAGES) {
+    assert.doesNotMatch(page(name),
+      /\bSOC[\s-]?[123]\b|ISO[\s-]?27001|HIPAA|SSAE|FedRAMP|PCI[\s-]?DSS|HITRUST/i,
+      name + ' must not name a compliance framework: GuideHerd holds no certification, '
+      + 'attestation, or audit report under any of them, and a framework name on a public '
+      + 'page reads as a claim regardless of the sentence around it.');
+  }
+});
+
+test('no public page uses certification vocabulary (#332)', () => {
+  for (const name of PUBLIC_PAGES) {
+    const html = page(name);
+    assert.doesNotMatch(html,
+      /\b(certified|certification|attested|attestation|accredited|accreditation|compliant|compliance)\b/i,
+      name + ' must not use certification vocabulary — nothing about GuideHerd has been '
+      + 'certified, attested, or assessed by an external party.');
+    // Audit vocabulary may appear ONLY as the product's change-audit-trail
+    // feature: "versioned(,) and audited", and the "audit history/line/
+    // trail/log" the product actually keeps — never as a statement that
+    // GuideHerd itself has been audited. Strip the feature senses, then
+    // refuse the rest of the root.
+    const stripped = html
+      .replace(/versioned,? (and )?audited/gi, '')
+      .replace(/audit (history|line|trail|log)/gi, '');
+    assert.doesNotMatch(stripped, /\baudit/i,
+      name + ' may say "audited" only inside the versioned-configuration feature phrase; '
+      + 'any other audit vocabulary on a public page reads as a compliance claim '
+      + 'GuideHerd cannot make.');
+  }
+});
+
 test('the ops screenshot’s alt text describes the current Overview, not the retired handoffs card', () => {
   const index = page('index.html');
   const alt = index.slice(index.indexOf('/images/ops-overview-dark.png'),
