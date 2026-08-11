@@ -1,0 +1,35 @@
+# Site claim + redirect suites (GitLab #332).
+#
+# The truth pins in test/ (public-claim accuracy, compliance-claim refusal,
+# redirect contract) only prevent anything if they run on every change.
+# Dependency-free node:test — no install step.
+#
+# External actions are pinned to immutable commit SHAs; workflow
+# permissions are least-privilege (read-only contents).
+
+name: Site tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  site-tests:
+    name: Claim and redirect suites
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Run the suites
+        run: node --test 'test/*.test.js'
+      - name: Build the site (allowlist build must stay runnable)
+        run: bash scripts/build-site.sh
