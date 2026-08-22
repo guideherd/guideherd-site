@@ -1,15 +1,28 @@
-# guideherd.ai — marketing site.
-# Application paths on this host are backward-compatibility redirects to
-# app.guideherd.ai and are not content; keep crawlers on marketing pages
-# and the public status page only.
+# guideherd.ai — public marketing site.
+#
+# This host serves marketing pages, the legal pages, and the public status
+# page. It carries NO application routes: the apex's backward-compatibility
+# redirects to app.guideherd.ai were retired (#254, owner decision
+# 2026-08-10), `_redirects` is empty and pinned empty by
+# test/redirects.test.js, and /receptionist/, /operations/, /admin/,
+# /manage/, /intake/, /intake-review/ and /documents/ now return an ordinary
+# 404 like any unknown path — verified live 2026-08-22.
+#
+# Those paths previously carried Disallow rules explaining themselves with
+# that retired premise. The rules are gone rather than rewritten: a path that
+# 404s has nothing to index, so the rule protected nothing while asserting a
+# routing posture this repository no longer has. Application surfaces live on
+# app.guideherd.ai, which publishes its own robots.txt.
+#
+# Four superseded pre-redesign pages remain reachable by direct URL —
+# /about, /approach, /services and /training. They are deliberately left
+# crawlable and deliberately absent from sitemap.xml: whether they are 404'd,
+# redirected, or kept is an owner decision tracked as #352, and either
+# disallowing them or listing them here would settle it by default. Their
+# absence from the sitemap is the non-committal posture, and it is pinned by
+# test/robots-sitemap.test.js so it cannot drift either way unnoticed.
+
 User-agent: *
 Allow: /
-Disallow: /receptionist/
-Disallow: /operations/
-Disallow: /admin/
-Disallow: /manage/
-Disallow: /intake/
-Disallow: /intake-review/
-Disallow: /documents/
 
 Sitemap: https://guideherd.ai/sitemap.xml
