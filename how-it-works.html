@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+@keyframes gh-breathe { 0%,100% { opacity:.5; } 50% { opacity:1; } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div style="background:#071019; position:relative; overflow-x:clip;">
+<canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+<div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:#E9E4D8; border-bottom:1px solid #2FA4A0; padding-bottom:2px;">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
+    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
+  </div>
+</nav>
+
+<!-- ARRIVAL -->
+<header data-screen-label="Arrival" style="position:relative; z-index:10; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 56px;">
+  <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.5);">How it works</p>
+  <h1 data-stagger style="margin:40px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,124px); line-height:1.02; letter-spacing:-0.03em; max-width:1150px;">What actually happens <em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">after</em> a conversation?</h1>
+  <p data-stagger style="margin:40px 0 0; max-width:440px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62);">Seven chapters. Barely any reading. Just watch.</p>
+  <div data-stagger style="position:absolute; bottom:6vh; display:flex; flex-direction:column; align-items:center; gap:10px;">
+    <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:rgba(233,228,216,.38);">Scroll</span>
+    <span style="width:1px; height:48px; background:linear-gradient(180deg, rgba(233,228,216,.5), transparent); animation:gh-breathe 2.4s ease-in-out infinite;"></span>
+  </div>
+</header>
+
+<!-- THE STORY -->
+<section data-journey data-screen-label="Story" style="position:relative; z-index:10; height:840vh;">
+  <div style="position:sticky; top:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;">
+    <div style="position:relative; width:100%; height:260px; display:flex; align-items:center; justify-content:center; padding:0 56px; box-sizing:border-box;">
+      <div data-word="0" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 1</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">Every conversation creates work.</div></div>
+      <div data-word="1" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 2</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">GuideHerd <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">understands.</em></div></div>
+      <div data-word="2" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 3</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">GuideHerd <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">plans.</em></div></div>
+      <div data-word="3" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 4</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">GuideHerd <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">orchestrates.</em></div></div>
+      <div data-word="4" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 5</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">People stay in <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#C8A97A;">control.</em></div></div>
+      <div data-word="5" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 6</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">Knowledge <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">grows.</em></div></div>
+      <div data-word="6" style="position:absolute; text-align:center; will-change:transform,opacity,filter; max-width:1100px;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.45);">CH. 7</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6.2vw,100px); letter-spacing:-0.025em; line-height:1.02; margin-top:16px;">Everything simply <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">works.</em></div></div>
+    </div>
+    <div style="position:absolute; bottom:16vh; width:100%; display:flex; justify-content:center; padding:0 56px; box-sizing:border-box;">
+      <div style="position:relative; height:60px; max-width:520px; width:100%; text-align:center;">
+        <p data-sub="0" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">A call, a meeting, an email, a chat. Most organizations never see everything that happens next.</p>
+        <p data-sub="1" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">No brains, no robots. Chaos becomes structure — intent emerges, relationships become visible.</p>
+        <p data-sub="2" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The work separates into actions: schedule, follow up, prepare, notify, request approval.</p>
+        <p data-sub="3" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Work flows between people, systems, and agents. Not automation. Not integrations. It simply moves.</p>
+        <p data-sub="4" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Review. Approve. Oversee. An intelligent teammate — never an autonomous replacement.</p>
+        <p data-sub="5" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Every completed interaction becomes institutional memory. The organization gets smarter.</p>
+        <p data-sub="6" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Nothing falls through the cracks. People know what matters. Knowledge compounds. Momentum, not software.</p>
+      </div>
+    </div>
+    <div data-journey-rail style="position:absolute; right:40px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px;">
+      <span data-rdot="0" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="1" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="2" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="3" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="4" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="5" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+      <span data-rdot="6" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
+    </div>
+  </div>
+</section>
+
+<!-- QUIET ENDING -->
+<section data-screen-label="Ending" style="position:relative; z-index:10; padding:34vh 56px 0; text-align:center;">
+  <div data-reveal style="max-width:840px; margin:0 auto;">
+    <p style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.8vw,54px); line-height:1.3; letter-spacing:-0.02em; text-wrap:balance;">Every conversation creates work.<br><em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">GuideHerd makes sure it gets done.</em></p>
+  </div>
+</section>
+
+<section data-screen-label="Lets talk" style="position:relative; z-index:10; padding:28vh 56px 16vh; text-align:center;">
+  <div data-reveal>
+    <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; color:rgba(233,228,216,.45);">When you're ready</p>
+    <h2 style="margin:28px auto 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(48px,7vw,120px); line-height:1.0; letter-spacing:-0.03em;">Let's <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">talk.</em></h2>
+    <a data-magnetic href="/lets-talk" style="display:inline-block; margin-top:42px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:16px 34px; border-radius:999px; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45); color:#071019;">Begin a conversation</a>
+  </div>
+</section>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.cleanup = [];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motion = !reduced;
+    const $ = (s) => Array.from(document.querySelectorAll(s));
+    $('[data-stagger]').forEach((el, i) => {
+      if (!motion) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(34px)'; el.style.filter = 'blur(8px)';
+      setTimeout(() => {
+        el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1), filter 1.2s ease';
+        el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.style.filter = 'blur(0)';
+      }, 350 + i * 150);
+    });
+    if (motion) {
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); }
+      }), { threshold: 0.12 });
+      $('[data-reveal]').forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+        el.style.opacity = '0'; el.style.transform = 'translateY(46px)';
+        el.style.transition = 'opacity 1.3s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1)';
+        io.observe(el);
+      });
+      this.cleanup.push(() => io.disconnect());
+    }
+    $('[data-magnetic]').forEach((el) => {
+      const move = (e) => { const r = el.getBoundingClientRect(); el.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.18 + 'px,' + (e.clientY - r.top - r.height / 2) * 0.3 + 'px)'; };
+      const leave = () => { el.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; el.style.transform = 'translate(0,0)'; setTimeout(() => { el.style.transition = ''; }, 500); };
+      el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave);
+      this.cleanup.push(() => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); });
+    });
+
+    // ---- story field: 7 chapter layouts ----
+    const cv = document.querySelector('[data-field]');
+    const ctx = cv.getContext('2d');
+    let W, H, layouts = [];
+    const N = 150, P = [];
+    const rand = (a, b) => a + Math.random() * (b - a);
+    const computeLayouts = () => {
+      const cx = W / 2, cy = H / 2;
+      const L = [[], [], [], [], [], [], []];
+      const clusters = [];
+      for (let c = 0; c < 5; c++) clusters.push([cx + rand(-W * 0.3, W * 0.3), cy + rand(-H * 0.26, H * 0.26)]);
+      const lanes = 6;
+      const cols = Math.ceil(Math.sqrt(N * (W / H)));
+      const rows = Math.ceil(N / cols);
+      const gw = Math.min(W * 0.72, 960), gh = Math.min(H * 0.56, 540);
+      const R = Math.min(W, H) * 0.3;
+      for (let i = 0; i < N; i++) {
+        // 0 conversation: loose scatter drifting
+        L[0].push([rand(W * 0.05, W * 0.95), rand(H * 0.08, H * 0.95)]);
+        // 1 understanding: clusters
+        const cl = clusters[i % 5];
+        const a = rand(0, Math.PI * 2), rr = rand(10, Math.min(W, H) * 0.09);
+        L[1].push([cl[0] + Math.cos(a) * rr, cl[1] + Math.sin(a) * rr]);
+        // 2 planning: six vertical columns (actions)
+        const lane = i % lanes;
+        const li = Math.floor(i / lanes) / Math.ceil(N / lanes);
+        L[2].push([cx + (lane - (lanes - 1) / 2) * W * 0.11, H * 0.2 + li * H * 0.6]);
+        // 3 orchestration: horizontal flowing lanes
+        const olane = i % 5;
+        const t = (Math.floor(i / 5) / Math.ceil(N / 5));
+        L[3].push([W * 0.05 + t * W * 0.9, cy + (olane - 2) * H * 0.11 + Math.sin(t * Math.PI * 2 + olane) * H * 0.035]);
+        // 4 control: ring (pause, oversight)
+        const ra = (i / N) * Math.PI * 2 - Math.PI / 2;
+        L[4].push([cx + Math.cos(ra) * R, cy + Math.sin(ra) * R]);
+        // 5 knowledge: dense grid-graph
+        const gc = i % cols, gr = Math.floor(i / cols);
+        L[5].push([cx - gw / 2 + (cols > 1 ? gc / (cols - 1) : 0.5) * gw, cy - gh / 2 + (rows > 1 ? gr / (rows - 1) : 0.5) * gh]);
+        // 6 result: same grid, calm (handled by jitter/link envelopes)
+        L[6].push(L[5][i]);
+      }
+      layouts = L;
+    };
+    const resize = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      computeLayouts();
+    };
+    resize(); window.addEventListener('resize', resize);
+    this.cleanup.push(() => window.removeEventListener('resize', resize));
+    for (let i = 0; i < N; i++) P.push({ x: rand(0, window.innerWidth), y: rand(0, window.innerHeight), vx: 0, vy: 0, ph: rand(0, 6.28), warm: i % 10 === 0 });
+    const mouse = { x: -9999, y: -9999 };
+    const onMouse = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    window.addEventListener('mousemove', onMouse);
+    this.cleanup.push(() => window.removeEventListener('mousemove', onMouse));
+
+    //             conv   und   plan  orch  ctrl  know  result
+    const LINK  = [0.04, 0.28, 0.35, 0.85, 0.4,  0.65, 0.25];
+    const PULSE = [0,    0,    0.15, 1,    0.15, 0.3,  0];
+    const JITTER= [1,    0.5,  0.3,  0.35, 0.12, 0.18, 0.06];
+    const WARMTH= [0,    0,    0,    0,    1,    0,    0];
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const ease = (t) => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+
+    const journey = document.querySelector('[data-journey]');
+    const words = $('[data-word]');
+    const subs = $('[data-sub]');
+    const rdots = $('[data-rdot]');
+    const rail = document.querySelector('[data-journey-rail]');
+    let raf, time = 0;
+    const loop = () => {
+      time += 0.016;
+      let fp = 0, inJourney = false;
+      if (journey) {
+        const r = journey.getBoundingClientRect();
+        const total = r.height - window.innerHeight;
+        const p = Math.min(1, Math.max(0, -r.top / total));
+        inJourney = r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
+        fp = p * 6;
+      }
+      const s0 = Math.min(5, Math.floor(fp)), s1 = Math.min(6, s0 + 1);
+      const st = ease(fp - s0);
+      const linkA = lerp(LINK[s0], LINK[s1], st);
+      const pulseE = lerp(PULSE[s0], PULSE[s1], st);
+      const jit = lerp(JITTER[s0], JITTER[s1], st);
+      const warmth = lerp(WARMTH[s0], WARMTH[s1], st);
+      if (motion) {
+        words.forEach((w, i) => {
+          const d = fp - i;
+          // plateau: hold each chapter in full focus for ~60% of its scroll span
+          const dd = Math.sign(d) * Math.max(0, Math.abs(d) - 0.3) / 0.7;
+          const vis = inJourney || (i === 0 && fp < 0.01) ? Math.max(0, 1 - Math.abs(dd) * 1.25) : 0;
+          w.style.opacity = String(vis);
+          w.style.transform = 'translateY(' + (-dd * 70) + 'px)';
+          w.style.filter = 'blur(' + Math.min(14, Math.abs(dd) * 10) + 'px)';
+          if (subs[i]) subs[i].style.opacity = String(inJourney ? Math.max(0, 1 - Math.abs(dd) * 1.6) : 0);
+          if (rdots[i]) { rdots[i].style.background = Math.abs(d) < 0.5 ? (i === 4 ? '#C8A97A' : '#2FA4A0') : 'rgba(233,228,216,.22)'; rdots[i].style.transform = Math.abs(d) < 0.5 ? 'scale(1.6)' : 'scale(1)'; }
+        });
+        if (rail) rail.style.opacity = inJourney ? '1' : '0';
+      }
+      ctx.clearRect(0, 0, W, H);
+      const dim = inJourney ? 1 : 0.45;
+      for (let i = 0; i < N; i++) {
+        const p = P[i];
+        const A = layouts[s0][i], B = layouts[s1][i];
+        const tx = lerp(A[0], B[0], st), ty = lerp(A[1], B[1], st);
+        const nx = tx + Math.sin(time * 0.7 + p.ph) * 26 * jit + Math.cos(time * 0.4 + p.ph * 2) * 18 * jit;
+        const ny = ty + Math.cos(time * 0.6 + p.ph) * 22 * jit + Math.sin(time * 0.5 + p.ph * 3) * 14 * jit;
+        p.vx = (p.vx + (nx - p.x) * 0.02) * 0.9;
+        p.vy = (p.vy + (ny - p.y) * 0.02) * 0.9;
+        const mdx = p.x - mouse.x, mdy = p.y - mouse.y, md2 = mdx * mdx + mdy * mdy;
+        if (md2 < 16900) { const f = (1 - Math.sqrt(md2) / 130) * 0.6; p.vx += mdx * 0.01 * f; p.vy += mdy * 0.01 * f; }
+        p.x += p.vx; p.y += p.vy;
+      }
+      if (linkA > 0.06) {
+        ctx.lineWidth = 1;
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+          const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y, d2 = dx * dx + dy * dy;
+          if (d2 < 8100) {
+            const d = Math.sqrt(d2);
+            const a = (1 - d / 90) * linkA * 0.5 * dim;
+            const wmix = warmth > 0.5 ? '200,169,122' : '47,164,160';
+            ctx.strokeStyle = 'rgba(' + wmix + ',' + a.toFixed(3) + ')';
+            ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke();
+            if (pulseE > 0.05 && (i + j) % 7 === 0) {
+              const pt = (time * 0.7 + (i * 13 + j) * 0.618) % 1;
+              ctx.fillStyle = 'rgba(233,228,216,' + (pulseE * 0.9 * dim).toFixed(3) + ')';
+              ctx.beginPath(); ctx.arc(lerp(P[i].x, P[j].x, pt), lerp(P[i].y, P[j].y, pt), 1.6, 0, Math.PI * 2); ctx.fill();
+            }
+          }
+        }
+      }
+      for (let i = 0; i < N; i++) {
+        const p = P[i];
+        const tw = 0.55 + Math.sin(time * 1.4 + p.ph * 4) * 0.25;
+        const isWarm = p.warm || warmth > 0.5;
+        ctx.fillStyle = isWarm ? 'rgba(200,169,122,' + (tw * 0.9 * dim).toFixed(3) + ')' : 'rgba(47,164,160,' + (tw * 0.8 * dim).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.warm ? 2.2 : 1.7, 0, Math.PI * 2); ctx.fill();
+      }
+      raf = requestAnimationFrame(loop);
+    };
+    if (motion) { raf = requestAnimationFrame(loop); this.cleanup.push(() => cancelAnimationFrame(raf)); }
+    else { words.forEach((w, i) => { w.style.opacity = i === 0 ? '1' : '0'; }); }
+  }
+  componentWillUnmount() { (this.cleanup || []).forEach((fn) => fn()); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

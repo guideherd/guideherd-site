@@ -11,7 +11,16 @@ mkdir -p "$OUT"
 
 # Marketing pages, and the 404 that keeps unknown paths from silently
 # rendering the homepage with a 200.
-cp index.html about.html approach.html services.html training.html 404.html "$OUT"/
+cp index.html platform.html solutions.html how-it-works.html academy.html \
+   resources.html company.html lets-talk.html 404.html "$OUT"/
+
+# Superseded pre-redesign pages. Still reachable by URL so existing links
+# and the truth-claim pins in test/ keep working; unlisted in sitemap.xml
+# because the redesigned routes are canonical. Removed in the content pass.
+cp about.html approach.html services.html training.html "$OUT"/
+
+# The redesign's runtime, required alongside the pages.
+cp support.js "$OUT"/
 
 # Crawler guidance: marketing pages and /status/ only — never app paths.
 cp robots.txt sitemap.xml "$OUT"/

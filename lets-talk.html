@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+input, textarea { font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; }
+input::placeholder, textarea::placeholder { color:rgba(233,228,216,.35); }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div style="background:#071019; position:relative; overflow-x:clip; min-height:100vh; display:flex; flex-direction:column;">
+<canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+<div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
+  </div>
+</nav>
+
+<header data-screen-label="Lets talk" style="position:relative; z-index:10; flex:1; display:grid; grid-template-columns:1.2fr 1fr; gap:90px; align-items:center; padding:190px 56px 100px; max-width:1320px; margin:0 auto; box-sizing:border-box; width:100%;">
+  <div>
+    <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.5);">Let's talk</p>
+    <h1 data-stagger style="margin:34px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(50px,6.4vw,104px); line-height:1.0; letter-spacing:-0.03em;">Start with a <em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">conversation.</em></h1>
+    <p data-stagger style="margin:34px 0 0; max-width:480px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62); text-wrap:pretty;">Fitting, for a company built on what conversations create. No form gauntlet, no ticket queue — tell us a little, and a person replies within two business days.</p>
+    <div data-stagger style="margin-top:44px; display:flex; flex-direction:column; gap:16px; font-size:14.5px;">
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Email</span><a href="mailto:hello@guideherd.ai" style="font-family:'JetBrains Mono',monospace; color:#E9E4D8; border-bottom:1px solid rgba(47,164,160,.5); padding-bottom:2px;">hello@guideherd.ai</a></div>
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Demo</span><span style="color:rgba(233,228,216,.7);">Half an hour, end to end, on real systems</span></div>
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Where</span><span style="color:rgba(233,228,216,.7);">Remote · US &amp; Canada</span></div>
+    </div>
+  </div>
+
+  <div data-stagger style="border:1px solid rgba(233,228,216,.13); border-radius:20px; background:rgba(10,20,32,.75); backdrop-filter:blur(10px); padding:44px; box-shadow:0 40px 120px rgba(2,8,14,.6);">
+    <div data-form-body style="display:flex; flex-direction:column; gap:26px;">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label for="lt-name" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Your name</label>
+        <input id="lt-name" type="text" placeholder="First name is fine" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label for="lt-org" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Organization</label>
+        <input id="lt-org" type="text" placeholder="Who you coordinate for" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label for="lt-email" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Email</label>
+        <input id="lt-email" type="email" placeholder="you@organization.com" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label for="lt-note" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">One sentence, if you have it</label>
+        <textarea id="lt-note" rows="3" placeholder="What happens after a call comes in today?" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; resize:vertical; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}"></textarea>
+      </div>
+      <button data-magnetic onClick="{{ send }}" style="margin-top:8px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:16px 30px; border-radius:999px; border:0; cursor:pointer; font-family:inherit; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45);">Begin the conversation</button>
+      <p style="margin:0; font-size:12.5px; color:rgba(233,228,216,.4);">Opens your email client, pre-written — nothing is stored here. We never sell or share your information.</p>
+    </div>
+  </div>
+</header>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.cleanup = [];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (s) => Array.from(document.querySelectorAll(s));
+    if (!reduced) {
+      $('[data-stagger]').forEach((el, i) => {
+        el.style.opacity = '0'; el.style.transform = 'translateY(32px)'; el.style.filter = 'blur(8px)';
+        setTimeout(() => {
+          el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1), filter 1.2s ease';
+          el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.style.filter = 'blur(0)';
+        }, 300 + i * 160);
+      });
+    }
+    $('[data-magnetic]').forEach((el) => {
+      const move = (e) => { const r = el.getBoundingClientRect(); el.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.12 + 'px,' + (e.clientY - r.top - r.height / 2) * 0.2 + 'px)'; };
+      const leave = () => { el.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; el.style.transform = 'translate(0,0)'; setTimeout(() => { el.style.transition = ''; }, 500); };
+      el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave);
+      this.cleanup.push(() => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); });
+    });
+    const cv = document.querySelector('[data-field]');
+    if (cv && !reduced) {
+      const ctx = cv.getContext('2d');
+      let W, H;
+      const resize = () => { const dpr = Math.min(2, window.devicePixelRatio || 1); W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+      resize(); window.addEventListener('resize', resize);
+      this.cleanup.push(() => window.removeEventListener('resize', resize));
+      const N = 70, P = [];
+      for (let i = 0; i < N; i++) P.push({ bx: Math.random(), by: Math.random(), ph: Math.random() * 6.28, warm: i % 11 === 0 });
+      let t = 0, raf;
+      const loop = () => {
+        t += 0.016; ctx.clearRect(0, 0, W, H);
+        P.forEach((p) => { p.x = p.bx * W + Math.sin(t * 0.35 + p.ph) * 60; p.y = p.by * H + Math.cos(t * 0.28 + p.ph * 2) * 46; });
+        ctx.lineWidth = 1;
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+          const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y, d2 = dx * dx + dy * dy;
+          if (d2 < 12100) { const a = (1 - Math.sqrt(d2) / 110) * 0.14; ctx.strokeStyle = 'rgba(47,164,160,' + a.toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke(); }
+        }
+        P.forEach((p) => {
+          const tw = 0.4 + Math.sin(t * 1.3 + p.ph * 4) * 0.2;
+          ctx.fillStyle = p.warm ? 'rgba(200,169,122,' + tw.toFixed(3) + ')' : 'rgba(47,164,160,' + tw.toFixed(3) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.warm ? 2 : 1.6, 0, Math.PI * 2); ctx.fill();
+        });
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+      this.cleanup.push(() => cancelAnimationFrame(raf));
+    }
+  }
+  componentWillUnmount() { (this.cleanup || []).forEach((fn) => fn()); }
+  renderVals() {
+    return {
+      focusIn: (e) => { e.target.style.borderBottomColor = '#2FA4A0'; },
+      focusOut: (e) => { e.target.style.borderBottomColor = 'rgba(233,228,216,.18)'; },
+      send: () => {
+        const v = (id) => (document.getElementById(id) || {}).value || '';
+        const body = 'Name: ' + v('lt-name') + '%0AOrganization: ' + v('lt-org') + '%0AReply to: ' + v('lt-email') + '%0A%0A' + encodeURIComponent(v('lt-note'));
+        window.location.href = 'mailto:hello@guideherd.ai?subject=' + encodeURIComponent('Let\u2019s talk — ' + (v('lt-org') || 'demo request')) + '&body=' + body;
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

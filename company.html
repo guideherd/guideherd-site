@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div style="background:#071019; position:relative; overflow-x:clip;">
+<canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+<div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:#E9E4D8; border-bottom:1px solid #2FA4A0; padding-bottom:2px;">Company</a>
+    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
+  </div>
+</nav>
+
+<header data-screen-label="Hero" style="position:relative; z-index:10; min-height:88vh; display:flex; flex-direction:column; justify-content:center; padding:180px 56px 80px; max-width:1320px; margin:0 auto; box-sizing:border-box;">
+  <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.5);">Company</p>
+  <h1 data-stagger style="margin:36px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(48px,6.4vw,104px); line-height:1.02; letter-spacing:-0.03em; max-width:1180px;">We watched good people spend their days being the <em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">glue.</em></h1>
+  <p data-stagger style="margin:38px 0 0; max-width:540px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62); text-wrap:pretty;">So we built a company around one conviction: the work between conversations deserves a system of its own.</p>
+</header>
+
+<section data-screen-label="Mission" style="position:relative; z-index:10; padding:10vh 56px 0; text-align:center;">
+  <div data-reveal style="max-width:900px; margin:0 auto;">
+    <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">Mission</p>
+    <p style="margin:30px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.8vw,54px); line-height:1.25; letter-spacing:-0.02em; text-wrap:balance;">Give every organization the operational intelligence that today only exists inside its best person's head.</p>
+  </div>
+</section>
+
+<section data-screen-label="Story" style="position:relative; z-index:10; padding:20vh 56px 0; max-width:1320px; margin:0 auto;">
+  <div data-reveal style="display:grid; grid-template-columns:1fr 1.4fr; gap:80px; border-top:1px solid rgba(233,228,216,.14); padding-top:70px; align-items:start;">
+    <h2 style="margin:0; position:sticky; top:140px; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); line-height:1.08; letter-spacing:-0.02em;">Why GuideHerd exists.</h2>
+    <div style="display:flex; flex-direction:column; gap:26px; max-width:620px;">
+      <p style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(22px,2.2vw,30px); line-height:1.4; letter-spacing:-0.01em;">In most organizations, the work between conversations is held together by a person, a notepad, and a good memory.</p>
+      <p style="margin:0; font-size:16px; font-weight:300; line-height:1.75; color:rgba(233,228,216,.65);">It works — right up until the day it doesn't. The double-booking. The confirmation that never went out. The caller who was promised a call back. Never dramatic; a steady tax on attention, paid by whoever happens to be at the desk, compounding as you grow.</p>
+      <p style="margin:0; font-size:16px; font-weight:300; line-height:1.75; color:rgba(233,228,216,.65);">We started in law — organizations where being careful is not optional, and where every promise made on a phone call is a professional obligation. If a system can earn trust there, it can earn trust anywhere.</p>
+      <p style="margin:0; font-size:16px; font-weight:300; line-height:1.75; color:rgba(233,228,216,.65);">The point was never the technology. The point is that a Tuesday afternoon at a busy front desk is calmer than it was — and that nobody's good memory is a single point of failure anymore.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Timeline" style="position:relative; z-index:10; padding:20vh 56px 0; max-width:1320px; margin:0 auto;">
+  <div data-reveal>
+    <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">The road so far</p>
+  </div>
+  <div data-reveal style="margin-top:48px; border-top:1px solid rgba(233,228,216,.14);">
+    <div style="display:grid; grid-template-columns:140px 1fr; gap:44px; padding:34px 0; border-bottom:1px solid rgba(233,228,216,.1); align-items:baseline;">
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:26px; color:#2FA4A0;">Origin</span>
+      <p style="margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65); max-width:640px;">The observation: every conversation creates work nobody budgets for. The first sketches of a system that would hold it.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:140px 1fr; gap:44px; padding:34px 0; border-bottom:1px solid rgba(233,228,216,.1); align-items:baseline;">
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:26px; color:#2FA4A0;">First vertical</span>
+      <p style="margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65); max-width:640px;">Shipped into law firms — real calendars, real mailboxes, real obligations. Dark-mode consoles, audit history, reversible configuration: the trust architecture built first, not bolted on.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:140px 1fr; gap:44px; padding:34px 0; border-bottom:1px solid rgba(233,228,216,.1); align-items:baseline;">
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:26px; color:#2FA4A0;">Platform</span>
+      <p style="margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65); max-width:640px;">The realization that nothing in the system knows an industry. Intake, coordination, execution, record — the shape of work everywhere. GuideHerd becomes an AI operations platform.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:140px 1fr; gap:44px; padding:34px 0; align-items:baseline;">
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:26px; color:#C8A97A;">Next</span>
+      <p style="margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65); max-width:640px;">New verticals, new agents, a growing Academy — and careers and partnerships, when the time is right. We publish dates when things happen, not before.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Philosophy" style="position:relative; z-index:10; padding:20vh 56px 0; max-width:1320px; margin:0 auto;">
+  <div data-reveal>
+    <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">Our philosophy</p>
+    <h2 style="margin:24px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(34px,4vw,56px); line-height:1.06; letter-spacing:-0.025em; max-width:820px;">Convictions we'd rather lose a deal over than <em style="font-family:'Instrument Serif',serif; font-style:italic;">bend.</em></h2>
+  </div>
+  <div data-reveal style="margin-top:56px; border-top:1px solid rgba(233,228,216,.14);">
+    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:36px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.4);">§ 01</span>
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(22px,2.4vw,32px); letter-spacing:-0.015em;">We say what exists.</span>
+      <span style="font-size:13.5px; color:rgba(233,228,216,.5); max-width:300px; text-align:right;">Working means working. Planned is labelled planned, on every page.</span>
+    </div>
+    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:36px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.4);">§ 02</span>
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(22px,2.4vw,32px); letter-spacing:-0.015em;">People make the decisions.</span>
+      <span style="font-size:13.5px; color:rgba(233,228,216,.5); max-width:300px; text-align:right;">The platform prepares, performs, records. It never speaks for you.</span>
+    </div>
+    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:36px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.4);">§ 03</span>
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(22px,2.4vw,32px); letter-spacing:-0.015em;">Everything can be undone.</span>
+      <span style="font-size:13.5px; color:rgba(233,228,216,.5); max-width:300px; text-align:right;">Software that only moves forward is software people fear.</span>
+    </div>
+    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:36px 0;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.4);">§ 04</span>
+      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(22px,2.4vw,32px); letter-spacing:-0.015em;">We stay after go-live.</span>
+      <span style="font-size:13.5px; color:rgba(233,228,216,.5); max-width:300px; text-align:right;">A handover is a moment. An organization is a moving thing.</span>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Finale" style="position:relative; z-index:10; padding:28vh 56px 16vh; text-align:center;">
+  <div data-reveal>
+    <h2 style="margin:0 auto; max-width:1000px; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,6vw,100px); line-height:1.02; letter-spacing:-0.03em;">One problem, held with <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">conviction.</em></h2>
+    <a data-magnetic href="/lets-talk" style="display:inline-block; margin-top:42px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:16px 34px; border-radius:999px; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45); color:#071019;">Let's talk</a>
+  </div>
+</section>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.cleanup = [];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (s) => Array.from(document.querySelectorAll(s));
+    if (!reduced) {
+      $('[data-stagger]').forEach((el, i) => {
+        el.style.opacity = '0'; el.style.transform = 'translateY(32px)'; el.style.filter = 'blur(8px)';
+        setTimeout(() => {
+          el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1), filter 1.2s ease';
+          el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.style.filter = 'blur(0)';
+        }, 300 + i * 150);
+      });
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); }
+      }), { threshold: 0.08 });
+      $('[data-reveal]').forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+        el.style.opacity = '0'; el.style.transform = 'translateY(46px)';
+        el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1)';
+        io.observe(el);
+      });
+      this.cleanup.push(() => io.disconnect());
+    }
+    $('[data-magnetic]').forEach((el) => {
+      const move = (e) => { const r = el.getBoundingClientRect(); el.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.18 + 'px,' + (e.clientY - r.top - r.height / 2) * 0.3 + 'px)'; };
+      const leave = () => { el.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; el.style.transform = 'translate(0,0)'; setTimeout(() => { el.style.transition = ''; }, 500); };
+      el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave);
+      this.cleanup.push(() => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); });
+    });
+    const cv = document.querySelector('[data-field]');
+    if (cv && !reduced) {
+      const ctx = cv.getContext('2d');
+      let W, H;
+      const resize = () => { const dpr = Math.min(2, window.devicePixelRatio || 1); W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+      resize(); window.addEventListener('resize', resize);
+      this.cleanup.push(() => window.removeEventListener('resize', resize));
+      const N = 70, P = [];
+      for (let i = 0; i < N; i++) P.push({ bx: Math.random(), by: Math.random(), ph: Math.random() * 6.28, warm: i % 11 === 0 });
+      let t = 0, raf;
+      const loop = () => {
+        t += 0.016; ctx.clearRect(0, 0, W, H);
+        P.forEach((p) => { p.x = p.bx * W + Math.sin(t * 0.35 + p.ph) * 60; p.y = p.by * H + Math.cos(t * 0.28 + p.ph * 2) * 46; });
+        ctx.lineWidth = 1;
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+          const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y, d2 = dx * dx + dy * dy;
+          if (d2 < 12100) { const a = (1 - Math.sqrt(d2) / 110) * 0.14; ctx.strokeStyle = 'rgba(47,164,160,' + a.toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke(); }
+        }
+        P.forEach((p) => {
+          const tw = 0.4 + Math.sin(t * 1.3 + p.ph * 4) * 0.2;
+          ctx.fillStyle = p.warm ? 'rgba(200,169,122,' + tw.toFixed(3) + ')' : 'rgba(47,164,160,' + tw.toFixed(3) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.warm ? 2 : 1.6, 0, Math.PI * 2); ctx.fill();
+        });
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+      this.cleanup.push(() => cancelAnimationFrame(raf));
+    }
+  }
+  componentWillUnmount() { (this.cleanup || []).forEach((fn) => fn()); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
