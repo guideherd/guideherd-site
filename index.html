@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuideHerd — AI Operations Platform</title>
+<meta name="description" content="GuideHerd is an AI operations platform for the work that happens between conversations: prepared handoffs, real scheduling, and a record of every action.">
+<link rel="icon" href="/assets/logo-crop.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+
 <script src="/support.js"></script>
 </head>
 <body>
@@ -91,7 +96,7 @@ a:hover { color:#2FA4A0; }
   <div data-tilt style="position:relative; max-width:1200px; margin:90px auto 0; will-change:transform; transform-origin:50% 30%;">
     <div style="position:absolute; inset:-80px -120px; background:radial-gradient(closest-side, rgba(47,164,160,.10), transparent 70%); filter:blur(50px); pointer-events:none;"></div>
     <div style="position:relative; border-radius:16px; overflow:hidden; border:1px solid rgba(233,228,216,.13); box-shadow:0 70px 180px rgba(2,8,14,.85);">
-      <img src="/images/ops-overview-dark.png" alt="A GuideHerd operations surface: the day's work, its health, and its record" style="width:100%; display:block;">
+      <img src="/images/ops-overview-dark.png" alt="The GuideHerd Operations Center Overview in dark mode: a KPI strip with pending, active, completed, and failed handoffs and overall health, system health detail, monthly usage, and scheduling readiness, populated with fictional sample data." style="width:100%; display:block;">
     </div>
   </div>
   <p style="max-width:1200px; margin:22px auto 0; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(233,228,216,.4); display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;"><span>Shipped product · not a mockup</span><span>Sample data, fictional organization</span></p>
@@ -123,6 +128,37 @@ a:hover { color:#2FA4A0; }
       <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.4);">§ 03</span>
       <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.015em;">A failure stops. It never invents.</span>
       <span style="font-size:13.5px; color:rgba(233,228,216,.5); max-width:280px; text-align:right;">The workflow halts and tells you — instead of guessing an answer.</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ WHERE IT CONNECTS ══ -->
+<section id="integrations" data-screen-label="Connections" style="position:relative; z-index:10; padding:30vh 56px 0; max-width:1240px; margin:0 auto;">
+  <div data-reveal>
+    <p style="margin:0 0 34px; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; color:rgba(233,228,216,.4);">Where it connects</p>
+    <p style="margin:0 0 40px; max-width:640px; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">Each system is labelled with where it actually stands today. We would rather tell you now than let you find out during onboarding.</p>
+    <div style="border-top:1px solid rgba(233,228,216,.14);">
+      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Microsoft 365 calendar integration</span>
+        <span style="font-size:13.5px; color:rgba(233,228,216,.5); text-align:right;">Outlook · Exchange Online</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Google Calendar integration</span>
+        <span style="font-size:13.5px; color:rgba(233,228,216,.5); text-align:right;">Google Workspace · validated end to end</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Clio</span>
+        <span style="font-size:13.5px; color:rgba(233,228,216,.5); text-align:right; max-width:420px;">Connected; validated end to end against a Clio tenant. Your firm authorizes it and can disconnect it at any time.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
+        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Sign-in</span>
+        <span style="font-size:13.5px; color:rgba(233,228,216,.5); text-align:right;">Google Workspace, or a firm-issued account</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">GuideHerd Academy</span>
+        <span style="font-size:13.5px; text-align:right;"><a href="https://training.guideherd.ai" style="color:#2FA4A0; border-bottom:1px solid rgba(47,164,160,.4); padding-bottom:1px;">Self-serve training — a separate subscription →</a></span>
+      </div>
     </div>
   </div>
 </section>
