@@ -21,7 +21,7 @@
   /* brand */
   --ink:        #0E2A3F;
   --ink-soft:   #1C3A52;
-  --ink-60:     rgba(14, 42, 63, 0.60);
+  --ink-60:     rgba(14, 42, 63, 0.66);
   --ink-40:     rgba(14, 42, 63, 0.40);
   --ink-20:     rgba(14, 42, 63, 0.20);
   --ink-10:     rgba(14, 42, 63, 0.10);
@@ -179,12 +179,12 @@ p { margin: 0; }
   align-items: flex-start;
 }
 .wordmark-main { letter-spacing: -0.02em; }
-.wordmark-sup {
+.wordmark-sup { /* --accent-ink, not --accent: 10px text needs 4.5:1 */
   font-family: var(--sans);
   font-weight: 500;
   font-size: 10px;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-left: 2px;
   margin-top: 4px;
   line-height: 1;
@@ -567,7 +567,7 @@ p { margin: 0; }
   font-size: var(--fs-xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-40);
+  color: var(--ink-60);
   margin-bottom: 2px;
 }
 @media (max-width: 900px) {
@@ -731,6 +731,10 @@ p { margin: 0; }
   padding-bottom: var(--sp-6);
   border-bottom: 1px solid rgba(245, 242, 234, 0.15);
 }
+/* The footer sits on --ink, where --accent-ink drops to 2.40:1.
+   The lighter --accent reads at 4.88:1 there — same hue family,
+   chosen by ground rather than by habit (#358). */
+.site-footer .wordmark-sup { color: var(--accent); }
 .footer-brand .wordmark { color: var(--paper); margin-bottom: var(--sp-3); display: inline-flex; }
 .footer-tag {
   font-family: var(--serif);
@@ -802,6 +806,10 @@ p { margin: 0; }
      column and stay readable, so it scrolls INSIDE its own frame —
      never taking the page sideways with it. */
   .price-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* The table scrolls horizontally at this width, so it is focusable
+     (#358) — a keyboard user could not otherwise reach the right-hand
+     columns. Focusable means it also needs a visible focus ring. */
+  .price-table:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
   .price-row, .price-head { min-width: 680px; }
 }
 
@@ -960,7 +968,7 @@ p { margin: 0; }
       <p style="font-size: var(--fs-md); color: var(--ink-soft); max-width: 58ch; margin-top: var(--sp-2);">Success plans are priced per firm, not per seat, for the first ten users. Scoped work is quoted after a short call. Platform pricing is separate &mdash; see <a href="/services" style="color: var(--accent-ink); border-bottom: 1px solid var(--accent);">platform pricing</a>.</p>
     </div>
 
-    <div class="price-table">
+    <div class="price-table" tabindex="0" role="region" aria-label="Plan comparison table, scrolls horizontally">
       <div class="price-head">
         <div>Plan</div>
         <div>Best for</div>
