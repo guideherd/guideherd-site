@@ -1,0 +1,14 @@
+{
+  "name": "guideherd-site",
+  "private": true,
+  "description": "GuideHerd public marketing site — static, self-contained.",
+  "scripts": {
+    "test": "node --test 'test/*.test.js'",
+    "test:a11y": "node --test test/a11y/*.test.js",
+    "build": "bash scripts/build-site.sh"
+  },
+  "devDependencies": {
+    "axe-core": "4.13.0",
+    "playwright-core": "1.62.1"
+  }
+}
