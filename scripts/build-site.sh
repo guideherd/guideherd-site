@@ -51,6 +51,14 @@ for verification in google*.html BingSiteAuth.xml; do
 done
 shopt -u nullglob
 
+# Root-level files that must be at the site ROOT to work at all:
+# favicon.ico is requested from / by clients that ignore <link rel="icon">,
+# and site.webmanifest is referenced from / by every page. assets/ ships
+# wholesale below, so the sized PNGs need no line here — these two do, and
+# an unlisted one is silently absent with no build error. That is the
+# likeliest way this gets half-done (#354).
+cp favicon.ico site.webmanifest "$OUT"/
+
 # Shared assets, product screenshots (fictional sample data only), and
 # the public status page.
 cp -R assets images status "$OUT"/
