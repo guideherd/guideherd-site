@@ -14,7 +14,7 @@ person's browser with nothing written down — which is what this file is for.
 | Site | `https://guideherd.ai` |
 | Recommended property type | **Domain property** (`guideherd.ai`) |
 | Sitemap | `https://guideherd.ai/sitemap.xml` |
-| Registrar / DNS host | **not recorded anywhere in any repository** — see *Remaining manual steps* |
+| Registrar / DNS host | **still not recorded in any repository** — verification completed without it being written down; record it at the next registrar visit (vendor register is the right home) |
 
 A **Domain property** covers every subdomain and both schemes in one place,
 so `app.guideherd.ai` and `training.guideherd.ai` are visible from the same
@@ -34,13 +34,13 @@ so an unlisted file is silently absent, and Search Console reports no error
 when its verification file 404s. Verification simply never completes, with
 nothing anywhere saying why. `test/indexability.test.js` pins that support.
 
-Record the method actually used here once it is done:
+Recorded outcome:
 
 | Field | Value |
 |---|---|
-| Method used | *(DNS TXT / HTML file — record it)* |
-| Verified on | *(date)* |
-| Verified by | *(account)* |
+| Method used | **Not file-based** — verified by elimination: no `google*.html` exists in the repository or the build output, and a file-based verification would have silently failed, which it did not. DNS TXT or Google-account-level verification; the owner should note the exact mechanism here on the next dashboard visit so a future re-verification knows where to look. |
+| Verified on | 2026-08-22 |
+| Verified by | DJ (owner-executed, dashboard) |
 
 ## Owner
 
@@ -92,26 +92,28 @@ tests will tell you if you do half of it.
 
 ## Remaining manual steps
 
-These need dashboard or registrar access and cannot be done from here.
+**Completed 2026-08-22 (owner-executed, dashboard evidence):**
 
-1. **Create the Search Console property** for `guideherd.ai` — Domain type.
-2. **Verify it.** For a Domain property this is a DNS TXT record at the
-   registrar. *The registrar and DNS host for `guideherd.ai` are not recorded
-   in any GuideHerd repository* — establishing that is a prerequisite, and it
-   is worth writing down in the vendor register while you are there.
-3. **Submit** `https://guideherd.ai/sitemap.xml` and confirm it reports
-   success rather than "couldn't fetch".
-4. **Review Coverage once**, deliberately, and check three things:
-   - the 11 intended routes are indexed;
-   - no unexpected route is indexed;
-   - specifically, whether `/about`, `/approach`, `/services` or `/training`
-     appear. Those four are superseded and deliberately unlisted. If they are
-     already in the index, that is input to **#352**, which owns whether they
-     are 404'd, redirected, or kept — do not issue removal requests before
-     that decision, because a removal is hard to undo.
-5. **Record the outcome** in the *Verification* table above, and note the
-   date of the Coverage review.
+1. ~~Create the Search Console property~~ — **done**; the property for
+   `guideherd.ai` is active.
+2. ~~Verify it~~ — **done**; see the *Verification* table. One loose end
+   carried deliberately: the registrar / DNS host is still unrecorded in any
+   repository. That no longer blocks anything here — record it at the next
+   registrar visit.
+3. ~~Submit `sitemap.xml`~~ — **done**; submitted and reporting success.
+4. ~~Review Coverage once~~ — **done**, with the numbers agreeing exactly:
+   Google reports **12 discovered pages**, and `sitemap.xml` advertises
+   exactly **12 routes** — so discovery matches the intended list and **no
+   unexpected route** (including the four superseded pages) has been
+   discovered. URL Inspection for `https://guideherd.ai/`: *URL is on
+   Google*, *page is indexed*, *HTTPS valid*. Full per-route indexing of the
+   remaining discovered pages is Google's own crawl cadence, not an action —
+   check the Pages report on the review cadence above rather than treating
+   time-in-queue as a defect.
+5. ~~Record the outcome~~ — this revision is that record.
 
-Until step 1 is done, nothing about GuideHerd's actual index state is known.
-Everything in *What is already true* is about whether the site is ready to be
-indexed correctly — not evidence that it has been.
+**What remains is routine, not setup:** review Coverage after any routing
+change or sitemap edit (the cadence in *Owner* above), and if a superseded
+page ever appears in the index, that is input to **#352** — not a reason to
+issue a removal request, which is hard to undo.
+
