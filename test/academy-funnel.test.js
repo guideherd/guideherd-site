@@ -23,10 +23,33 @@ test('the homepage cross-links the Academy beside the Success pointer', () => {
   assert.match(html, /https:\/\/training\.guideherd\.ai/);
 });
 
+// The published legal pages (#333) are the one place the marketing site has
+// to NAME the payment processor: a privacy policy that hides who takes the
+// card is not a privacy policy. Naming a processor in prose is disclosure,
+// which is the opposite of carrying commerce, so the word alone is allowed
+// there — and only there. Every commerce MECHANISM stays refused on every
+// page including these two: no checkout endpoint, no price or key material,
+// no Stripe SDK or API host, no checkout link. The original guard is
+// unchanged for all twelve other pages.
+const LEGAL_PAGES = new Set(['privacy.html', 'terms.html']);
+const COMMERCE = /stripe|\/api\/checkout|price_[0-9A-Za-z]{10,}|sk_(live|test)_/i;
+const COMMERCE_MECHANISM =
+  /js\.stripe\.com|api\.stripe\.com|checkout\.stripe\.com|stripe\.js|new Stripe\(|Stripe\(['"`]|\/api\/checkout|price_[0-9A-Za-z]{10,}|sk_(live|test)_|pk_(live|test)_/i;
+
 test('marketing owns NO commerce: no Stripe, no checkout, no price ids', () => {
   for (const f of fs.readdirSync('.').filter((f) => f.endsWith('.html'))) {
     const html = fs.readFileSync(f, 'utf8');
-    assert.ok(!/stripe|\/api\/checkout|price_[0-9A-Za-z]{10,}|sk_(live|test)_/i.test(html),
-      f + ' must not carry commerce');
+    const pattern = LEGAL_PAGES.has(f) ? COMMERCE_MECHANISM : COMMERCE;
+    assert.ok(!pattern.test(html), f + ' must not carry commerce');
   }
+});
+
+// The narrowing above is only safe while the disclosure it exists for is
+// actually on the page. If a future edit drops it, the exemption must not
+// quietly survive as a hole.
+test('the legal pages earn their exemption by carrying the disclosure', () => {
+  const privacy = fs.readFileSync('privacy.html', 'utf8');
+  assert.match(privacy, /Stripe/, 'the Privacy Policy must name the payment processor');
+  assert.match(privacy, /never see or store your card details/i,
+    'and must state plainly that GuideHerd does not hold card data');
 });
