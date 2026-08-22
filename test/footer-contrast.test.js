@@ -41,17 +41,27 @@ const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 // ── The redesigned footer: rgba(233,228,216,α) on the page ground ─────────
 const REDESIGNED = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
   'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
-  'privacy.html', 'terms.html'];
+  'privacy.html', 'terms.html', 'status/index.html'];
 const GROUND = hex('#071019');
 const FOREGROUND = [233, 228, 216];
+
+// A page can carry more than one footer — the Status page has its own note
+// inside <main> as well as the shared site footer — so every footer block on
+// the page is scanned, not the first one the slice happens to land on.
+// Checking only the first is how this pin nearly shipped blind to the very
+// page it was extended to cover.
+function footerBlocks(html) {
+  return [...html.matchAll(/<footer[\s\S]*?<\/footer>/g)].map((m) => m[0]);
+}
 
 test('every redesigned footer’s text clears AA against the page ground', () => {
   for (const name of REDESIGNED) {
     const html = page(name);
-    const footer = html.slice(html.indexOf('<footer'), html.indexOf('</footer>'));
-    assert.ok(footer.length > 0, name + ' has a footer');
-    const alphas = [...footer.matchAll(/color:\s*rgba\(233,\s*228,\s*216,\s*(\.\d+|0?\.\d+|1)\)/g)]
-      .map((m) => parseFloat(m[1]));
+    const blocks = footerBlocks(html);
+    assert.ok(blocks.length > 0, name + ' has a footer');
+    const alphas = blocks.flatMap((footer) =>
+      [...footer.matchAll(/color:\s*rgba\(233,\s*228,\s*216,\s*(\.\d+|0?\.\d+|1)\)/g)]
+        .map((m) => parseFloat(m[1])));
     assert.ok(alphas.length >= 2,
       name + ': expected the footer to carry its tagline and copyright colours');
     for (const a of alphas) {
@@ -92,4 +102,19 @@ test('the superseded pages’ footer headings and meta row clear AA against --in
 test('the contrast helper agrees with what the browser measured', () => {
   assert.equal(contrast(FOREGROUND, GROUND, 0.42).toFixed(2), '3.46');   // axe: 3.45
   assert.equal(contrast(PAPER, INK, 0.5).toFixed(2), '4.39');            // axe: 4.39
+});
+
+// The Status page's own footer note is painted by --ink-40 rather than an
+// inline colour, so the scan above cannot reach it. That token also paints
+// .brand and .striplabel, and it shipped the migration at 0.42 (3.46:1) —
+// pin the value that fixed all three.
+test('the Status page’s small-text token clears AA', () => {
+  const html = page('status/index.html');
+  const m = html.match(/--ink-40:\s*rgba\(233,\s*228,\s*216,\s*([\d.]+)\)/);
+  assert.ok(m, 'status/index.html still defines --ink-40');
+  const c = contrast(FOREGROUND, GROUND, parseFloat(m[1]));
+  assert.ok(c >= AA,
+    'status/index.html: --ink-40 at alpha ' + m[1] + ' is ' + c.toFixed(2) + ':1 against #071019, '
+    + 'below the ' + AA + ':1 AA threshold. It paints .brand, .striplabel and the page’s own '
+    + 'footer note, so one value here is three failures.');
 });
