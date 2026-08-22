@@ -41,7 +41,7 @@ const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 // ── The redesigned footer: rgba(233,228,216,α) on the page ground ─────────
 const REDESIGNED = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
   'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
-  'privacy.html', 'terms.html', 'status/index.html'];
+  'privacy.html', 'terms.html', 'trust.html', 'status/index.html'];
 const GROUND = hex('#071019');
 const FOREGROUND = [233, 228, 216];
 
@@ -139,7 +139,7 @@ test('the Status page’s small-text token clears AA', () => {
 const DARK_TEXT_FLOOR = 0.58;
 const DARK_PAGES = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
   'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
-  'privacy.html', 'terms.html', 'status/index.html'];
+  'privacy.html', 'terms.html', 'trust.html', 'status/index.html'];
 
 test('no dark page declares secondary TEXT below the readable floor', () => {
   for (const name of DARK_PAGES) {

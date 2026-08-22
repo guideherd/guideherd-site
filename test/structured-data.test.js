@@ -78,7 +78,7 @@ test('no commerce, rating, or review markup anywhere on the site', () => {
   const REFUSED = ['Product', 'Offer', 'AggregateOffer', 'AggregateRating', 'Review', 'Rating'];
   for (const name of ['index.html', 'platform.html', 'academy.html', 'solutions.html',
                       'how-it-works.html', 'resources.html', 'company.html', 'lets-talk.html',
-                      'privacy.html', 'terms.html', 'about.html', 'approach.html',
+                      'privacy.html', 'terms.html', 'trust.html', 'about.html', 'approach.html',
                       'services.html', 'training.html', '404.html', 'status/index.html']) {
     for (const b of blocks(read(name))) {
       for (const type of REFUSED) {
@@ -118,7 +118,7 @@ test('only the homepage carries entity markup', () => {
   // Repeating Organization on every page multiplies the entity rather than
   // reinforcing it, and gives fourteen places for it to drift.
   for (const name of ['platform.html', 'academy.html', 'company.html', 'privacy.html',
-                      'terms.html', 'status/index.html', '404.html']) {
+                      'terms.html', 'trust.html', 'status/index.html', '404.html']) {
     assert.equal(blocks(read(name)).length, 0,
       name + ' carries JSON-LD. Entity markup belongs on the homepage alone, or the same '
       + 'organisation is asserted from fourteen places that can disagree.');

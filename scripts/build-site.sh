@@ -16,7 +16,7 @@ cp index.html platform.html solutions.html how-it-works.html academy.html \
 
 # The published legal pages. Served at /privacy and /terms — Cloudflare Pages
 # resolves the clean URL from the .html file, so no redirect rule is involved.
-cp privacy.html terms.html "$OUT"/
+cp privacy.html terms.html trust.html "$OUT"/
 
 # Superseded pre-redesign pages. Still reachable by URL so existing links
 # and the truth-claim pins in test/ keep working; unlisted in sitemap.xml

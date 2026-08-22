@@ -36,6 +36,7 @@ const INDEXABLE = {
   '/lets-talk': 'lets-talk.html',
   '/privacy': 'privacy.html',
   '/terms': 'terms.html',
+  '/trust': 'trust.html',
   '/status/': 'status/index.html',
 };
 
