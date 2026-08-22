@@ -8,38 +8,65 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const page = (n) => fs.readFileSync(path.join(__dirname, '..', n), 'utf8');
+// The integrations page is where products are named (editorial pass): the
+// homepage speaks in capabilities, /platform names each product and where it
+// stands. These pins follow the CLAIM, not the page it used to live on, and
+// two of them are now stronger than before because they apply site-wide
+// rather than to index.html alone.
+const INTEGRATIONS_PAGE = 'platform.html';
+const ALL_PUBLIC = ['index.html', 'platform.html', 'solutions.html',
+  'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
+  'lets-talk.html', 'about.html', 'approach.html', 'services.html',
+  'training.html', '404.html', 'status/index.html'];
+
 test('the scheduling claims name both validated calendar providers', () => {
-  const index = page('index.html');
-  assert.match(index, /Google calendars|Google Calendar/, 'index names Google Calendar');
-  assert.match(index, /Microsoft 365/, 'index names Microsoft 365');
+  const integrations = page(INTEGRATIONS_PAGE);
+  assert.match(integrations, /Google calendars|Google Calendar/, 'the integrations page names Google Calendar');
+  assert.match(integrations, /Microsoft 365/, 'the integrations page names Microsoft 365');
   assert.match(page('services.html'), /Google Calendar/, 'services names Google Calendar');
   assert.match(page('approach.html'), /Google Calendar/, 'approach names Google Calendar');
 });
+
+// STRONGER than the original: "Microsoft-only" is refused on EVERY page, not
+// just the one that happened to carry the claim when #294 was written. That
+// was the actual failure — a Microsoft-only sentence surviving an audit.
+test('no public page names the Microsoft calendar without naming Google’s', () => {
+  for (const name of ALL_PUBLIC) {
+    const html = page(name);
+    if (!/Microsoft 365 calendar/i.test(html)) continue;
+    assert.match(html, /Google Calendar/,
+      name + ' names the Microsoft 365 calendar integration, so it must name the '
+      + 'Google Calendar integration too — Microsoft-only is the exact claim #294 exists to refuse');
+  }
+});
+
 test('SSO and calendar remain distinct claims', () => {
-  const index = page('index.html');
+  const integrations = page(INTEGRATIONS_PAGE);
   // Sign-in claim (Workspace SSO) and the calendar claim both present,
   // so one being edited can never silently stand in for the other.
-  assert.match(index, /Google Workspace, or a firm-issued account/);
-  assert.match(index, /Google Calendar integration/);
+  assert.match(integrations, /Google Workspace, or a firm-issued account/);
+  assert.match(integrations, /Google Calendar integration/);
 });
 // The Clio dialect is validated at rung 3 against the Clio TRIAL tenant.
 // Rungs 4-5 (pilot-firm live validation) are still open, so no page may
 // imply a customer's own Clio account has been used.
 test('the Clio claim stays inside the evidence', () => {
-  for (const name of ['index.html', 'services.html', 'approach.html']) {
+  for (const name of ALL_PUBLIC) {
     assert.doesNotMatch(page(name), /real firm|in production at a firm/i,
       name + ' must not claim Clio ran against a customer firm’s own account');
   }
-  assert.match(page('index.html'), /validated end to end against a Clio tenant/);
+  assert.match(page(INTEGRATIONS_PAGE), /validated end to end against a Clio tenant/);
 });
 // Entra ID sign-in is implemented but dark and never validated against a
 // real tenant; the customer reference guide lists it as not available.
 // Microsoft 365 CALENDAR is a separate, live-proven claim and stays.
 test('Microsoft is not offered as a staff sign-in method', () => {
-  const index = page('index.html');
-  assert.doesNotMatch(index, /sign in with Microsoft or Google|Microsoft or Google Workspace/i,
-    'index must not list Microsoft among the available sign-in methods');
-  assert.match(index, /Microsoft 365 calendar integration/,
+  // STRONGER: the refusal now covers every public page.
+  for (const name of ALL_PUBLIC) {
+    assert.doesNotMatch(page(name), /sign in with Microsoft or Google|Microsoft or Google Workspace/i,
+      name + ' must not list Microsoft among the available sign-in methods');
+  }
+  assert.match(page(INTEGRATIONS_PAGE), /Microsoft 365 calendar integration/,
     'the Microsoft 365 calendar claim is separate and must survive');
 });
 
@@ -82,9 +109,9 @@ test('the screenshot generator mocks a production-equivalent provider set', () =
 // (#95, closed 2026-07-28) reached through entirely different credentials.
 // Correcting the AUTHENTICATION claim must never be done by deleting it.
 test('correcting Microsoft sign-in never removes the Microsoft 365 calendar claim', () => {
-  assert.match(page('index.html'), /Microsoft 365 calendar integration/,
+  assert.match(page(INTEGRATIONS_PAGE), /Microsoft 365 calendar integration/,
     'the calendar claim is separate from the sign-in claim and must survive');
-  assert.match(page('index.html'), /Microsoft 365/,
+  assert.match(page(INTEGRATIONS_PAGE), /Microsoft 365/,
     'the Microsoft 365 integration card must survive');
 });
 
