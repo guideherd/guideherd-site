@@ -114,7 +114,9 @@ test('the screenshot generator’s identities carry the firm name the real sessi
 // report. These pins refuse the vocabulary outright on every public page,
 // so a compliance claim cannot ship by copy-edit: adding one is a
 // deliberate edit here PLUS the auditor's issued report as evidence.
-const PUBLIC_PAGES = ['index.html', 'about.html', 'approach.html',
+const PUBLIC_PAGES = ['index.html', 'platform.html', 'solutions.html',
+  'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
+  'lets-talk.html', 'about.html', 'approach.html',
   'services.html', 'training.html', '404.html', 'status/index.html'];
 
 test('no public page names a compliance framework (#332)', () => {
@@ -140,7 +142,12 @@ test('no public page uses certification vocabulary (#332)', () => {
     // GuideHerd itself has been audited. Strip the feature senses, then
     // refuse the rest of the root.
     const stripped = html
-      .replace(/versioned,? (and )?audited/gi, '')
+      // The feature sense, in the forms the surfaces actually write it:
+      // "versioned and audited", "versioned, audited", "versioned,
+      // auditable". `auditable` is the weaker, more accurate adjective —
+      // rewriting copy to `audited` just to satisfy this pattern would
+      // strengthen the claim, which is the opposite of the intent here.
+      .replace(/versioned,? (and )?audit(ed|able)/gi, '')
       .replace(/audit (history|line|trail|log)/gi, '');
     assert.doesNotMatch(stripped, /\baudit/i,
       name + ' may say "audited" only inside the versioned-configuration feature phrase; '
