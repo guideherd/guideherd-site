@@ -26,3 +26,9 @@ never contacts the GuideHerd backend, so it stays truthful during an
 outage. Its `connect-src` is pinned to the artifact host alone.
 
 No backend code, no application source, no credentials, no customer data.
+
+## Search indexing
+
+`docs/search-indexing.md` — the Search Console property, how it is verified,
+the recorded decision on whether `/status/` is indexed, and the exact
+remaining steps that need registrar or dashboard access.
