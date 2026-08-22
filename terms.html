@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms — GuideHerd</title>
+<meta name="description" content="The terms covering use of the GuideHerd website and the GuideHerd Academy subscription, and where a separate platform agreement takes over.">
+<link rel="icon" href="/assets/logo-crop.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+/* ── Narrow-viewport reachability (reseller feedback) ──────────────────────
+   Nothing here changes the desktop layout: every rule sits inside a
+   max-width query. Three real causes were measured, not guessed:
+     1. the nav's link row is a flex line that neither shrank nor scrolled,
+        so Academy / Resources / Company / Let's talk were clipped off the
+        right edge with no way to reach them;
+     2. sections carry a 56px desktop gutter — 112px of a 390px phone;
+     3. multi-column grids kept their desktop column counts on phones.
+   Layout is fixed first; the nav keeps deliberate, visible horizontal
+   scrolling because seven items will not fit a phone at a legible size. */
+@media (max-width: 720px) {
+  /* 1. The nav scrolls east-west on purpose, and shows that it can. */
+  nav { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
+  nav > div {
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scroll-snap-type:x proximity;
+    padding-bottom:4px;
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
+            mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
+  }
+  nav > div > * { flex:0 0 auto; scroll-snap-align:start; }
+  /* A comfortable thumb target. Plain nav links are a 16px line box on
+     their own; the padding grows the hit area without moving the text. */
+  nav > div > a { padding-top:10px; padding-bottom:10px; }
+  nav > div::-webkit-scrollbar { height:3px; }
+  nav > div::-webkit-scrollbar-thumb { background:rgba(233,228,216,.35); border-radius:3px; }
+
+  /* 2. Reclaim the desktop gutter. border-box matters here: several of these
+        are width:100% with side padding, so without it the padding is ADDED
+        to the full width and the block hangs off both edges. */
+  [style*="56px"], [style*="52px"] {
+    box-sizing:border-box !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+
+  /* 3. Stack multi-column rows rather than clipping their right-hand columns. */
+  [style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+  [style*="text-align:right"] { text-align:left !important; }
+}
+
+@media (max-width: 360px) {
+  /* The display type clamps to a 64px FLOOR, which is wider than a 320px
+     phone once the gutter is gone, so the headline was clipped instead of
+     wrapping. Only the floor moves; the fluid middle and the desktop
+     ceiling are untouched. */
+  h1 { font-size:clamp(34px, 10vw, 64px) !important; }
+  h1, h2, p { overflow-wrap:anywhere; }
+}
+</style>
+
+<style>
+/* Long-form legal reading. Uses the site's existing tokens and rhythm; adds
+   nothing to the visual language beyond a comfortable measure. */
+.lgl { max-width: 760px; margin: 0 auto; padding: 0 56px 16vh; }
+.lgl h2 { font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,34px);
+          letter-spacing:-0.02em; line-height:1.15; margin:64px 0 18px; }
+.lgl h3 { font-family:'Inter Tight',sans-serif; font-weight:500; font-size:16px;
+          margin:30px 0 10px; color:#E9E4D8; }
+.lgl p, .lgl li { font-size:15.5px; font-weight:300; line-height:1.75;
+                  color:rgba(233,228,216,.72); text-wrap:pretty; }
+.lgl p { margin:0 0 16px; }
+.lgl ul { margin:0 0 16px; padding-left:20px; }
+.lgl li { margin:0 0 9px; }
+.lgl a { color:#2FA4A0; border-bottom:1px solid rgba(47,164,160,.4); padding-bottom:1px; }
+.lgl strong { color:#E9E4D8; font-weight:500; }
+.lgl .meta { font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.16em;
+             text-transform:uppercase; color:rgba(233,228,216,.58); }
+.lgl table { width:100%; border-collapse:collapse; margin:0 0 18px; }
+.lgl th, .lgl td { text-align:left; padding:13px 12px 13px 0; font-size:14.5px; font-weight:300;
+                   line-height:1.6; color:rgba(233,228,216,.72);
+                   border-bottom:1px solid rgba(233,228,216,.1); vertical-align:top; }
+.lgl th { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em;
+          text-transform:uppercase; color:rgba(233,228,216,.58); font-weight:400; }
+.lgl .closing { margin-top:64px; padding-top:26px; border-top:1px solid rgba(233,228,216,.14); }
+@media (max-width: 720px) {
+  .lgl { padding-left:20px; padding-right:20px; }
+  .lgl table, .lgl thead, .lgl tbody, .lgl tr, .lgl th, .lgl td { display:block; width:100%; }
+  .lgl thead { display:none; }
+  .lgl tr { padding:14px 0; border-bottom:1px solid rgba(233,228,216,.1); }
+  .lgl td { border:0; padding:2px 0; }
+  .lgl td:first-child { color:#E9E4D8; }
+}
+</style>
+
+</helmet>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
+    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
+  </div>
+</nav>
+
+<main class="lgl" style="padding-top:22vh;">
+  <p class="meta">Terms</p>
+  <h1 style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(38px,5.2vw,64px); line-height:1.04; letter-spacing:-0.025em; margin:26px 0 14px;">Terms of Use</h1>
+  <p class="meta" style="letter-spacing:.1em;">Last updated 22 August 2026</p>
+
+  <p style="margin-top:26px; font-size:17px; line-height:1.7; color:rgba(233,228,216,.82); font-weight:300;">These terms cover this website and the GuideHerd Academy subscription. Organizations that license the GuideHerd platform do so under a separate written agreement, and that agreement governs their use.</p>
+
+  <h2>1. Who these terms are between</h2>
+  <p>These terms are an agreement between you and <strong>GuideHerd AI, LLC</strong> (&ldquo;GuideHerd&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;). They apply when you browse this website and when you use GuideHerd Academy at <strong>training.guideherd.ai</strong>. Using either means you accept them; if you do not, please do not use them.</p>
+  <p>If you are agreeing on behalf of a firm or company, you are confirming that you are authorized to bind it, and &ldquo;you&rdquo; means that organization.</p>
+
+  <h2>2. Where a separate agreement takes over</h2>
+  <p>Organizations that deploy the GuideHerd platform sign a written services agreement with us covering their use, their data, service levels, and liability. <strong>Where that agreement and these terms disagree, that agreement controls</strong> for everything within its scope. These terms fill the gaps around it; they do not replace it.</p>
+
+  <h2>3. What GuideHerd is &mdash; and is not</h2>
+  <p>GuideHerd is administrative and operational software. <strong>We are not a law firm and we do not provide legal advice.</strong> We do not decide conflicts, we do not form attorney-client relationships, and we do not send client communications without a firm&rsquo;s approval. The platform prepares work and keeps records; your people talk to your clients.</p>
+  <p>GuideHerd Academy is training material about running that software and the work around it. It is educational. It is not legal, financial, or professional advice about your own practice, and outcomes described in it are not promises about yours.</p>
+
+  <h3>Automated assistance</h3>
+  <p>Parts of GuideHerd draft, summarize, transcribe, and route work automatically. <strong>These outputs are drafts for a person to review, not decisions.</strong> They can be incomplete or wrong. You remain responsible for what your organization sends, files, schedules, and relies on. Do not use GuideHerd as the last check on anything that matters.</p>
+
+  <h2>4. Your account</h2>
+  <ul>
+    <li>Give accurate information when you register, and keep it current.</li>
+    <li>Keep your sign-in credentials confidential. Anything done through your account is treated as done by you.</li>
+    <li>Tell us promptly at <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a> if you believe someone else has access to it.</li>
+    <li>Academy plans are licensed per organization for a stated number of people. Do not share access outside the organization that bought it.</li>
+  </ul>
+
+  <h2>5. Academy subscriptions and billing</h2>
+  <p>Academy plans are sold as recurring subscriptions and billed through Stripe. The price, billing period, and included seats are those shown at checkout for the plan you choose.</p>
+  <ul>
+    <li>A subscription <strong>renews automatically</strong> at the end of each billing period until it is cancelled.</li>
+    <li><strong>Monthly plans</strong> can be cancelled at any time; cancellation takes effect at the end of the billing period you have already paid for, and access continues until then.</li>
+    <li><strong>Annual plans</strong> are refundable within 14 days of purchase, and are not refundable after that.</li>
+    <li>You manage and cancel your subscription in the billing page reached from your account.</li>
+    <li>We may change prices for future billing periods. A change never applies to a period you have already paid for, and we will give notice before it takes effect.</li>
+    <li>Taxes are your responsibility unless we state otherwise at checkout.</li>
+  </ul>
+
+  <h2>6. Acceptable use</h2>
+  <p>Use GuideHerd for its purpose, lawfully, and without degrading it for anyone else. Do not:</p>
+  <ul>
+    <li>break the law, infringe someone&rsquo;s rights, or use GuideHerd to help someone else do either;</li>
+    <li>attempt to gain access to accounts, data, or systems you are not entitled to;</li>
+    <li>probe, scan, overload, or interfere with the service or the infrastructure behind it;</li>
+    <li>copy, resell, sublicense, or publicly redistribute Academy material, or record and republish it;</li>
+    <li>scrape or bulk-extract content from our sites by automated means;</li>
+    <li>reverse engineer or attempt to derive our source code, except where law expressly permits it;</li>
+    <li>upload material that is unlawful, malicious, or that you have no right to submit;</li>
+    <li>misrepresent GuideHerd&rsquo;s capabilities, or present its output as reviewed professional advice.</li>
+  </ul>
+  <p>If you find a security problem, please tell us at <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a> before disclosing it publicly, and give us a reasonable chance to fix it. We will not pursue good-faith research that respects the boundaries above.</p>
+
+  <h2>7. Intellectual property</h2>
+  <p><strong>Ours.</strong> GuideHerd owns the platform, this website, the Academy curriculum, and the GuideHerd name and marks. Your subscription grants your organization a limited, non-exclusive, non-transferable right to use the Academy material internally for its own training, for as long as the subscription is active. Nothing else transfers.</p>
+  <p><strong>Yours.</strong> Content and data your organization puts into GuideHerd stays yours. You grant us only the permission we need to host, process, and deliver the service to you &mdash; nothing more, and nothing that survives your leaving beyond what law or a signed agreement requires.</p>
+  <p><strong>Feedback.</strong> If you send us suggestions, we may act on them freely and without obligation. We will not identify you as the source without asking.</p>
+
+  <h2>8. Third-party services</h2>
+  <p>GuideHerd works with services other companies operate &mdash; payment processing, calendars, telephony, practice-management systems, and others named in our <a href="/privacy">Privacy Policy</a>. Those services are governed by their own terms and their own privacy practices. Where you connect one to GuideHerd, you confirm you are entitled to do so, and we are not responsible for how that provider behaves or for changes it makes to its own service.</p>
+
+  <h2>9. Availability</h2>
+  <p>We work to keep GuideHerd running and we publish current condition on our <a href="/status/">service status</a> page. We do not commit to a specific uptime figure on these terms; a service commitment, where one exists, lives in an organization&rsquo;s written agreement. We may perform maintenance, and we may change, suspend, or discontinue features. Where a change materially reduces something you rely on, we will give reasonable notice.</p>
+
+  <h2>10. Suspension and termination</h2>
+  <p>You may stop using GuideHerd at any time and cancel your subscription as described above. We may suspend or end access where these terms are breached, where use threatens the service or another customer, where payment fails, or where the law requires it. We will tell you why, and where the situation reasonably allows it, we will give you a chance to put it right first.</p>
+
+  <h2>11. Disclaimers</h2>
+  <p>Except where these terms say otherwise, and to the extent the law allows, this website and the Academy are provided <strong>as they are</strong>, without warranties of any kind, whether express or implied &mdash; including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the service will be uninterrupted or error-free, or that any particular result will follow from using it.</p>
+
+  <h2>12. Limitation of liability</h2>
+  <p>To the extent the law allows, neither party is liable to the other for indirect, incidental, special, consequential, or punitive damages, or for lost profits, lost revenue, or lost data, arising out of these terms &mdash; even if the possibility was known.</p>
+  <p>To the extent the law allows, our total liability arising out of these terms is limited to the amounts you paid us in the twelve months before the event giving rise to the claim.</p>
+  <p>Nothing here limits liability that cannot lawfully be limited, and some jurisdictions do not allow some of these exclusions, in which case they apply to you only as far as they lawfully can.</p>
+  <!-- OWNER / COUNSEL REVIEW: the liability cap above (12 months of fees) and
+       the exclusions in this section are placed as a reasonable early-stage
+       position, not as legal advice. Counsel should confirm the cap, whether
+       carve-outs are needed (confidentiality, indemnity, IP infringement,
+       gross negligence, willful misconduct), and whether an indemnity section
+       belongs here at all. -->
+
+  <!-- OWNER / COUNSEL REVIEW: this document deliberately contains NO governing
+       law clause, NO venue or jurisdiction clause, NO arbitration agreement,
+       and NO class-action waiver. Each is a legal-strategy decision — which
+       state's law, which forum, arbitration vs. courts, and the consumer-law
+       consequences of each — and inventing one would be worse than leaving it
+       open. Counsel should add a single dispute-resolution section here, and
+       the Privacy Policy should be reviewed against it at the same time. -->
+
+  <h2>13. Changes to these terms</h2>
+  <p>These terms describe how GuideHerd operates today, and they will be updated as the platform grows. When we change them, the date at the top of this page changes with them. Where a change materially affects people who hold a subscription, we will tell them rather than relying on this page alone, and continuing to use GuideHerd after a change takes effect means accepting the updated terms.</p>
+
+  <div class="closing">
+    <h2 style="margin-top:0;">Contact</h2>
+    <p>Questions about these terms, or about the written agreement behind a platform deployment: <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a>.</p>
+  </div>
+
+</main>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; display:inline-flex; gap:18px;"><a href="/privacy" style="color:rgba(233,228,216,.6);">Privacy</a><a href="/terms" style="color:rgba(233,228,216,.6);">Terms</a></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</x-dc>
+</body>
+</html>

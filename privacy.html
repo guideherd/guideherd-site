@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — GuideHerd</title>
+<meta name="description" content="What GuideHerd collects across its website, the Academy, and the platform, why it is collected, and which service providers are involved.">
+<link rel="icon" href="/assets/logo-crop.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+/* ── Narrow-viewport reachability (reseller feedback) ──────────────────────
+   Nothing here changes the desktop layout: every rule sits inside a
+   max-width query. Three real causes were measured, not guessed:
+     1. the nav's link row is a flex line that neither shrank nor scrolled,
+        so Academy / Resources / Company / Let's talk were clipped off the
+        right edge with no way to reach them;
+     2. sections carry a 56px desktop gutter — 112px of a 390px phone;
+     3. multi-column grids kept their desktop column counts on phones.
+   Layout is fixed first; the nav keeps deliberate, visible horizontal
+   scrolling because seven items will not fit a phone at a legible size. */
+@media (max-width: 720px) {
+  /* 1. The nav scrolls east-west on purpose, and shows that it can. */
+  nav { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
+  nav > div {
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scroll-snap-type:x proximity;
+    padding-bottom:4px;
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
+            mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
+  }
+  nav > div > * { flex:0 0 auto; scroll-snap-align:start; }
+  /* A comfortable thumb target. Plain nav links are a 16px line box on
+     their own; the padding grows the hit area without moving the text. */
+  nav > div > a { padding-top:10px; padding-bottom:10px; }
+  nav > div::-webkit-scrollbar { height:3px; }
+  nav > div::-webkit-scrollbar-thumb { background:rgba(233,228,216,.35); border-radius:3px; }
+
+  /* 2. Reclaim the desktop gutter. border-box matters here: several of these
+        are width:100% with side padding, so without it the padding is ADDED
+        to the full width and the block hangs off both edges. */
+  [style*="56px"], [style*="52px"] {
+    box-sizing:border-box !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+
+  /* 3. Stack multi-column rows rather than clipping their right-hand columns. */
+  [style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+  [style*="text-align:right"] { text-align:left !important; }
+}
+
+@media (max-width: 360px) {
+  /* The display type clamps to a 64px FLOOR, which is wider than a 320px
+     phone once the gutter is gone, so the headline was clipped instead of
+     wrapping. Only the floor moves; the fluid middle and the desktop
+     ceiling are untouched. */
+  h1 { font-size:clamp(34px, 10vw, 64px) !important; }
+  h1, h2, p { overflow-wrap:anywhere; }
+}
+</style>
+
+<style>
+/* Long-form legal reading. Uses the site's existing tokens and rhythm; adds
+   nothing to the visual language beyond a comfortable measure. */
+.lgl { max-width: 760px; margin: 0 auto; padding: 0 56px 16vh; }
+.lgl h2 { font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,34px);
+          letter-spacing:-0.02em; line-height:1.15; margin:64px 0 18px; }
+.lgl h3 { font-family:'Inter Tight',sans-serif; font-weight:500; font-size:16px;
+          margin:30px 0 10px; color:#E9E4D8; }
+.lgl p, .lgl li { font-size:15.5px; font-weight:300; line-height:1.75;
+                  color:rgba(233,228,216,.72); text-wrap:pretty; }
+.lgl p { margin:0 0 16px; }
+.lgl ul { margin:0 0 16px; padding-left:20px; }
+.lgl li { margin:0 0 9px; }
+.lgl a { color:#2FA4A0; border-bottom:1px solid rgba(47,164,160,.4); padding-bottom:1px; }
+.lgl strong { color:#E9E4D8; font-weight:500; }
+.lgl .meta { font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.16em;
+             text-transform:uppercase; color:rgba(233,228,216,.58); }
+.lgl table { width:100%; border-collapse:collapse; margin:0 0 18px; }
+.lgl th, .lgl td { text-align:left; padding:13px 12px 13px 0; font-size:14.5px; font-weight:300;
+                   line-height:1.6; color:rgba(233,228,216,.72);
+                   border-bottom:1px solid rgba(233,228,216,.1); vertical-align:top; }
+.lgl th { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em;
+          text-transform:uppercase; color:rgba(233,228,216,.58); font-weight:400; }
+.lgl .closing { margin-top:64px; padding-top:26px; border-top:1px solid rgba(233,228,216,.14); }
+@media (max-width: 720px) {
+  .lgl { padding-left:20px; padding-right:20px; }
+  .lgl table, .lgl thead, .lgl tbody, .lgl tr, .lgl th, .lgl td { display:block; width:100%; }
+  .lgl thead { display:none; }
+  .lgl tr { padding:14px 0; border-bottom:1px solid rgba(233,228,216,.1); }
+  .lgl td { border:0; padding:2px 0; }
+  .lgl td:first-child { color:#E9E4D8; }
+}
+</style>
+
+</helmet>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
+    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
+  </div>
+</nav>
+
+<main class="lgl" style="padding-top:22vh;">
+  <p class="meta">Privacy</p>
+  <h1 style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(38px,5.2vw,64px); line-height:1.04; letter-spacing:-0.025em; margin:26px 0 14px;">Privacy Policy</h1>
+  <p class="meta" style="letter-spacing:.1em;">Last updated 22 August 2026</p>
+
+  <p style="margin-top:26px; font-size:17px; line-height:1.7; color:rgba(233,228,216,.82); font-weight:300;">This policy describes what GuideHerd collects today, why, and who else is involved. GuideHerd has three separate surfaces and they do not work the same way, so this policy takes them one at a time.</p>
+
+  <h2>Who we are</h2>
+  <p>GuideHerd AI, LLC (&ldquo;GuideHerd&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) builds software that turns conversations into completed work. Write to us at <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a> with any question about this policy or about information we hold.</p>
+
+  <h2>Three surfaces, three different answers</h2>
+  <p>What we collect depends entirely on which part of GuideHerd you are using.</p>
+  <table>
+    <thead><tr><th>Surface</th><th>What it is</th><th>What we collect</th></tr></thead>
+    <tbody>
+      <tr><td><strong>guideherd.ai</strong></td><td>This website</td><td>Nothing you type. No account, no cookie.</td></tr>
+      <tr><td><strong>training.guideherd.ai</strong></td><td>GuideHerd Academy, a self-serve subscription</td><td>Your email address, your name, and your subscription state</td></tr>
+      <tr><td><strong>The GuideHerd platform</strong></td><td>Used by organizations that contract with us</td><td>Held for that organization, on its instructions &mdash; see below</td></tr>
+    </tbody>
+  </table>
+
+  <h2>This website</h2>
+  <p>These marketing pages set <strong>no cookies</strong> and write nothing to your browser&rsquo;s storage. There is no login and no account to create.</p>
+  <p>The contact form on our <a href="/lets-talk">Let&rsquo;s talk</a> page does not send anything to us directly. It assembles a message and hands it to your own email application, and nothing leaves your computer until you choose to send it. Until you press send in your own mail client, we have received nothing at all. When you do send it, we receive the email you wrote and reply to it, and that message then lives in our business email like any other correspondence.</p>
+  <p>Two third parties are involved in serving this website, and your browser contacts them when a page loads:</p>
+  <ul>
+    <li><strong>Cloudflare</strong> hosts the site and provides its traffic measurement. Cloudflare receives the network information that any web request carries, including your IP address, and reports aggregate figures to us. We do not build visitor profiles and we do not run advertising trackers.</li>
+    <li><strong>unpkg</strong>, a public delivery network for open-source software, serves two JavaScript libraries this site&rsquo;s interface uses. Requesting them exposes your IP address to that network, in the same way that loading any external resource does.</li>
+  </ul>
+  <p>Our <a href="/status/">service status</a> page additionally fetches a published status file from GitHub, deliberately, so that it keeps working when the rest of the platform does not.</p>
+
+  <h2>GuideHerd Academy</h2>
+  <p>The Academy at <strong>training.guideherd.ai</strong> is a self-serve training subscription. When you subscribe, we store in our own database:</p>
+  <ul>
+    <li>your <strong>email address</strong> and the <strong>name</strong> you give at checkout;</li>
+    <li>your <strong>subscription state</strong> &mdash; which plan, whether it is active, when the current period ends, and whether it is set to renew;</li>
+    <li>identifiers that connect your account to your payment record;</li>
+    <li>an audit history of account events, which records what happened and when so an access decision can be explained afterwards.</li>
+  </ul>
+
+  <h3>Payment</h3>
+  <p><strong>We never see or store your card details.</strong> Payment is handled entirely by <strong>Stripe</strong>. You enter your card on Stripe&rsquo;s own checkout page, Stripe processes the payment, and we receive back only the identifiers we need in order to know that your subscription exists and is current. Stripe&rsquo;s handling of your payment information is governed by Stripe&rsquo;s own terms and privacy policy. When you manage or cancel a subscription, you do so in a billing page Stripe hosts.</p>
+
+  <h3>Staying signed in</h3>
+  <p>Signing in to the Academy sets one cookie, <strong>gh_session</strong>. It holds a signed reference to your account &mdash; not your password, and no personal information. It is marked HttpOnly and Secure, is restricted to our own site, and expires after 30 days. Its only purpose is to keep you signed in. It is not used for advertising and not used to follow you across other sites.</p>
+
+  <h2>Information we hold for an organization</h2>
+  <p>The GuideHerd platform is used by organizations that contract with us. When a firm uses GuideHerd, the information moving through it &mdash; the people who contacted that firm, what they said, what was scheduled, what was recorded, what was filed &mdash; <strong>belongs to that organization, not to us</strong>. We hold and process it on that organization&rsquo;s instructions, for the purpose of running the service it asked us to run. We do not use it to market to anyone, and we do not use it for our own purposes.</p>
+  <p>If you are a client or a caller of an organization that uses GuideHerd and you want to know what is held about you, or want it corrected or deleted, <strong>please contact that organization directly</strong>. They control it and the decision is theirs. We support them in answering you, including with tooling to export and erase the records tied to one person, but we act on their instruction rather than in place of them.</p>
+
+  <h3>Signing in to the platform</h3>
+  <p>Staff sign in either through <strong>Google Workspace</strong> or with an account their own organization issues, using an email address and a password, optionally with a second factor from an authenticator application. Where a federated provider is used, that provider tells us who you are; we never receive or store your password for it.</p>
+
+  <h2>Service providers</h2>
+  <p>GuideHerd runs on infrastructure and services operated by other companies. Which of them are involved depends on what an organization has switched on: a capability nobody has configured is not running and is holding nothing.</p>
+  <table>
+    <thead><tr><th>Provider</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Cloudflare</td><td>Hosting and delivery for our websites and the platform&rsquo;s browser interface, traffic measurement, and the Academy&rsquo;s database</td></tr>
+      <tr><td>Railway</td><td>Hosting and the operational database for the platform</td></tr>
+      <tr><td>Stripe</td><td>Payment processing and billing management for Academy subscriptions</td></tr>
+      <tr><td>Google</td><td>Workspace sign-in; and, where an organization connects them, email delivery, Google Calendar scheduling, and document delivery into the firm&rsquo;s own Drive</td></tr>
+      <tr><td>Microsoft</td><td>Where an organization connects it, email delivery and Microsoft 365 calendar scheduling</td></tr>
+      <tr><td>ElevenLabs</td><td>The spoken side of a voice conversation, where an organization enables it</td></tr>
+      <tr><td>Twilio</td><td>Telephone routing and text messaging, where an organization enables it</td></tr>
+      <tr><td>Practice-management systems</td><td>Where an organization authorizes a connection to its own account, and for as long as it keeps that connection, GuideHerd sends intake and matter records into it</td></tr>
+      <tr><td>Address lookup</td><td>Where enabled, an address-completion service receives what a person types into an address field, directly from their browser</td></tr>
+      <tr><td>GitHub</td><td>Publishing the independent service status page</td></tr>
+      <tr><td>unpkg</td><td>Delivering the open-source libraries this website&rsquo;s interface uses</td></tr>
+    </tbody>
+  </table>
+  <p>Each provider receives only what its function requires. <strong>We do not sell personal information, and we do not share it for advertising.</strong></p>
+
+  <h2>How we protect information</h2>
+  <p>What follows describes our practices. It is not a guarantee, and we would rather say that plainly than imply otherwise.</p>
+  <ul>
+    <li>Traffic between you and GuideHerd is encrypted in transit.</li>
+    <li>Credentials are never displayed in our interfaces and never written into our logs.</li>
+    <li>Each organization&rsquo;s data is separated from every other organization&rsquo;s by construction, and that separation is covered by tests that run on every change.</li>
+    <li>Configuration is versioned and auditable, so a change can be traced, explained, and reversed.</li>
+    <li>Access to production systems is limited to the people who need it, and is reviewed.</li>
+  </ul>
+  <p>No system is beyond every risk, and we do not claim to be. No outside party has assessed our security posture. If that changes, we will say so directly and name who did it, rather than implying it.</p>
+
+  <h2>How long we keep information</h2>
+  <p>Academy account records are kept while your account exists, and for a reasonable period afterwards for financial and record-keeping purposes. Information we hold for an organization is retained according to that organization&rsquo;s instructions and the agreement we hold with it. If you want to know what we hold about you, ask us at <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a> and we will tell you.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li><strong>Your Academy account:</strong> write to us and we will correct or delete your account information.</li>
+    <li><strong>Email from us:</strong> we email you in reply to something you sent, or about a subscription you hold. We do not add you to a marketing list you did not ask for.</li>
+    <li><strong>Information held for an organization:</strong> contact that organization &mdash; they decide, and we support them.</li>
+  </ul>
+  <p>Depending on where you live, local law may give you further rights over information about you. Write to us and we will work out how to honour them.</p>
+
+  <h2>Children</h2>
+  <p>GuideHerd is built for professional and business use. It is not directed at children, and we do not knowingly collect information from them.</p>
+
+  <!-- OWNER / COUNSEL REVIEW: cross-border transfer language (EU/UK/Swiss
+       transfer mechanisms, and any US state-specific privacy disclosures such
+       as a "do not sell" notice) is deliberately absent. GuideHerd's customers
+       are US-based today and no transfer mechanism has been executed; adding
+       one of these sections would describe a legal position that does not
+       exist yet. Revisit with counsel when the first non-US customer or a
+       state-law threshold is in reach. -->
+
+  <div class="closing">
+    <h2 style="margin-top:0;">Changes to this policy</h2>
+    <p>This policy describes how GuideHerd operates today. The platform is growing &mdash; new capabilities, new providers, new kinds of customer &mdash; and this policy will be updated to keep pace with it, with the date at the top of the page changing whenever it is. Where a change materially affects people who already hold an account with us, we will tell them rather than relying on this page to notice on their behalf.</p>
+    <p>Questions, corrections, and requests: <a href="mailto:hello@guideherd.ai">hello@guideherd.ai</a>.</p>
+  </div>
+
+</main>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; display:inline-flex; gap:18px;"><a href="/privacy" style="color:rgba(233,228,216,.6);">Privacy</a><a href="/terms" style="color:rgba(233,228,216,.6);">Terms</a></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</x-dc>
+</body>
+</html>

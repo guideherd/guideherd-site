@@ -17,7 +17,8 @@ const INTEGRATIONS_PAGE = 'platform.html';
 const ALL_PUBLIC = ['index.html', 'platform.html', 'solutions.html',
   'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
   'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-  'training.html', '404.html', 'status/index.html'];
+  'training.html', 'privacy.html', 'terms.html', '404.html',
+  'status/index.html'];
 
 test('the scheduling claims name both validated calendar providers', () => {
   const integrations = page(INTEGRATIONS_PAGE);
@@ -101,7 +102,8 @@ test('wherever the sign-in capture is published, it does not present Microsoft a
   const PUBLISHED_PAGES = ['index.html', 'platform.html', 'solutions.html',
     'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
     'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-    'training.html', '404.html', 'status/index.html'];
+    'training.html', 'privacy.html', 'terms.html', '404.html',
+    'status/index.html'];
   for (const name of PUBLISHED_PAGES) {
     const html = page(name);
     const at = html.indexOf('/images/entry-dark.png');
@@ -168,7 +170,8 @@ test('the screenshot generator’s identities carry the firm name the real sessi
 const PUBLIC_PAGES = ['index.html', 'platform.html', 'solutions.html',
   'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
   'lets-talk.html', 'about.html', 'approach.html',
-  'services.html', 'training.html', '404.html', 'status/index.html'];
+  'services.html', 'training.html', 'privacy.html', 'terms.html',
+  '404.html', 'status/index.html'];
 
 test('no public page names a compliance framework (#332)', () => {
   for (const name of PUBLIC_PAGES) {
