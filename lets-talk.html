@@ -41,7 +41,7 @@ a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
 a:hover { color:#2FA4A0; }
 ::selection { background:rgba(47,164,160,.3); }
 input, textarea { font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; }
-input::placeholder, textarea::placeholder { color:rgba(233,228,216,.35); }
+input::placeholder, textarea::placeholder { color:rgba(233,228,216,.58); }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
 
 /* ── Narrow-viewport reachability (reseller feedback) ──────────────────────
@@ -116,36 +116,36 @@ input::placeholder, textarea::placeholder { color:rgba(233,228,216,.35); }
 
 <header data-screen-label="Let's talk" style="position:relative; z-index:10; flex:1; display:grid; grid-template-columns:1.2fr 1fr; gap:90px; align-items:center; padding:190px 56px 100px; max-width:1320px; margin:0 auto; box-sizing:border-box; width:100%;">
   <div>
-    <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.5);">Let's talk</p>
+    <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.58);">Let's talk</p>
     <h1 data-stagger style="margin:34px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(50px,6.4vw,104px); line-height:1.0; letter-spacing:-0.03em;">Start with a <em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">conversation.</em></h1>
     <p data-stagger style="margin:34px 0 0; max-width:480px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62); text-wrap:pretty;">Fitting, for a company built on what conversations create. No form gauntlet, no ticket queue — tell us a little, and a person replies within two business days.</p>
     <div data-stagger style="margin-top:44px; display:flex; flex-direction:column; gap:16px; font-size:14.5px;">
-      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Email</span><!--email_off--><a href="mailto:hello@guideherd.ai" style="font-family:'JetBrains Mono',monospace; color:#E9E4D8; border-bottom:1px solid rgba(47,164,160,.5); padding-bottom:2px;">hello@guideherd.ai</a><!--email_on--></div>
-      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Demo</span><span style="color:rgba(233,228,216,.7);">Half an hour, end to end, on real systems</span></div>
-      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42); width:90px;">Where</span><span style="color:rgba(233,228,216,.7);">Remote · US &amp; Canada</span></div>
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58); width:90px;">Email</span><!--email_off--><a href="mailto:hello@guideherd.ai" style="font-family:'JetBrains Mono',monospace; color:#E9E4D8; border-bottom:1px solid rgba(47,164,160,.5); padding-bottom:2px;">hello@guideherd.ai</a><!--email_on--></div>
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58); width:90px;">Demo</span><span style="color:rgba(233,228,216,.7);">Half an hour, end to end, on real systems</span></div>
+      <div style="display:flex; align-items:baseline; gap:18px;"><span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58); width:90px;">Where</span><span style="color:rgba(233,228,216,.7);">Remote · US &amp; Canada</span></div>
     </div>
   </div>
 
   <div data-stagger style="border:1px solid rgba(233,228,216,.13); border-radius:20px; background:rgba(10,20,32,.75); backdrop-filter:blur(10px); padding:44px; box-shadow:0 40px 120px rgba(2,8,14,.6);">
     <div data-form-body style="display:flex; flex-direction:column; gap:26px;">
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <label for="lt-name" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Your name</label>
+        <label for="lt-name" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58);">Your name</label>
         <input id="lt-name" type="text" placeholder="First name is fine" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <label for="lt-org" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Organization</label>
+        <label for="lt-org" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58);">Organization</label>
         <input id="lt-org" type="text" placeholder="Who you coordinate for" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <label for="lt-email" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">Email</label>
+        <label for="lt-email" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58);">Email</label>
         <input id="lt-email" type="email" placeholder="you@organization.com" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}">
       </div>
       <div style="display:flex; flex-direction:column; gap:8px;">
-        <label for="lt-note" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.42);">One sentence, if you have it</label>
+        <label for="lt-note" style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.58);">One sentence, if you have it</label>
         <textarea id="lt-note" rows="3" placeholder="What happens after a call comes in today?" style="background:transparent; border:0; border-bottom:1px solid rgba(233,228,216,.18); color:#E9E4D8; font-size:16px; padding:10px 0; outline:none; resize:vertical; transition:border-color .3s;" onFocus="{{ focusIn }}" onBlur="{{ focusOut }}"></textarea>
       </div>
       <button data-magnetic onClick="{{ send }}" style="margin-top:8px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:16px 30px; border-radius:999px; border:0; cursor:pointer; font-family:inherit; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45);">Begin the conversation</button>
-      <p style="margin:0; font-size:12.5px; color:rgba(233,228,216,.4);">Opens your email client, pre-written — nothing is stored here. We never sell or share your information.</p>
+      <p style="margin:0; font-size:12.5px; color:rgba(233,228,216,.58);">Opens your email client, pre-written — nothing is stored here. We never sell or share your information.</p>
     </div>
   </div>
 </header>
