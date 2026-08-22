@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://guideherd.ai/</loc></url>
-  <url><loc>https://guideherd.ai/about</loc></url>
-  <url><loc>https://guideherd.ai/approach</loc></url>
-  <url><loc>https://guideherd.ai/services</loc></url>
-  <url><loc>https://guideherd.ai/training</loc></url>
+  <url><loc>https://guideherd.ai/platform</loc></url>
+  <url><loc>https://guideherd.ai/solutions</loc></url>
+  <url><loc>https://guideherd.ai/how-it-works</loc></url>
+  <url><loc>https://guideherd.ai/academy</loc></url>
+  <url><loc>https://guideherd.ai/resources</loc></url>
+  <url><loc>https://guideherd.ai/company</loc></url>
+  <url><loc>https://guideherd.ai/lets-talk</loc></url>
   <url><loc>https://guideherd.ai/status/</loc></url>
 </urlset>

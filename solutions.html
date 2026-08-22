@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solutions — GuideHerd</title>
+<meta name="description" content="How GuideHerd fits organizations whose important work happens between conversations — across industries, configured per organization rather than per vertical.">
+<link rel="icon" href="/assets/logo-crop.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
+a:hover { color:#2FA4A0; }
+::selection { background:rgba(47,164,160,.3); }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+</style>
+</helmet>
+
+<div style="background:#071019; position:relative; overflow-x:clip;">
+<canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+<div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
+
+<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
+  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
+    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
+    <a href="/solutions" style="color:#E9E4D8; border-bottom:1px solid #2FA4A0; padding-bottom:2px;">Solutions</a>
+    <a href="/academy" style="color:rgba(233,228,216,.6);">Academy</a>
+    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
+    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
+    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
+  </div>
+</nav>
+
+<header data-screen-label="Hero" style="position:relative; z-index:10; min-height:82vh; display:flex; flex-direction:column; justify-content:flex-end; padding:180px 56px 90px; max-width:1320px; margin:0 auto; box-sizing:border-box;">
+  <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.5);">Solutions</p>
+  <h1 data-stagger style="margin:36px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(54px,7.2vw,116px); line-height:1.0; letter-spacing:-0.03em; max-width:1150px;">Not industries. <em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">Problems.</em></h1>
+  <p data-stagger style="margin:38px 0 0; max-width:540px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62); text-wrap:pretty;">Every organization that runs on conversations pays the same quiet tax. Pick the one you recognize.</p>
+</header>
+
+<section data-screen-label="Transformations" style="position:relative; z-index:10; padding:40px 56px 0; max-width:1320px; margin:0 auto; display:flex; flex-direction:column; gap:28px;">
+
+  <div data-reveal style="border:1px solid rgba(233,228,216,.11); border-radius:20px; overflow:hidden; background:rgba(10,20,32,.6);">
+    <div style="padding:52px 52px 20px;">
+      <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">01</p>
+      <h2 style="margin:16px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); letter-spacing:-0.02em;">Work falls through the cracks.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; padding:20px 52px 52px;">
+      <div style="border:1px solid rgba(233,228,216,.1); border-radius:14px; padding:30px 32px; background:rgba(7,16,25,.6);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.4);">Today</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">The follow-up lives on a sticky note. The confirmation depends on whoever is at the desk remembering. One busy afternoon and a promise quietly breaks.</p>
+      </div>
+      <div style="display:flex; align-items:center; padding:0 34px;"><span data-flow-arrow style="font-family:'Fraunces',serif; font-size:34px; color:#2FA4A0;">→</span></div>
+      <div style="border:1px solid rgba(47,164,160,.35); border-radius:14px; padding:30px 32px; background:rgba(12,27,38,.75); box-shadow:0 24px 80px rgba(2,8,14,.5);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#2FA4A0;">With GuideHerd</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.8);">Every conversation registers the work it created. Each item has an owner, an order, and a record — and the system holds it until it's done. Nothing depends on memory.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="border:1px solid rgba(233,228,216,.11); border-radius:20px; overflow:hidden; background:rgba(10,20,32,.6);">
+    <div style="padding:52px 52px 20px;">
+      <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">02</p>
+      <h2 style="margin:16px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); letter-spacing:-0.02em;">Teams lose context.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; padding:20px 52px 52px;">
+      <div style="border:1px solid rgba(233,228,216,.1); border-radius:14px; padding:30px 32px; background:rgba(7,16,25,.6);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.4);">Today</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">Every handoff starts the story over. The customer repeats themselves; the specialist rereads a thread; the details thin out with each transfer.</p>
+      </div>
+      <div style="display:flex; align-items:center; padding:0 34px;"><span data-flow-arrow style="font-family:'Fraunces',serif; font-size:34px; color:#2FA4A0;">→</span></div>
+      <div style="border:1px solid rgba(47,164,160,.35); border-radius:14px; padding:30px 32px; background:rgba(12,27,38,.75); box-shadow:0 24px 80px rgba(2,8,14,.5);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#2FA4A0;">With GuideHerd</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.8);">Context travels with the work. Whoever picks it up sees who, what, why, and what's already happened — nobody asks anyone to start over.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="border:1px solid rgba(233,228,216,.11); border-radius:20px; overflow:hidden; background:rgba(10,20,32,.6);">
+    <div style="padding:52px 52px 20px;">
+      <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">03</p>
+      <h2 style="margin:16px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); letter-spacing:-0.02em;">Manual coordination eats the day.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; padding:20px 52px 52px;">
+      <div style="border:1px solid rgba(233,228,216,.1); border-radius:14px; padding:30px 32px; background:rgba(7,16,25,.6);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.4);">Today</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">Check the calendar, type the appointment, send the confirmation, chase the reschedule. A person is the integration between every system — all day.</p>
+      </div>
+      <div style="display:flex; align-items:center; padding:0 34px;"><span data-flow-arrow style="font-family:'Fraunces',serif; font-size:34px; color:#2FA4A0;">→</span></div>
+      <div style="border:1px solid rgba(47,164,160,.35); border-radius:14px; padding:30px 32px; background:rgba(12,27,38,.75); box-shadow:0 24px 80px rgba(2,8,14,.5);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#2FA4A0;">With GuideHerd</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.8);">The work moves itself: real calendars read and written, confirmations from your own mailbox, reschedules handled by the customer. People stop being the glue.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="border:1px solid rgba(233,228,216,.11); border-radius:20px; overflow:hidden; background:rgba(10,20,32,.6);">
+    <div style="padding:52px 52px 20px;">
+      <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">04</p>
+      <h2 style="margin:16px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); letter-spacing:-0.02em;">Knowledge is trapped in people.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; padding:20px 52px 52px;">
+      <div style="border:1px solid rgba(233,228,216,.1); border-radius:14px; padding:30px 32px; background:rgba(7,16,25,.6);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.4);">Today</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">"Ask Dana — she knows how that works." The process lives in one head, and it leaves when they do.</p>
+      </div>
+      <div style="display:flex; align-items:center; padding:0 34px;"><span data-flow-arrow style="font-family:'Fraunces',serif; font-size:34px; color:#2FA4A0;">→</span></div>
+      <div style="border:1px solid rgba(47,164,160,.35); border-radius:14px; padding:30px 32px; background:rgba(12,27,38,.75); box-shadow:0 24px 80px rgba(2,8,14,.5);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#2FA4A0;">With GuideHerd</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.8);">How the organization works is configuration — versioned, auditable, teachable. Every completed interaction adds to institutional memory instead of one person's.</p>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal style="border:1px solid rgba(233,228,216,.11); border-radius:20px; overflow:hidden; background:rgba(10,20,32,.6);">
+    <div style="padding:52px 52px 20px;">
+      <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#2FA4A0;">05</p>
+      <h2 style="margin:16px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.4vw,48px); letter-spacing:-0.02em;">Slow follow-up, inconsistent experiences.</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; padding:20px 52px 52px;">
+      <div style="border:1px solid rgba(233,228,216,.1); border-radius:14px; padding:30px 32px; background:rgba(7,16,25,.6);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:rgba(233,228,216,.4);">Today</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">Some customers hear back in an hour, some in a week — depending on who answered and how busy the day was. The experience is whoever happened to handle it.</p>
+      </div>
+      <div style="display:flex; align-items:center; padding:0 34px;"><span data-flow-arrow style="font-family:'Fraunces',serif; font-size:34px; color:#2FA4A0;">→</span></div>
+      <div style="border:1px solid rgba(47,164,160,.35); border-radius:14px; padding:30px 32px; background:rgba(12,27,38,.75); box-shadow:0 24px 80px rgba(2,8,14,.5);">
+        <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:#2FA4A0;">With GuideHerd</p>
+        <p style="margin:14px 0 0; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.8);">Every conversation gets the same choreography: confirmed in minutes, followed up on time, on the record. Consistency stops being a matter of luck.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section data-screen-label="Anywhere" style="position:relative; z-index:10; padding:28vh 56px 0; text-align:center;">
+  <div data-reveal style="max-width:860px; margin:0 auto;">
+    <p style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(28px,3.4vw,48px); line-height:1.3; letter-spacing:-0.015em; text-wrap:balance;">These problems don't belong to an industry. They belong to <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">every organization that runs on conversations.</em></p>
+    <p style="margin:28px auto 0; max-width:480px; font-size:15px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.55);">Law was first. Healthcare, construction, finance, logistics, government, education — the shape of the work is the same.</p>
+  </div>
+</section>
+
+<section data-screen-label="Finale" style="position:relative; z-index:10; padding:26vh 56px 16vh; text-align:center;">
+  <div data-reveal>
+    <h2 style="margin:0 auto; max-width:1000px; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(48px,6.6vw,110px); line-height:1.0; letter-spacing:-0.03em;">Which one is <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">yours?</em></h2>
+    <a data-magnetic href="/lets-talk" style="display:inline-block; margin-top:42px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:16px 34px; border-radius:999px; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45); color:#071019;">Let's talk about it</a>
+  </div>
+</section>
+
+<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">The work between conversations</span>
+  <span style="font-size:13px; color:rgba(233,228,216,.42);">© 2026 GuideHerd AI, LLC</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.cleanup = [];
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (s) => Array.from(document.querySelectorAll(s));
+    if (!reduced) {
+      $('[data-stagger]').forEach((el, i) => {
+        el.style.opacity = '0'; el.style.transform = 'translateY(32px)'; el.style.filter = 'blur(8px)';
+        setTimeout(() => {
+          el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1), filter 1.2s ease';
+          el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.style.filter = 'blur(0)';
+        }, 300 + i * 150);
+      });
+      const io = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); }
+      }), { threshold: 0.08 });
+      $('[data-reveal]').forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+        el.style.opacity = '0'; el.style.transform = 'translateY(46px)';
+        el.style.transition = 'opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1)';
+        io.observe(el);
+      });
+      this.cleanup.push(() => io.disconnect());
+      // arrows pulse gently
+      $('[data-flow-arrow]').forEach((el, i) => {
+        el.style.animation = 'none';
+        let t = i * 1.2, raf;
+        const pulse = () => { t += 0.02; el.style.transform = 'translateX(' + (Math.sin(t) * 6) + 'px)'; el.style.opacity = String(0.7 + Math.sin(t) * 0.3); raf = requestAnimationFrame(pulse); };
+        raf = requestAnimationFrame(pulse);
+        this.cleanup.push(() => cancelAnimationFrame(raf));
+      });
+    }
+    $('[data-magnetic]').forEach((el) => {
+      const move = (e) => { const r = el.getBoundingClientRect(); el.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.18 + 'px,' + (e.clientY - r.top - r.height / 2) * 0.3 + 'px)'; };
+      const leave = () => { el.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; el.style.transform = 'translate(0,0)'; setTimeout(() => { el.style.transition = ''; }, 500); };
+      el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave);
+      this.cleanup.push(() => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); });
+    });
+    const cv = document.querySelector('[data-field]');
+    if (cv && !reduced) {
+      const ctx = cv.getContext('2d');
+      let W, H;
+      const resize = () => { const dpr = Math.min(2, window.devicePixelRatio || 1); W = window.innerWidth; H = window.innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+      resize(); window.addEventListener('resize', resize);
+      this.cleanup.push(() => window.removeEventListener('resize', resize));
+      const N = 70, P = [];
+      for (let i = 0; i < N; i++) P.push({ bx: Math.random(), by: Math.random(), ph: Math.random() * 6.28, warm: i % 11 === 0 });
+      let t = 0, raf;
+      const loop = () => {
+        t += 0.016; ctx.clearRect(0, 0, W, H);
+        P.forEach((p) => { p.x = p.bx * W + Math.sin(t * 0.35 + p.ph) * 60; p.y = p.by * H + Math.cos(t * 0.28 + p.ph * 2) * 46; });
+        ctx.lineWidth = 1;
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+          const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y, d2 = dx * dx + dy * dy;
+          if (d2 < 12100) { const a = (1 - Math.sqrt(d2) / 110) * 0.14; ctx.strokeStyle = 'rgba(47,164,160,' + a.toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke(); }
+        }
+        P.forEach((p) => {
+          const tw = 0.4 + Math.sin(t * 1.3 + p.ph * 4) * 0.2;
+          ctx.fillStyle = p.warm ? 'rgba(200,169,122,' + tw.toFixed(3) + ')' : 'rgba(47,164,160,' + tw.toFixed(3) + ')';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.warm ? 2 : 1.6, 0, Math.PI * 2); ctx.fill();
+        });
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+      this.cleanup.push(() => cancelAnimationFrame(raf));
+    }
+  }
+  componentWillUnmount() { (this.cleanup || []).forEach((fn) => fn()); }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
