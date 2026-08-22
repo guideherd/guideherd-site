@@ -17,7 +17,7 @@ const INTEGRATIONS_PAGE = 'platform.html';
 const ALL_PUBLIC = ['index.html', 'platform.html', 'solutions.html',
   'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
   'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-  'training.html', 'privacy.html', 'terms.html', '404.html',
+  'training.html', 'privacy.html', 'terms.html', 'trust.html', '404.html',
   'status/index.html'];
 
 test('the scheduling claims name both validated calendar providers', () => {
@@ -102,7 +102,7 @@ test('wherever the sign-in capture is published, it does not present Microsoft a
   const PUBLISHED_PAGES = ['index.html', 'platform.html', 'solutions.html',
     'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
     'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-    'training.html', 'privacy.html', 'terms.html', '404.html',
+    'training.html', 'privacy.html', 'terms.html', 'trust.html', '404.html',
     'status/index.html'];
   for (const name of PUBLISHED_PAGES) {
     const html = page(name);

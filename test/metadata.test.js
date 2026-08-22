@@ -30,6 +30,7 @@ const ROUTES = {
   'lets-talk.html': '/lets-talk',
   'privacy.html': '/privacy',
   'terms.html': '/terms',
+  'trust.html': '/trust',
   'status/index.html': '/status/',
   '404.html': '/404',
 };
