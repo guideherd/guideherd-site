@@ -81,13 +81,37 @@ test('Microsoft is not offered as a staff sign-in method', () => {
 // Microsoft Entra sign-in is implemented but has never been validated against
 // a real directory, so it must not appear as an available capability — in copy
 // OR in imagery, where a reader believes the picture over the caption.
-test('the sign-in imagery does not present Microsoft authentication', () => {
-  const index = page('index.html');
-  const figure = index.slice(index.indexOf('/images/entry-dark.png') - 400,
-                             index.indexOf('/images/entry-dark.png') + 900);
-  assert.doesNotMatch(figure, /Microsoft/i,
-    'the entry screenshot’s alt text and caption must not mention Microsoft sign-in — '
-    + 'regenerate the image from a production-equivalent posture instead of annotating it');
+// RETIRED IN ITS ORIGINAL FORM. The assertion below used to slice a window
+// around `/images/entry-dark.png` inside index.html. The marketing redesign
+// stopped publishing that screenshot, so `indexOf` returned -1, the slice
+// became `slice(-401, 899)` — an EMPTY string — and the check passed no
+// matter what the page said. Proven: injecting "Microsoft sign-in" across
+// the whole page still passed it. A guard that cannot fail is worse than no
+// guard, because it reads like coverage.
+//
+// The GUARANTEE is kept and is now automatic: whichever public page
+// publishes that capture must not present Microsoft authentication beside
+// it. No page publishes it today, so this asserts nothing about nothing —
+// and the moment the screenshot returns, the check returns with it.
+//
+// The generator pin below is untouched and still live: scripts/
+// product-screenshots.js continues to emit entry-dark.png, so what its
+// provider mock returns still becomes a picture the moment it is published.
+test('wherever the sign-in capture is published, it does not present Microsoft authentication', () => {
+  const PUBLISHED_PAGES = ['index.html', 'platform.html', 'solutions.html',
+    'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
+    'lets-talk.html', 'about.html', 'approach.html', 'services.html',
+    'training.html', '404.html', 'status/index.html'];
+  for (const name of PUBLISHED_PAGES) {
+    const html = page(name);
+    const at = html.indexOf('/images/entry-dark.png');
+    if (at === -1) continue;                 // this page does not publish it
+    const figure = html.slice(Math.max(0, at - 400), at + 900);
+    assert.doesNotMatch(figure, /Microsoft/i,
+      name + ': the entry screenshot’s alt text and caption must not mention Microsoft '
+      + 'sign-in — regenerate the image from a production-equivalent posture instead of '
+      + 'annotating it');
+  }
 });
 
 test('the screenshot generator mocks a production-equivalent provider set', () => {
