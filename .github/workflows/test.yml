@@ -83,3 +83,25 @@ jobs:
       # navigation genuinely usable at phone widths (#370).
       - name: Run the responsive-layout gate
         run: npm run test:layout
+
+  webkit:
+    name: WebKit scroll stability (iPhone-width)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      # The #371 flicker only ever reproduced under WebKit — the engine on
+      # every iPhone. playwright-core drives the browser; the binary comes
+      # from the matching playwright CLI at CI time.
+      - name: Install WebKit
+        run: npx playwright@1.62.1 install --with-deps webkit
+      - name: Run the WebKit stability gate
+        run: npm run test:webkit

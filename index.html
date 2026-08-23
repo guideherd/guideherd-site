@@ -136,7 +136,14 @@ nav[data-nav]::before {
   /* 2. Reclaim the desktop gutter. border-box matters here: several of these
         are width:100% with side padding, so without it the padding is ADDED
         to the full width and the block hangs off both edges. */
-  [style*="56px"], [style*="52px"] {
+  /* Anchored on ":56px" / " 56px" deliberately (#371): the runtime and the
+     reveal/parallax animations re-serialize style attributes every frame,
+     and a bare substring match flapped ON whenever an animated transform
+     value happened to contain "52px"/"56px" (translateY(-15.652px)...) —
+     20px of padding appeared for one frame and everything below bounced. A
+     padding list always has a colon or space before the value; an animated
+     number never does. */
+  [style*=":56px"], [style*=" 56px"], [style*=":52px"], [style*=" 52px"] {
     box-sizing:border-box !important;
     padding-left:20px !important;
     padding-right:20px !important;
@@ -268,7 +275,7 @@ nav[data-nav]::before {
   <div data-tilt style="position:relative; max-width:1200px; margin:90px auto 0; will-change:transform; transform-origin:50% 30%;">
     <div style="position:absolute; inset:-80px -120px; background:radial-gradient(closest-side, rgba(47,164,160,.10), transparent 70%); filter:blur(50px); pointer-events:none;"></div>
     <div style="position:relative; border-radius:16px; overflow:hidden; border:1px solid rgba(233,228,216,.13); box-shadow:0 70px 180px rgba(2,8,14,.85);">
-      <img src="/images/ops-overview-dark.png" width="3200" height="2000" alt="The GuideHerd Operations Center Overview in dark mode: a KPI strip with pending, active, completed, and failed handoffs and overall health, system health detail, monthly usage, and scheduling readiness, populated with fictional sample data." style="width:100%; height:auto; display:block;">
+      <div style="position:relative; width:100%; padding-top:62.5%;"><img src="/images/ops-overview-dark.png" width="3200" height="2000" alt="The GuideHerd Operations Center Overview in dark mode: a KPI strip with pending, active, completed, and failed handoffs and overall health, system health detail, monthly usage, and scheduling readiness, populated with fictional sample data." style="position:absolute; top:0; left:0; width:100%; height:100%; display:block;"></div>
     </div>
   </div>
   <p style="max-width:1200px; margin:22px auto 0; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(233,228,216,.58); display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;"><span>Shipped product · not a mockup</span><span>Sample data, fictional organization</span></p>
