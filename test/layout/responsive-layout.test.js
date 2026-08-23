@@ -149,14 +149,29 @@ const AUDIT_FN = `(() => {
   return out;
 })()`;
 
+/**
+ * The page runtime re-mounts <x-dc> content into #dc-root after load; until
+ * that finishes the DOM is a half-styled intermediate no user ever sees.
+ * Measuring during that window is what a cold CI runner does with a fixed
+ * settle wait — so wait for the mount itself. Pages without the runtime
+ * (status, legacy, 404) have no <x-dc> and pass immediately; a page whose
+ * mount never completes FAILS here, which is itself a defect worth failing.
+ */
+async function settle(tab) {
+  await tab.waitForFunction(
+    () => !document.querySelector('x-dc') || !!document.querySelector('#dc-root'),
+    undefined, { timeout: 15000 });
+  await tab.evaluate(() => document.fonts.ready);
+  await tab.waitForTimeout(300);
+}
+
 async function auditPage(page, width) {
   const ctx = await browser.newContext({ viewport: { width, height: 844 }, reducedMotion: 'reduce' });
   const tab = await ctx.newPage();
   const pageErrors = [];
   tab.on('pageerror', (e) => pageErrors.push(e.message.slice(0, 160)));
   await tab.goto(`${server.origin}/${page}`, { waitUntil: 'networkidle' });
-  await tab.evaluate(() => document.fonts.ready);
-  await tab.waitForTimeout(300);
+  await settle(tab);
 
   const found = [];
   const seen = new Set();
@@ -200,7 +215,7 @@ test('the mobile navigation is deliberate and fully usable at phone widths', asy
       const ctx = await browser.newContext({ viewport: { width, height: 844 }, reducedMotion: 'reduce' });
       const tab = await ctx.newPage();
       await tab.goto(`${server.origin}/${page}`, { waitUntil: 'networkidle' });
-      await tab.waitForTimeout(250);
+      await settle(tab);
 
       const toggle = await tab.evaluate(() => {
         const b = document.querySelector('[data-nav-toggle]');
@@ -261,7 +276,7 @@ test('the desktop navigation still shows every link in the bar at 1280px', async
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
   const tab = await ctx.newPage();
   await tab.goto(`${server.origin}/index.html`, { waitUntil: 'networkidle' });
-  await tab.waitForTimeout(250);
+  await settle(tab);
   const state = await tab.evaluate(() => {
     const toggle = document.querySelector('[data-nav-toggle]');
     const links = [...document.querySelectorAll('[data-nav-links] a')].map((a) => {
