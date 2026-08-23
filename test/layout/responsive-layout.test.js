@@ -308,6 +308,39 @@ test('every image declares its intrinsic size, so content below it cannot move w
     'images with no reserved layout space (add width/height attributes):\n    ' + offenders.join('\n    '));
 });
 
+test('every image renders at its natural aspect ratio — reserved space must not distort it', async () => {
+  // The #371 first fix taught this the hard way: width/height attributes
+  // WITHOUT height:auto in CSS leave the height attribute standing as a
+  // fixed 2000px hint while width:100% collapses to the phone — a 330x2000
+  // smear. Reserving space and preserving shape are two different
+  // guarantees; this pins the second.
+  const offenders = [];
+  for (const page of H.PAGES) {
+    for (const width of [390, 1280]) {
+      const ctx = await browser.newContext({ viewport: { width, height: 844 }, reducedMotion: 'reduce' });
+      const tab = await ctx.newPage();
+      await tab.goto(`${server.origin}/${page}`, { waitUntil: 'networkidle' });
+      await settle(tab);
+      const bad = await tab.evaluate(() => [...document.images]
+        .filter((img) => {
+          if (!img.complete || !img.naturalWidth || !img.naturalHeight) return false;
+          const r = img.getBoundingClientRect();
+          if (r.width < 4 || r.height < 4) return false;
+          const cs = getComputedStyle(img);
+          if (cs.display === 'none' || (cs.objectFit && cs.objectFit !== 'fill')) return false;
+          const natural = img.naturalWidth / img.naturalHeight;
+          const rendered = r.width / r.height;
+          return Math.abs(rendered - natural) / natural > 0.05;
+        })
+        .map((img) => `${img.getAttribute('src')} natural ${img.naturalWidth}x${img.naturalHeight} rendered ${Math.round(img.getBoundingClientRect().width)}x${Math.round(img.getBoundingClientRect().height)}`));
+      for (const b of bad) offenders.push(`${page} @${width}px: ${b}`);
+      await ctx.close();
+    }
+  }
+  assert.deepEqual(offenders, [],
+    'distorted images (aspect ratio off by >5%):\n    ' + offenders.join('\n    '));
+});
+
 test('the desktop navigation still shows every link in the bar at 1280px', async () => {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
   const tab = await ctx.newPage();
