@@ -59,3 +59,27 @@ jobs:
           echo "CHROMIUM_PATH=$(which google-chrome || which google-chrome-stable)" >> "$GITHUB_ENV"
       - name: Run the accessibility gate
         run: npm run test:a11y
+
+  layout:
+    name: Responsive layout (browser geometry)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Locate Chrome
+        run: |
+          which google-chrome || which google-chrome-stable
+          echo "CHROMIUM_PATH=$(which google-chrome || which google-chrome-stable)" >> "$GITHUB_ENV"
+      # The a11y gate proves semantics and contrast; this one proves
+      # geometry — no text painted through text, nothing clipped, the
+      # navigation genuinely usable at phone widths (#370).
+      - name: Run the responsive-layout gate
+        run: npm run test:layout

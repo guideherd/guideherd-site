@@ -88,24 +88,50 @@ a:hover { color:#2FA4A0; }
      3. multi-column grids kept their desktop column counts on phones.
    Layout is fixed first; the nav keeps deliberate, visible horizontal
    scrolling because seven items will not fit a phone at a legible size. */
+/* Mobile navigation + nav surface (#370): the toggle exists only at
+   phone widths; the nav's own surface lives on the element so link text
+   can never paint through page content at any width. */
+[data-nav-toggle] { display:none; }
+/* The surface lives on a pseudo-element, NOT the nav itself: backdrop-filter
+   on the nav would make the nav the containing block for the fixed-position
+   mobile panel, pinning the panel to the bar instead of the viewport. */
+nav[data-nav]::before {
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(7,16,25,.92), rgba(7,16,25,.78));
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+
 @media (max-width: 720px) {
-  /* 1. The nav scrolls east-west on purpose, and shows that it can. */
-  nav { padding-left:16px !important; padding-right:16px !important; gap:12px !important; }
-  nav > div {
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:thin;
-    scroll-snap-type:x proximity;
-    padding-bottom:4px;
-    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
-            mask-image:linear-gradient(to right,#000 calc(100% - 18px),transparent);
+  /* 1. Deliberate mobile navigation (#370). The bar keeps the wordmark
+        and a Menu toggle; the links become a full-screen panel in the
+        site's own idiom — no squeezed or sideways-scrolling desktop row. */
+  nav { padding:20px 20px !important; }
+  nav > a[href="/"] { position:relative; z-index:2; }
+  [data-nav-toggle] {
+    position:relative; z-index:2;
+    display:inline-flex; align-items:center;
+    background:none; border:1px solid rgba(233,228,216,.3); border-radius:999px;
+    color:#E9E4D8; font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; padding:11px 18px; cursor:pointer;
   }
-  nav > div > * { flex:0 0 auto; scroll-snap-align:start; }
-  /* A comfortable thumb target. Plain nav links are a 16px line box on
-     their own; the padding grows the hit area without moving the text. */
-  nav > div > a { padding-top:10px; padding-bottom:10px; }
-  nav > div::-webkit-scrollbar { height:3px; }
-  nav > div::-webkit-scrollbar-thumb { background:rgba(233,228,216,.35); border-radius:3px; }
+  [data-nav-links] {
+    position:fixed; top:0; left:0; right:0; bottom:0; z-index:1;
+    flex-direction:column; align-items:flex-start; justify-content:center;
+    gap:4px; padding:96px 28px 48px; box-sizing:border-box;
+    background:rgba(7,16,25,.98);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .25s ease, visibility .25s;
+  }
+  nav.gh-open [data-nav-links] { opacity:1; visibility:visible; pointer-events:auto; }
+  [data-nav-links] > a { font-size:24px !important; line-height:1.3; color:#E9E4D8 !important; padding:10px 0; }
+  [data-nav-links] > a[href="/lets-talk"] { margin-top:22px; font-size:15px !important; color:#071019 !important; padding:14px 28px !important; }
+
+  /* Sticky side layers (#370): in the collapsed single column their
+     sticky range is the whole grid, so they ride over every following
+     chapter. Unstuck, they read in normal flow above the content. */
+  [style*="position:sticky"][style*="top:140px"],
+  [style*="position: sticky"][style*="top: 140px"] { position:static !important; }
 
   /* 2. Reclaim the desktop gutter. border-box matters here: several of these
         are width:100% with side padding, so without it the padding is ADDED
@@ -118,6 +144,12 @@ a:hover { color:#2FA4A0; }
 
   /* 3. Stack multi-column rows rather than clipping their right-hand columns. */
   [style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+  /* min-width:auto lets a child's intrinsic width (a form input's default
+     size, a long mono string) push the single column wider than the phone
+     itself — Linux fallback fonts ship wider intrinsics and showed it
+     first. The column shrinks; children stretch to it, never past it. */
+  [style*="grid-template-columns"] > * { min-width:0; }
+  input, textarea { min-width:0; }
   [style*="text-align:right"] { text-align:left !important; }
 }
 
@@ -137,9 +169,10 @@ a:hover { color:#2FA4A0; }
 <canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
 <div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
 
-<nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
+<nav data-nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
   <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
-  <div style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
+  <button data-nav-toggle aria-expanded="false" aria-controls="gh-nav-links" aria-label="Menu">Menu</button>
+  <div data-nav-links id="gh-nav-links" style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
     <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
     <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
     <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
@@ -149,6 +182,37 @@ a:hover { color:#2FA4A0; }
     <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
   </div>
 </nav>
+<script>
+/* Mobile nav toggle (#370). Delegated from the document on purpose: the
+   page runtime re-mounts the body content after load, so listeners bound
+   to the original elements would be lost with the elements themselves. */
+(function () {
+  function nav() { return document.querySelector('nav[data-nav]'); }
+  function setOpen(n, open) {
+    n.classList.toggle('gh-open', open);
+    var b = n.querySelector('[data-nav-toggle]');
+    if (b) b.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  document.addEventListener('click', function (e) {
+    var n = nav();
+    if (!n) return;
+    if (e.target.closest && e.target.closest('[data-nav-toggle]')) {
+      setOpen(n, !n.classList.contains('gh-open'));
+    } else if (e.target.closest && e.target.closest('[data-nav-links] a')) {
+      setOpen(n, false);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    var n = nav();
+    if (n && e.key === 'Escape') setOpen(n, false);
+  });
+  window.addEventListener('resize', function () {
+    var n = nav();
+    if (n && window.innerWidth > 720) setOpen(n, false);
+  });
+})();
+</script>
 
 <div data-journey-rail style="position:fixed; right:40px; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:14px; opacity:0; transition:opacity .6s;">
   <span data-rdot="0" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
@@ -161,8 +225,7 @@ a:hover { color:#2FA4A0; }
 
 <!-- ══ ARRIVAL ══ -->
 <header data-screen-label="Arrival" style="position:relative; z-index:10; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 56px;">
-  <p data-stagger style="margin:0; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:rgba(233,228,216,.58);">AI operations platform</p>
-  <h1 style="margin:40px 0 0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(64px,9.5vw,160px); line-height:1.0; letter-spacing:-0.03em; max-width:1300px;">
+  <h1 style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(64px,9.5vw,160px); line-height:1.0; letter-spacing:-0.03em; max-width:1300px;">
     <span data-stagger style="display:block;">Work happens</span>
     <span data-stagger style="display:block;"><em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">between</em> conversations.</span>
   </h1>
@@ -178,20 +241,20 @@ a:hover { color:#2FA4A0; }
   <div style="position:sticky; top:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;">
     <div style="position:relative; width:100%; height:220px; display:flex; align-items:center; justify-content:center;">
       <div data-word="0" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">01</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Conversation</div></div>
-      <div data-word="1" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">02</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Understanding</div></div>
-      <div data-word="2" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">03</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Coordination</div></div>
-      <div data-word="3" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">04</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Execution</div></div>
-      <div data-word="4" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">05</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Completion</div></div>
-      <div data-word="5" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">06</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Insight</div></div>
+      <div data-word="1" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">02</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Understanding</div></div>
+      <div data-word="2" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">03</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Coordination</div></div>
+      <div data-word="3" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">04</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Execution</div></div>
+      <div data-word="4" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">05</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Completion</div></div>
+      <div data-word="5" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">06</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Insight</div></div>
     </div>
     <div style="position:absolute; bottom:14vh; width:100%; display:flex; justify-content:center; padding:0 56px;">
       <div style="position:relative; height:56px; max-width:520px; width:100%; text-align:center;">
         <p data-sub="0" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">A client calls. A person answers. Something now has to happen.</p>
-        <p data-sub="1" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The system gathers what was said — and what it means.</p>
-        <p data-sub="2" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Calendars, records, and people fall into a single line of motion.</p>
-        <p data-sub="3" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The work runs — booked, sent, confirmed — without a handoff.</p>
-        <p data-sub="4" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">It closes the loop. Nothing waits on whoever is at the desk.</p>
-        <p data-sub="5" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">And every step is a record your organization can stand on.</p>
+        <p data-sub="1" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The system gathers what was said — and what it means.</p>
+        <p data-sub="2" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Calendars, records, and people fall into a single line of motion.</p>
+        <p data-sub="3" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The work runs — booked, sent, confirmed — without a handoff.</p>
+        <p data-sub="4" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">It closes the loop. Nothing waits on whoever is at the desk.</p>
+        <p data-sub="5" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">And every step is a record your organization can stand on.</p>
       </div>
     </div>
   </div>
@@ -501,6 +564,31 @@ class Component extends DCLogic {
       raf = requestAnimationFrame(loop);
     };
     if (motion) { raf = requestAnimationFrame(loop); this.cleanup.push(() => cancelAnimationFrame(raf)); }
+    if (!motion) {
+      // Reduced motion (#370): the journey still narrates stage by stage —
+      // scroll position selects exactly one word and one sub-line, with no
+      // transforms and no animation. Without this branch nothing ever set
+      // the layer opacities, so every absolutely-positioned stage rendered
+      // at once, stacked, for reduced-motion (and failed-script) visitors.
+      const setStage = () => {
+        let fp = 0, inJourney = false;
+        if (journey) {
+          const r = journey.getBoundingClientRect();
+          const total = r.height - window.innerHeight;
+          const p = Math.min(1, Math.max(0, -r.top / total));
+          inJourney = r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
+          fp = p * 5;
+        }
+        const cur = Math.min(5, Math.max(0, Math.round(fp)));
+        words.forEach((w, i) => { w.style.opacity = i === cur ? '1' : '0'; });
+        subs.forEach((s, i) => { s.style.opacity = i === cur ? '1' : '0'; });
+        rdots.forEach((d, i) => { d.style.background = i === cur ? '#2FA4A0' : 'rgba(233,228,216,.22)'; });
+        if (rail) rail.style.opacity = inJourney ? '1' : '0';
+      };
+      setStage();
+      window.addEventListener('scroll', setStage, { passive: true });
+      this.cleanup.push(() => window.removeEventListener('scroll', setStage));
+    }
     else {
       // static composed frame for reduced motion
       words.forEach((w, i) => { w.style.opacity = i === 2 ? '1' : '0'; });
