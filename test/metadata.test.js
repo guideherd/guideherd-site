@@ -124,13 +124,7 @@ test('the error page is excluded from indexing, exactly once', () => {
   }
 });
 
-test('the superseded pages are deliberately left without canonicals (#352 decides them)', () => {
-  // Giving a superseded page a self-canonical asserts it is authoritative;
-  // pointing it at a redesigned page decides the retirement question. Neither
-  // is this issue's to make, so the absence is the deliberate state and is
-  // pinned so it cannot be filled in by habit.
-  for (const name of ['about.html', 'approach.html', 'services.html', 'training.html']) {
-    assert.doesNotMatch(page(name), /<link rel="canonical"/,
-      name + ' is superseded; whether it is canonical, redirected, or removed is #352');
-  }
-});
+// The superseded-pages canonical pin retired with the pages themselves:
+// #352 was decided (owner, 2026-08-24) as REMOVAL — no redirects, no
+// canonicals, the routes fall through to the custom 404. The question the
+// pin held open no longer exists.

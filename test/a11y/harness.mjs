@@ -24,8 +24,7 @@ export const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wca
 export const PAGES = [
   'index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
   'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
-  'privacy.html', 'terms.html', 'trust.html', 'about.html', 'approach.html',
-  'services.html', 'training.html', '404.html', 'status/index.html',
+  'privacy.html', 'terms.html', 'trust.html', '404.html', 'status/index.html',
 ];
 export const WIDTHS = [1440, 390];
 

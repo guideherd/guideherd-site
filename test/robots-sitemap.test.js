@@ -40,8 +40,11 @@ const INDEXABLE = {
   '/status/': 'status/index.html',
 };
 
-// Superseded, reachable, deliberately unlisted — #352 owns their fate.
-const SUPERSEDED = ['about.html', 'approach.html', 'services.html', 'training.html'];
+// Retired outright (#352, owner decision 2026-08-24): removed from the
+// repo and the build, no redirects, no canonicals — the routes fall
+// through to the custom 404. Pinned so none of them re-enters the
+// sitemap by habit.
+const RETIRED_ROUTES = ['/about', '/approach', '/services', '/training'];
 
 // Never indexable: an error page must not compete for its own query.
 const NEVER = ['404.html'];
@@ -90,12 +93,11 @@ test('every sitemap entry carries a well-formed, non-future lastmod', () => {
   }
 });
 
-test('the sitemap never lists a superseded or non-indexable page', () => {
+test('the sitemap never lists a retired or non-indexable page', () => {
   const listed = locs().join(' ');
-  for (const f of SUPERSEDED) {
-    const route = '/' + f.replace('.html', '');
+  for (const route of RETIRED_ROUTES) {
     assert.ok(!listed.includes(SITE + route),
-      f + ' is superseded — listing it in the sitemap decides #352 by default');
+      route + ' was retired outright (#352) — it must not re-enter the sitemap');
   }
   for (const f of NEVER) {
     assert.ok(!listed.includes('/404'), f + ' must never be advertised for indexing');
@@ -113,10 +115,13 @@ test('every shipped marketing page is either in the sitemap or deliberately excl
   const copied = [...BUILD.matchAll(/^\s*cp\s+([^"|]*?)\s*"\$OUT"\//gms)]
     .flatMap((m) => m[1].split(/[\s\\]+/))
     .filter((f) => f.endsWith('.html'));
-  assert.ok(copied.length >= 13, 'expected the allowlist to name the marketing pages, saw ' + copied.length);
+  // Floor updated when the four superseded pages retired (#352): the
+  // current shipped set is 12 root pages; the floor exists so the parse
+  // above failing silently can never read as an empty-but-passing check.
+  assert.ok(copied.length >= 12, 'expected the allowlist to name the marketing pages, saw ' + copied.length);
 
   const inSitemap = new Set(Object.values(INDEXABLE));
-  const excluded = new Set([...SUPERSEDED, ...NEVER]);
+  const excluded = new Set(NEVER);
   for (const f of copied) {
     assert.ok(inSitemap.has(f) || excluded.has(f),
       f + ' ships but is neither listed in the sitemap nor recorded as a deliberate '

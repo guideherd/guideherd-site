@@ -14,18 +14,22 @@ const page = (n) => fs.readFileSync(path.join(__dirname, '..', n), 'utf8');
 // two of them are now stronger than before because they apply site-wide
 // rather than to index.html alone.
 const INTEGRATIONS_PAGE = 'platform.html';
-const ALL_PUBLIC = ['index.html', 'platform.html', 'solutions.html',
-  'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
-  'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-  'training.html', 'privacy.html', 'terms.html', 'trust.html', '404.html',
-  'status/index.html'];
+// Every shipped page, DISCOVERED rather than listed (#352): a hard-coded
+// list silently misses the next page added, and these are refusals that
+// must bind every public surface. Root *.html is exactly the shipped page
+// set (scripts/build-site.sh's allowlist), plus the status page.
+const ALL_PUBLIC = [...fs.readdirSync(path.join(__dirname, '..'))
+  .filter((f) => f.endsWith('.html')), 'status/index.html'];
 
 test('the scheduling claims name both validated calendar providers', () => {
   const integrations = page(INTEGRATIONS_PAGE);
   assert.match(integrations, /Google calendars|Google Calendar/, 'the integrations page names Google Calendar');
   assert.match(integrations, /Microsoft 365/, 'the integrations page names Microsoft 365');
-  assert.match(page('services.html'), /Google Calendar/, 'services names Google Calendar');
-  assert.match(page('approach.html'), /Google Calendar/, 'approach names Google Calendar');
+  // The services.html/approach.html asserts retired with those pages
+  // (#352, owner removal decision): the risk they guarded — a
+  // Microsoft-only calendar claim ON THOSE PAGES — cannot recur on pages
+  // that no longer exist, and the site-wide both-or-neither refusal below
+  // still binds every page that ships.
 });
 
 // STRONGER than the original: "Microsoft-only" is refused on EVERY page, not
@@ -99,12 +103,7 @@ test('Microsoft is not offered as a staff sign-in method', () => {
 // product-screenshots.js continues to emit entry-dark.png, so what its
 // provider mock returns still becomes a picture the moment it is published.
 test('wherever the sign-in capture is published, it does not present Microsoft authentication', () => {
-  const PUBLISHED_PAGES = ['index.html', 'platform.html', 'solutions.html',
-    'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
-    'lets-talk.html', 'about.html', 'approach.html', 'services.html',
-    'training.html', 'privacy.html', 'terms.html', 'trust.html', '404.html',
-    'status/index.html'];
-  for (const name of PUBLISHED_PAGES) {
+  for (const name of ALL_PUBLIC) {  // discovered, not listed (#352)
     const html = page(name);
     const at = html.indexOf('/images/entry-dark.png');
     if (at === -1) continue;                 // this page does not publish it
@@ -167,11 +166,7 @@ test('the screenshot generator’s identities carry the firm name the real sessi
 // report. These pins refuse the vocabulary outright on every public page,
 // so a compliance claim cannot ship by copy-edit: adding one is a
 // deliberate edit here PLUS the auditor's issued report as evidence.
-const PUBLIC_PAGES = ['index.html', 'platform.html', 'solutions.html',
-  'how-it-works.html', 'academy.html', 'resources.html', 'company.html',
-  'lets-talk.html', 'about.html', 'approach.html',
-  'services.html', 'training.html', 'privacy.html', 'terms.html',
-  '404.html', 'status/index.html'];
+const PUBLIC_PAGES = ALL_PUBLIC; // discovered, not listed (#352)
 
 test('no public page names a compliance framework (#332)', () => {
   for (const name of PUBLIC_PAGES) {

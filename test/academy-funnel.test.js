@@ -9,13 +9,16 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 
-test('the Training page offers an explicit Academy doorway', () => {
-  const html = fs.readFileSync('training.html', 'utf8');
-  assert.match(html, /https:\/\/training\.guideherd\.ai/);
-  assert.match(html, /Explore Academy plans/);
-  // Honest framing: the Academy is presented as its own subscription,
-  // never blurred into the platform or the Success plans.
-  assert.match(html, /separate subscription/i);
+test('the Academy page offers an explicit doorway to the Academy product', () => {
+  // Relocated from training.html when that page retired (#352): the
+  // doorway obligation binds the LIVING marketing surface for the
+  // Academy. The honest-framing half of the old pin (its own
+  // subscription, never blurred into platform plans) is carried by the
+  // no-commerce refusals below and the dated /resources entry that names
+  // it a subscription product.
+  const html = fs.readFileSync('academy.html', 'utf8');
+  assert.match(html, /https:\/\/training\.guideherd\.ai/,
+    'the Academy marketing page must link the Academy product');
 });
 
 test('the homepage cross-links the Academy beside the Success pointer', () => {
