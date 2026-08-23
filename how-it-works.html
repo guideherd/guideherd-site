@@ -109,6 +109,12 @@ nav[data-nav]::before {
 
   /* 3. Stack multi-column rows rather than clipping their right-hand columns. */
   [style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+  /* min-width:auto lets a child's intrinsic width (a form input's default
+     size, a long mono string) push the single column wider than the phone
+     itself — Linux fallback fonts ship wider intrinsics and showed it
+     first. The column shrinks; children stretch to it, never past it. */
+  [style*="grid-template-columns"] > * { min-width:0; }
+  input, textarea { min-width:0; }
   [style*="text-align:right"] { text-align:left !important; }
 }
 
