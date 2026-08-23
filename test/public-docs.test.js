@@ -102,7 +102,7 @@ test('the evaluation surfaces reach each other', () => {
   // A reseller must be able to get from any page to the trust surface, and
   // from the trust surface to everything else, without a sales conversation.
   const PAGES = ['index.html', 'platform.html', 'privacy.html', 'terms.html', 'trust.html',
-    'resources.html', 'company.html', 'about.html', 'training.html', 'status/index.html'];
+    'resources.html', 'company.html', 'status/index.html'];
   for (const name of PAGES) {
     assert.match(read(name), /href="\/trust"/, name + ' has no route to the trust page');
   }

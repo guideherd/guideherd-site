@@ -78,8 +78,7 @@ test('no commerce, rating, or review markup anywhere on the site', () => {
   const REFUSED = ['Product', 'Offer', 'AggregateOffer', 'AggregateRating', 'Review', 'Rating'];
   for (const name of ['index.html', 'platform.html', 'academy.html', 'solutions.html',
                       'how-it-works.html', 'resources.html', 'company.html', 'lets-talk.html',
-                      'privacy.html', 'terms.html', 'trust.html', 'about.html', 'approach.html',
-                      'services.html', 'training.html', '404.html', 'status/index.html']) {
+                      'privacy.html', 'terms.html', 'trust.html', '404.html', 'status/index.html']) {
     for (const b of blocks(read(name))) {
       for (const type of REFUSED) {
         assert.ok(!new RegExp('"@type"\\s*:\\s*"' + type + '"').test(b),

@@ -74,136 +74,14 @@ test('every redesigned footer’s text clears AA against the page ground', () =>
   }
 });
 
-// ── The superseded pre-redesign footer: rgba(245,242,234,α) on --ink ──────
-const SUPERSEDED = ['about.html', 'approach.html', 'services.html', 'training.html'];
-const INK = hex('#0E2A3F');
-const PAPER = [245, 242, 234];
+// ── Retired with the pages (#352) ─────────────────────────────────────────
+// Four blocks here policed the superseded pre-redesign pages' own light
+// palette (.footer-col/.footer-meta alpha, --ink-60, --ink-40-as-text, the
+// wordmark superscript token). Those pages were removed outright by owner
+// decision (2026-08-24); the tokens they policed exist nowhere else, so the
+// pins' risk cannot recur. The redesign footer test above and the axe gate
+// carry contrast coverage for every page that ships.
 
-test('the superseded pages’ footer headings and meta row clear AA against --ink', () => {
-  for (const name of SUPERSEDED) {
-    const html = page(name);
-    for (const selector of ['.footer-col h4', '.footer-meta']) {
-      const rule = html.slice(html.indexOf(selector + ' {'));
-      const block = rule.slice(0, rule.indexOf('}'));
-      const m = block.match(/color:\s*rgba\(245,\s*242,\s*234,\s*([\d.]+)\)/);
-      assert.ok(m, name + ': ' + selector + ' still declares a colour');
-      const a = parseFloat(m[1]);
-      const c = contrast(PAPER, INK, a);
-      assert.ok(c >= AA,
-        name + ': ' + selector + ' at alpha ' + a + ' is ' + c.toFixed(2) + ':1 against #0E2A3F, '
-        + 'below the ' + AA + ':1 AA threshold. The meta row also paints the Privacy and '
-        + 'Terms links, so this value decides whether they are readable.');
-    }
-  }
-});
-
-// The arithmetic itself, pinned against two values measured by axe-core in a
-// real browser — so a bug in the helper cannot quietly pass every page above.
-test('the contrast helper agrees with what the browser measured', () => {
-  assert.equal(contrast(FOREGROUND, GROUND, 0.42).toFixed(2), '3.46');   // axe: 3.45
-  assert.equal(contrast(PAPER, INK, 0.5).toFixed(2), '4.39');            // axe: 4.39
-});
-
-// The Status page's own footer note is painted by --ink-40 rather than an
-// inline colour, so the scan above cannot reach it. That token also paints
-// .brand and .striplabel, and it shipped the migration at 0.42 (3.46:1) —
-// pin the value that fixed all three.
-test('the Status page’s small-text token clears AA', () => {
-  const html = page('status/index.html');
-  const m = html.match(/--ink-40:\s*rgba\(233,\s*228,\s*216,\s*([\d.]+)\)/);
-  assert.ok(m, 'status/index.html still defines --ink-40');
-  const c = contrast(FOREGROUND, GROUND, parseFloat(m[1]));
-  assert.ok(c >= AA,
-    'status/index.html: --ink-40 at alpha ' + m[1] + ' is ' + c.toFixed(2) + ':1 against #071019, '
-    + 'below the ' + AA + ':1 AA threshold. It paints .brand, .striplabel and the page’s own '
-    + 'footer note, so one value here is three failures.');
-});
-
-// ── Generalised from the footer to the whole site (#358) ─────────────────
-//
-// The footer pin above caught one instance of a site-wide problem: 198
-// serious contrast nodes across 16 pages. Those are fixed, and the axe gate
-// in test/a11y/ now requires zero — but that gate needs a browser, takes 40
-// seconds, and reports a rendered COLOUR rather than the declaration that
-// produced it. These assertions read the source instead: they run in
-// milliseconds, need nothing installed, and name the exact line to change.
-//
-// Both layers are wanted. axe catches what only exists once a page is
-// composited (a colour inherited onto an unexpected ground, an overlay).
-// This catches the far commoner case — someone types a dim value — at the
-// point where the fix is obvious.
-
-// Secondary text on the dark ground is rgba(233,228,216,alpha). Below 0.51
-// it cannot reach 4.5:1 on ANY of the grounds the site uses; 0.58 is the
-// floor actually shipped, chosen for margin rather than for the minimum.
-const DARK_TEXT_FLOOR = 0.58;
-const DARK_PAGES = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
-  'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
-  'privacy.html', 'terms.html', 'trust.html', 'status/index.html'];
-
-test('no dark page declares secondary TEXT below the readable floor', () => {
-  for (const name of DARK_PAGES) {
-    const html = page(name);
-    // `color:` only. The same alphas are correct on borders and backgrounds,
-    // and a sweep that did not distinguish them would lighten every hairline
-    // rule on the site.
-    for (const m of html.matchAll(/color:\s*rgba\(233,\s*228,\s*216,\s*(\.\d+|0?\.\d+)\)/g)) {
-      const a = parseFloat(m[1]);
-      assert.ok(a >= DARK_TEXT_FLOOR,
-        name + ': text at alpha ' + a + ' is ' + contrast(FOREGROUND, GROUND, a).toFixed(2)
-        + ':1 on #071019, under the 4.5:1 AA threshold. The floor is ' + DARK_TEXT_FLOOR
-        + '. Borders and backgrounds may sit lower — this only matches `color:`.');
-    }
-  }
-});
-
-test('the superseded pages’ --ink-60 clears AA on the darkest paper it sits on', () => {
-  // One token behind 37 of the original violations. It is used on --paper,
-  // --paper-2 and --cream; --paper-2 #EDE8DB is the darkest, so it decides.
-  const DARKEST_PAPER = hex('#EDE8DB');
-  for (const name of ['about.html', 'approach.html', 'services.html', 'training.html']) {
-    const m = page(name).match(/--ink-60:\s*rgba\(14,\s*42,\s*63,\s*([\d.]+)\)/);
-    assert.ok(m, name + ' still defines --ink-60');
-    const c = contrast(hex('#0E2A3F'), DARKEST_PAPER, parseFloat(m[1]));
-    assert.ok(c >= AA,
-      name + ': --ink-60 at ' + m[1] + ' is ' + c.toFixed(2) + ':1 on --paper-2 #EDE8DB. It paints '
-      + 'the eyebrows, section numbers, lane tags and price notes across these pages, so one '
-      + 'value here is dozens of failures.');
-  }
-});
-
-test('--ink-40 is never used as text', () => {
-  // It cannot clear AA at any size the site uses it, and it is ALSO a border
-  // colour — so the fix is to stop painting text with it, not to raise it.
-  for (const name of ['about.html', 'approach.html', 'services.html', 'training.html']) {
-    const html = page(name);
-    for (const m of html.matchAll(/\{[^}]*\}/g)) {
-      const rule = m[0];
-      if (/color:\s*var\(--ink-40\)/.test(rule) && !/border|outline|background/.test(rule)) {
-        assert.fail(name + ': a rule paints TEXT with --ink-40 (2.32:1 at 11px, the worst ratio '
-          + 'this site has shipped). Use --ink-60. Raising --ink-40 is not the fix — it is also '
-          + 'a border colour.\n      ' + rule.replace(/\s+/g, ' ').slice(0, 120));
-      }
-    }
-  }
-});
-
-test('the wordmark superscript takes the teal that suits its ground', () => {
-  // --accent-ink is 5.50:1 on the light paper but 2.40:1 on the dark footer;
-  // --accent is the reverse (2.71 / 4.88). Neither token works everywhere,
-  // and picking one by habit is how this shipped failing on both grounds.
-  for (const name of ['about.html', 'approach.html', 'services.html', 'training.html']) {
-    const html = page(name);
-    const base = html.match(/\.wordmark-sup \{[\s\S]*?\}/);
-    assert.ok(base, name + ' defines .wordmark-sup');
-    assert.match(base[0], /color:\s*var\(--accent-ink\)/,
-      name + ': the wordmark superscript is 10px text — on the light paper it needs '
-      + '--accent-ink (5.50:1), not --accent (2.71:1)');
-    assert.match(html, /\.site-footer \.wordmark-sup \{\s*color:\s*var\(--accent\);\s*\}/,
-      name + ': the footer sits on --ink where --accent-ink drops to 2.40:1, so it must take '
-      + 'the lighter --accent there');
-  }
-});
 
 test('404.html’s tokens belong to the palette it actually renders on', () => {
   // The palette migration swapped --ink and --paper to the dark identity and

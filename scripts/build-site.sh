@@ -18,11 +18,6 @@ cp index.html platform.html solutions.html how-it-works.html academy.html \
 # resolves the clean URL from the .html file, so no redirect rule is involved.
 cp privacy.html terms.html trust.html "$OUT"/
 
-# Superseded pre-redesign pages. Still reachable by URL so existing links
-# and the truth-claim pins in test/ keep working; unlisted in sitemap.xml
-# because the redesigned routes are canonical. Removed in the content pass.
-cp about.html approach.html services.html training.html "$OUT"/
-
 # The redesign's runtime, required alongside the pages.
 cp support.js "$OUT"/
 
