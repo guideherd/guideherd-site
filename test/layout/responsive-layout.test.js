@@ -279,6 +279,35 @@ test('the mobile navigation is deliberate and fully usable at phone widths', asy
     `only ${pagesWithToggle} page/width combinations carried the mobile nav toggle — expected 24`);
 });
 
+test('every image declares its intrinsic size, so content below it cannot move when it loads', async () => {
+  // An <img> with only width:100% reserves ZERO height until its bytes
+  // arrive; on a phone connection that is mid-scroll, and everything below
+  // it jumps as the box appears (#371 — reported from production as "text
+  // briefly jumps up and back into place"). Width/height attributes (or an
+  // explicit CSS aspect-ratio / fixed height) give the browser the
+  // placeholder box up front.
+  const offenders = [];
+  for (const page of H.PAGES) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+    const tab = await ctx.newPage();
+    await tab.goto(`${server.origin}/${page}`, { waitUntil: 'networkidle' });
+    await settle(tab);
+    const bad = await tab.evaluate(() => [...document.images]
+      .filter((img) => {
+        if (img.getAttribute('width') && img.getAttribute('height')) return false;
+        const cs = getComputedStyle(img);
+        if (cs.aspectRatio && cs.aspectRatio !== 'auto') return false;
+        if (img.style.height && img.style.height !== 'auto') return false;
+        return true;
+      })
+      .map((img) => img.getAttribute('src')));
+    for (const src of bad) offenders.push(`${page}: ${src}`);
+    await ctx.close();
+  }
+  assert.deepEqual(offenders, [],
+    'images with no reserved layout space (add width/height attributes):\n    ' + offenders.join('\n    '));
+});
+
 test('the desktop navigation still shows every link in the bar at 1280px', async () => {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
   const tab = await ctx.newPage();
