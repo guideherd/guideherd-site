@@ -100,7 +100,14 @@ nav[data-nav]::before {
   /* 2. Reclaim the desktop gutter. border-box matters here: several of these
         are width:100% with side padding, so without it the padding is ADDED
         to the full width and the block hangs off both edges. */
-  [style*="56px"], [style*="52px"] {
+  /* Anchored on ":56px" / " 56px" deliberately (#371): the runtime and the
+     reveal/parallax animations re-serialize style attributes every frame,
+     and a bare substring match flapped ON whenever an animated transform
+     value happened to contain "52px"/"56px" (translateY(-15.652px)...) —
+     20px of padding appeared for one frame and everything below bounced. A
+     padding list always has a colon or space before the value; an animated
+     number never does. */
+  [style*=":56px"], [style*=" 56px"], [style*=":52px"], [style*=" 52px"] {
     box-sizing:border-box !important;
     padding-left:20px !important;
     padding-right:20px !important;

@@ -6,7 +6,8 @@
     "test": "node --test 'test/*.test.js'",
     "test:a11y": "node --test test/a11y/*.test.js",
     "build": "bash scripts/build-site.sh",
-    "test:layout": "node --test test/layout/*.test.js"
+    "test:layout": "node --test test/layout/*.test.js",
+    "test:webkit": "node --test test/webkit/*.test.js"
   },
   "devDependencies": {
     "axe-core": "4.13.0",
