@@ -107,9 +107,16 @@ const AUDIT_FN = `(() => {
   if (document.documentElement.scrollWidth > vw + 1) {
     out.overflow = document.documentElement.scrollWidth + '>' + vw;
   }
-  for (const { el, r } of rects) {
+  for (const { el, r, cs } of rects) {
     if ((r.right > vw + 8 || r.left < -8) && !inScrollable(el)) {
-      out.offscreen.push(label(el) + ' [' + Math.round(r.left) + '..' + Math.round(r.right) + ']');
+      // Enough computed state to diagnose an environment-specific layout
+      // from the failure message alone — CI has no screenshots.
+      const pw = el.parentElement ? Math.round(el.parentElement.getBoundingClientRect().width) : -1;
+      out.offscreen.push(label(el) + ' [' + Math.round(r.left) + '..' + Math.round(r.right) + ']'
+        + ' {fs:' + cs.fontSize + ' ff:' + cs.fontFamily.split(',')[0] + ' ws:' + cs.whiteSpace
+        + ' ow:' + cs.overflowWrap + ' dir:' + cs.direction + ' parentW:' + pw
+        + ' mq360:' + matchMedia('(max-width: 360px)').matches
+        + ' fontLoaded:' + document.fonts.check('16px Fraunces') + '}');
     }
   }
   for (let i = 0; i < rects.length; i++) {
