@@ -218,3 +218,42 @@ test('the ops screenshot’s alt text describes the current Overview, not the re
     'the "Today’s handoffs" card was removed (product #314) — the KPI strip owns the numbers');
   assert.match(alt, /KPI strip/, 'the alt names the composition the capture actually shows');
 });
+
+// ── GitLab #372: the shipped-history claims stay inside their evidence ───
+//
+// The release chronology on /resources introduced the site's first public
+// voice claim. Its basis is one production validation (2026-07-28): a live
+// call became a confirmed Microsoft 365 booking with confirmations and a
+// durable intake record. The claim is therefore a DATED EVENT on the
+// release log — it may not migrate into general positioning copy, and it
+// may not shed the grounding that keeps it literal.
+test('the voice claim lives only in the dated release entry, and keeps its grounding', () => {
+  const r = page('resources.html');
+  assert.match(r, /AI voice reception/, '/resources carries the voice entry');
+  assert.match(r, /Microsoft 365 calendar/, 'the voice entry names the validated calendar path');
+  assert.match(r, /production deployment/, 'the voice entry stays anchored to the production event');
+  for (const name of ALL_PUBLIC) {
+    if (name === 'resources.html') continue;
+    assert.doesNotMatch(page(name), /AI voice|voice reception|voice AI|automated (voice|phone)/i,
+      name + ' must not make a voice capability claim — the only supported claim is the dated entry on /resources (#372)');
+  }
+});
+
+// The guided-onboarding entry was validated against a SYNTHETIC second
+// tenant. That qualifier is the difference between the claim and an
+// adoption claim no evidence supports; an edit may not silently drop it.
+test('the onboarding entry keeps its synthetic-tenant qualifier', () => {
+  assert.match(page('resources.html'), /synthetic second tenant/,
+    'the guided-onboarding entry must say its validation used a synthetic tenant (#372)');
+});
+
+// Every release-note row carries a month-year date, and the chronology
+// cannot silently shrink: a "history" whose rows can vanish or lose their
+// dates stops being a record.
+test('every release-note row is dated, and the chronology holds its floor', () => {
+  const r = page('resources.html');
+  const rows = r.split('Release note').length - 1;
+  assert.ok(rows >= 11, 'the release log holds at least its 2026-08 row count (' + rows + ')');
+  const dates = (r.match(/>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* 20\d\d</g) || []).length;
+  assert.ok(dates >= rows, 'every Release note row must carry a Mon YYYY date (' + dates + '/' + rows + ')');
+});
