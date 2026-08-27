@@ -24,7 +24,6 @@ const ROUTES = {
   'platform.html': '/platform',
   'solutions.html': '/solutions',
   'how-it-works.html': '/how-it-works',
-  'academy.html': '/academy',
   'resources.html': '/resources',
   'company.html': '/company',
   'lets-talk.html': '/lets-talk',

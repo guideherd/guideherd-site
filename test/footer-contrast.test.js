@@ -40,7 +40,7 @@ const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
 // ── The redesigned footer: rgba(233,228,216,α) on the page ground ─────────
 const REDESIGNED = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
-  'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
+  'resources.html', 'company.html', 'lets-talk.html',
   'privacy.html', 'terms.html', 'trust.html', 'status/index.html'];
 const GROUND = hex('#071019');
 const FOREGROUND = [233, 228, 216];

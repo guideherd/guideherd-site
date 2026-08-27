@@ -11,7 +11,7 @@ mkdir -p "$OUT"
 
 # Marketing pages, and the 404 that keeps unknown paths from silently
 # rendering the homepage with a 200.
-cp index.html platform.html solutions.html how-it-works.html academy.html \
+cp index.html platform.html solutions.html how-it-works.html \
    resources.html company.html lets-talk.html 404.html "$OUT"/
 
 # The published legal pages. Served at /privacy and /terms — Cloudflare Pages
