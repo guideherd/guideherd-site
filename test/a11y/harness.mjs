@@ -23,7 +23,7 @@ export const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22a', 'wca
 // layout and type actually differ.
 export const PAGES = [
   'index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
-  'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
+  'resources.html', 'company.html', 'lets-talk.html',
   'privacy.html', 'terms.html', 'trust.html', '404.html', 'status/index.html',
 ];
 export const WIDTHS = [1440, 390];
