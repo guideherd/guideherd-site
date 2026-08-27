@@ -58,7 +58,7 @@ test('sameAs lists only properties GuideHerd controls', () => {
   const org = node('Organization');
   // sameAs asserts "this is also us". A wrong entry hands GuideHerd's entity
   // identity to something it does not own.
-  assert.deepEqual(org.sameAs, ['https://app.guideherd.ai', 'https://training.guideherd.ai']);
+  assert.deepEqual(org.sameAs, ['https://app.guideherd.ai']);
   for (const u of org.sameAs) {
     assert.match(u, /^https:\/\/[a-z-]+\.guideherd\.ai$/,
       u + ' is not a guideherd.ai property — sameAs is not a links page');
@@ -76,7 +76,7 @@ test('the WebSite is bound to the Organization and claims no search it does not 
 
 test('no commerce, rating, or review markup anywhere on the site', () => {
   const REFUSED = ['Product', 'Offer', 'AggregateOffer', 'AggregateRating', 'Review', 'Rating'];
-  for (const name of ['index.html', 'platform.html', 'academy.html', 'solutions.html',
+  for (const name of ['index.html', 'platform.html', 'solutions.html',
                       'how-it-works.html', 'resources.html', 'company.html', 'lets-talk.html',
                       'privacy.html', 'terms.html', 'trust.html', '404.html', 'status/index.html']) {
     for (const b of blocks(read(name))) {
@@ -116,7 +116,7 @@ test('the contact address is not republished in machine-readable form', () => {
 test('only the homepage carries entity markup', () => {
   // Repeating Organization on every page multiplies the entity rather than
   // reinforcing it, and gives fourteen places for it to drift.
-  for (const name of ['platform.html', 'academy.html', 'company.html', 'privacy.html',
+  for (const name of ['platform.html', 'company.html', 'privacy.html',
                       'terms.html', 'trust.html', 'status/index.html', '404.html']) {
     assert.equal(blocks(read(name)).length, 0,
       name + ' carries JSON-LD. Entity markup belongs on the homepage alone, or the same '

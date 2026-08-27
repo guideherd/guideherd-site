@@ -29,7 +29,6 @@ const INDEXABLE = {
   '/platform': 'platform.html',
   '/solutions': 'solutions.html',
   '/how-it-works': 'how-it-works.html',
-  '/academy': 'academy.html',
   '/resources': 'resources.html',
   '/company': 'company.html',
   '/lets-talk': 'lets-talk.html',

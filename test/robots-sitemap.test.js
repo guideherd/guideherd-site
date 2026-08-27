@@ -30,7 +30,6 @@ const INDEXABLE = {
   '/platform': 'platform.html',
   '/solutions': 'solutions.html',
   '/how-it-works': 'how-it-works.html',
-  '/academy': 'academy.html',
   '/resources': 'resources.html',
   '/company': 'company.html',
   '/lets-talk': 'lets-talk.html',
@@ -44,7 +43,11 @@ const INDEXABLE = {
 // repo and the build, no redirects, no canonicals — the routes fall
 // through to the custom 404. Pinned so none of them re-enters the
 // sitemap by habit.
-const RETIRED_ROUTES = ['/about', '/approach', '/services', '/training'];
+// /academy joined them on 2026-08-27 (owner decision, DJ): the Academy is no
+// longer promoted from the marketing site. Same posture as the four above --
+// page and build entry removed, no redirect, no canonical, falls through to
+// the custom 404. training.guideherd.ai itself is unchanged.
+const RETIRED_ROUTES = ['/about', '/approach', '/services', '/training', '/academy'];
 
 // Never indexable: an error page must not compete for its own query.
 const NEVER = ['404.html'];
@@ -115,10 +118,11 @@ test('every shipped marketing page is either in the sitemap or deliberately excl
   const copied = [...BUILD.matchAll(/^\s*cp\s+([^"|]*?)\s*"\$OUT"\//gms)]
     .flatMap((m) => m[1].split(/[\s\\]+/))
     .filter((f) => f.endsWith('.html'));
-  // Floor updated when the four superseded pages retired (#352): the
-  // current shipped set is 12 root pages; the floor exists so the parse
-  // above failing silently can never read as an empty-but-passing check.
-  assert.ok(copied.length >= 12, 'expected the allowlist to name the marketing pages, saw ' + copied.length);
+  // Floor updated when the four superseded pages retired (#352), and again
+  // when /academy retired (2026-08-27, owner decision DJ): the current
+  // shipped set is 11 root pages; the floor exists so the parse above
+  // failing silently can never read as an empty-but-passing check.
+  assert.ok(copied.length >= 11, 'expected the allowlist to name the marketing pages, saw ' + copied.length);
 
   const inSitemap = new Set(Object.values(INDEXABLE));
   const excluded = new Set(NEVER);

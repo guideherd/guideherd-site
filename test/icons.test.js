@@ -21,7 +21,7 @@ const root = (...p) => path.join(__dirname, '..', ...p);
 const read = (n) => fs.readFileSync(root(n), 'utf8');
 
 const ALL_PAGES = ['index.html', 'platform.html', 'solutions.html', 'how-it-works.html',
-  'academy.html', 'resources.html', 'company.html', 'lets-talk.html',
+  'resources.html', 'company.html', 'lets-talk.html',
   'privacy.html', 'terms.html', 'trust.html', '404.html', 'status/index.html'];
 
 const pngSize = (p) => {
