@@ -254,7 +254,9 @@ test('the mobile navigation is deliberate and fully usable at phone widths', asy
           };
         });
       });
-      assert.ok(links.length >= 6, `${page} @${width}px: expected the full link set in the panel, saw ${links.length}`);
+      // Floor tracks the real nav: lets-talk omits its own CTA, so it carries
+      // the fewest. Dropped one when /academy retired (2026-08-27).
+      assert.ok(links.length >= 5, `${page} @${width}px: expected the full link set in the panel, saw ${links.length}`);
       for (const l of links) {
         assert.ok(l.onScreen, `${page} @${width}px: "${l.text}" is outside the viewport in the open menu`);
         assert.ok(l.hittable, `${page} @${width}px: "${l.text}" is not hittable at its own center`);

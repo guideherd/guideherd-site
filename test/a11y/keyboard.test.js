@@ -30,10 +30,11 @@ test('every nav destination and the CTA are reachable by Tab alone', async () =>
 
     const navHrefs = await tab.evaluate(() =>
       [...document.querySelectorAll('nav a[href]')].map((a) => a.getAttribute('href')));
-    // Pages omit their own CTA from the nav, so lets-talk carries 7 where the
-    // rest carry 8. The count is a sanity floor; the real assertion is that
-    // whatever IS in the nav can be reached.
-    assert.ok(navHrefs.length >= 7, `${page}: expected the nav, saw ${navHrefs.length}`);
+    // Pages omit their own CTA from the nav, so lets-talk carries 6 where the
+    // rest carry 7 (each dropped one when /academy retired, 2026-08-27). The
+    // count is a sanity floor; the real assertion is that whatever IS in the
+    // nav can be reached.
+    assert.ok(navHrefs.length >= 6, `${page}: expected the nav, saw ${navHrefs.length}`);
 
     // Walk the document with Tab and collect what actually receives focus.
     const reached = new Set();
