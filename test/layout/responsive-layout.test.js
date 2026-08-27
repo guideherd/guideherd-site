@@ -275,10 +275,11 @@ test('the mobile navigation is deliberate and fully usable at phone widths', asy
       await ctx.close();
     }
   }
-  // 12 redesign pages x 2 widths. Falling below this means pages LOST the
-  // mobile nav, not that they grew a better one.
-  assert.ok(pagesWithToggle >= 24,
-    `only ${pagesWithToggle} page/width combinations carried the mobile nav toggle — expected 24`);
+  // 11 redesign pages x 2 widths (12 until /academy retired, 2026-08-27).
+  // Falling below this means pages LOST the mobile nav, not that they grew
+  // a better one.
+  assert.ok(pagesWithToggle >= 22,
+    `only ${pagesWithToggle} page/width combinations carried the mobile nav toggle — expected 22`);
 });
 
 test('every image declares its intrinsic size, so content below it cannot move when it loads', async () => {
