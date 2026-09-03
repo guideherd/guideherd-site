@@ -94,11 +94,26 @@ test('no invented company facts', () => {
   const org = node('Organization');
   // Each of these is a field a template would happily fill in, and none of
   // them is knowable from anything in this repository.
-  for (const field of ['foundingDate', 'numberOfEmployees', 'address', 'telephone',
+  for (const field of ['foundingDate', 'numberOfEmployees', 'address',
                        'taxID', 'vatID', 'award', 'slogan']) {
     assert.ok(!(field in org),
       'Organization.' + field + ' is not knowable from this repository — leave it out rather '
       + 'than guess. If it becomes known, add it with the source recorded.');
+  }
+});
+
+test('the telephone is the official company line, and matches every tel: link on the site', () => {
+  // Owner-stated 2026-09-02 (GitLab #441): GuideHerd's company phone
+  // number, answered by its receptionist. Published in E.164 with the
+  // schema.org-conventional hyphens; the human-facing pages carry the
+  // same digits, so the three renderings cannot drift apart.
+  const org = node('Organization');
+  assert.equal(org.telephone, '+1-938-200-9202');
+  const digits = org.telephone.replace(/[^\d+]/g, '');
+  for (const name of ['index.html', 'lets-talk.html']) {
+    for (const m of read(name).matchAll(/href="tel:([^"]+)"/g)) {
+      assert.equal(m[1], digits, name + ' tel: link must dial the same number the Organization declares');
+    }
   }
 });
 
