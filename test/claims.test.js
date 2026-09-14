@@ -248,7 +248,78 @@ test('the onboarding entry keeps its synthetic-tenant qualifier', () => {
 test('every release-note row is dated, and the chronology holds its floor', () => {
   const r = page('resources.html');
   const rows = r.split('Release note').length - 1;
-  assert.ok(rows >= 11, 'the release log holds at least its 2026-08 row count (' + rows + ')');
+  assert.ok(rows >= 14, 'the release log holds at least its 2026-09 row count (' + rows + ')');
   const dates = (r.match(/>(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* 20\d\d</g) || []).length;
   assert.ok(dates >= rows, 'every Release note row must carry a Mon YYYY date (' + dates + '/' + rows + ')');
+});
+
+// ── The 2026-09 entries: three new claims, three pins ────────────────────
+//
+// One helper for all three. A release row is a self-contained block, so a
+// pin that reads the WHOLE page would pass on a sentence borrowed from a
+// neighbouring row. These slice the row and assert inside it.
+const releaseRow = (title) => {
+  const r = page('resources.html');
+  const at = r.indexOf(title);
+  assert.ok(at > -1, 'the release log no longer carries the entry: ' + title);
+  return r.slice(at, at + 900);
+};
+
+// Gmail delivery was live-validated 2026-08-09 with exactly ONE notification
+// type — a consultation summary, verified in the recipient's mailbox. Two
+// ways that claim could quietly grow: into "every kind of message", and into
+// "your firm's own address sends it". Neither is true on this path — the
+// sender is the deployment's delegated Workspace mailbox, and per-firm
+// branding is subject/body copy only (ADR-0011). The site's EXISTING "from
+// your own mailbox" copy describes the Microsoft Graph path and is backed
+// (#317 audit, 2026-08-10); it is not touched here, which is exactly why
+// this pin reads the Gmail row rather than the page.
+test('the Gmail entry stays a delivery route, and keeps the one type it proved', () => {
+  const row = releaseRow('Client email delivered through Gmail');
+  assert.match(row, /per-firm choice/,
+    'the Gmail entry must say the provider is chosen per firm — Gmail is not how GuideHerd sends');
+  assert.match(row, /consultation summary/,
+    'the Gmail entry must name the one notification type the 2026-08-09 run exercised; without it '
+    + 'the row promises every kind of message, which the conformance suite alone cannot support');
+  assert.doesNotMatch(row, /own mailbox|your own (Gmail|Workspace|Google)/i,
+    'the Gmail path sends from the deployment\u2019s delegated Workspace mailbox, not the '
+    + 'firm\u2019s own address — that claim belongs to the Graph path, not this row');
+});
+
+// Google Drive storage was live-validated 2026-08-09: one owner-executed
+// upload landing in a Shared Drive the firm controls. The workload holds the
+// Drive scope alone and reads nothing else in Workspace, so the row must
+// keep the drive the firm's, and no public page may grow the claim into
+// general Workspace access.
+test('the Google Drive entry keeps the drive the firm\u2019s, and claims no wider Workspace access', () => {
+  const row = releaseRow('Documents land in the firm');
+  assert.match(row, /shared Google Drive the firm controls/,
+    'the Drive entry must say the drive belongs to the firm — a Shared Drive it controls is the '
+    + 'whole point of the claim, and the boundary the access actually has');
+  for (const name of ALL_PUBLIC) {
+    assert.doesNotMatch(page(name),
+      /Google Docs|Google Sheets|Google Meet|reads? (your|the firm\u2019s|the firm's) (Drive|inbox|mail)/i,
+      name + ' claims Google Workspace access GuideHerd does not have: the validated workloads are '
+      + 'calendar, gmail.send, and Drive within one approved folder — nothing else');
+  }
+});
+
+// The leaving entry (GitLab #496, 2026-09-13) rests on a synthetic firm
+// driven through all eight transitions on staging, plus the same-day
+// production deployment. No real firm has been offboarded, and the deletion
+// NAMES a remainder it cannot erase — so both the qualifier and the absence
+// of an absolute erasure promise are load-bearing.
+test('the leaving entry keeps its synthetic qualifier, and promises no total erasure', () => {
+  const row = releaseRow('A firm can leave, and take its data with it');
+  assert.match(row, /against a synthetic firm/,
+    'the leaving entry must say its validation used a synthetic firm — dropping that turns a '
+    + 'proven path into a customer exit that has never happened (#496)');
+  assert.match(row, /what was removed and what was not/,
+    'the deletion records a remainder it cannot erase; the entry must keep saying so');
+  for (const name of ALL_PUBLIC) {
+    assert.doesNotMatch(page(name),
+      /erases everything|completely (erased|deleted|removed)|nothing is retained|every trace/i,
+      name + ' promises a total erasure the proof-of-absence does not support — classes without a '
+      + 'tenant-wide purge are named on the record, not removed');
+  }
 });
