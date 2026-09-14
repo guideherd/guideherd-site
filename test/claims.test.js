@@ -323,3 +323,80 @@ test('the leaving entry keeps its synthetic qualifier, and promises no total era
       + 'tenant-wide purge are named on the record, not removed');
   }
 });
+
+// ── The status surface catches up with the two Google workloads ──────────
+//
+// /platform is the authoritative CURRENT integration status (#357); the
+// release log is the dated history. Gmail delivery and Google Drive storage
+// were both live-validated 2026-08-09 and had rows on one surface and not
+// the other. These pins keep them named, keep each claim the size of its
+// evidence, and keep the two surfaces from collapsing into one.
+const statusRow = (name) => {
+  const html = page(INTEGRATIONS_PAGE);
+  const at = html.indexOf('>' + name + '<');
+  assert.ok(at > -1, INTEGRATIONS_PAGE + ' no longer names the integration: ' + name);
+  const end = html.indexOf('</div>', at);
+  return html.slice(at, end);            // this row only — never the next one
+};
+
+test('the status surface names the Gmail and Google Drive workloads', () => {
+  for (const name of ['Gmail notification delivery', 'Google Drive document storage']) {
+    assert.match(page(INTEGRATIONS_PAGE), new RegExp(name),
+      INTEGRATIONS_PAGE + ' must name ' + name + ': it is live-validated and firm-selectable, '
+      + 'and a status surface that omits a shipped integration sends a reader to find it during '
+      + 'onboarding — the exact thing this section promises not to do');
+  }
+});
+
+// ONE notification type was exercised live on 2026-08-09: a consultation
+// summary, verified in the recipient's mailbox. The ICS lifecycle path and
+// the revoked-delegation shapes rest on the conformance suite, so the row
+// may not grow into "every message". And the sender is the delegated mailbox
+// of the connected Workspace, NOT each firm's own address — the page's
+// separate "sending from your own mailbox" line describes the Microsoft
+// Graph path (#317 audit, backed) and is untouched; this pin keeps the two
+// from merging inside the Gmail row.
+test('the Gmail status row stays the size of the run that proved it', () => {
+  const row = statusRow('Gmail notification delivery');
+  assert.match(row, /consultation summaries/,
+    'the Gmail row must name the notification type that was validated — without it the row '
+    + 'claims every kind of client email, which one live delivery cannot support');
+  assert.match(row, /chooses Gmail or Microsoft 365/,
+    'the row must say the provider is a per-firm choice; Gmail is one delivery route, not how '
+    + 'GuideHerd sends');
+  assert.doesNotMatch(row, /\b(all|every|any)\b/i,
+    'a totalizing word in the Gmail row turns one validated notification type into the whole '
+    + 'notification surface');
+  assert.doesNotMatch(row, /own mailbox|your mailbox|firm.s mailbox/i,
+    'the Gmail path sends from the connected Workspace\u2019s delegated mailbox — no evidence '
+    + 'shows a firm\u2019s own domain delegating, so that claim belongs to the Graph path alone');
+});
+
+// Effective Drive access is bounded by shared-drive membership plus the
+// configured root folder, and GuideHerd deletes its own copy once placement
+// verifies. Both bounds are the claim, not decoration.
+test('the Google Drive status row keeps the drive the firm\u2019s and the folder named', () => {
+  const row = statusRow('Google Drive document storage');
+  assert.match(row, /shared drive your firm controls/,
+    'the Drive row must keep the drive the firm\u2019s — membership of a drive it owns is the '
+    + 'real access boundary, not the scope string');
+  assert.match(row, /under a folder you name/,
+    'and the configured root folder is the other half of that boundary');
+  assert.match(row, /keeps a reference, not the file/,
+    'GuideHerd deletes its own copy after verified placement; the row must keep saying where '
+    + 'the document actually lives');
+});
+
+// The two surfaces answer different questions: /resources says WHEN a
+// capability became real, /platform says WHERE it stands now. A date
+// creeping into the status section is the first step to maintaining the
+// history in two places and letting them drift (#357).
+test('the status surface says where things stand, not when they got there', () => {
+  const html = page(INTEGRATIONS_PAGE);
+  const at = html.indexOf('id="supported-integrations"');
+  assert.ok(at > -1, '/platform still carries the supported-integrations section');
+  const section = html.slice(at, html.indexOf('</section>', at));
+  assert.doesNotMatch(section, /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* 20\d\d/,
+    'the integration status surface must not carry dated entries — chronology lives on '
+    + '/resources, and duplicating it here creates the second, drifting source #357 refuses');
+});

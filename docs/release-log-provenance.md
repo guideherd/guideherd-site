@@ -31,6 +31,22 @@ date — never a first implementation commit.
 | Trust and security, published (Aug 2026) | PRODUCTION | Pre-existing row (GitLab #357); the page is live. |
 | A firm can leave, and take its data with it (Sep 2026) | VALIDATED, 2026-09-13 (production deployment same day) | GitLab #496 closure: a synthetic firm driven through all eight transitions (provision → configure → validate → activate → suspend → export → offboard → delete, plus resume) in one automated operator-CLI run on staging, `hf-synthetic-09132230`, 2026-09-13 22:30 UTC, every transition recorded with its own evidence and the tenancy ending in `deleted`; the export produced the #492 archive (manifest digest `8d44c8b2…`, 11 classes) and the deletion recorded the proof-of-absence and named the remainder. Legal-hold and precondition refusals proven in the end-to-end API test (`offboard`/`delete` under an active hold → refused). Deployed to production the same day: revision `3533568`, Promote run 34787516674, production verification 9 pass / 0 fail, release-health judge healthy. Supporting: #492 (tenant export and its proving import, legal holds, erasure ledger and proof-of-absence, closed 2026-09-13). **Qualifiers, all load-bearing:** the end-to-end run was a SYNTHETIC firm on staging — no real firm has been offboarded, and the copy must keep "against a synthetic firm" (pinned in test/claims.test.js). The clean run's tenant never took traffic, so every data class counted zero; export/import manifest equality is proven on a synthetic tenant only and has not been run against a PostgreSQL-backed environment (#492 AC4, recorded there). Copy therefore claims the recorded path and the hand-back, never a completed customer exit. |
 
+## The same evidence on /platform
+
+/resources says WHEN a capability became real; `/platform`'s *Supported
+integrations* section says WHERE it stands now (#357 — one public home for
+integration status). The Gmail and Google Drive evidence above backs a row on
+both surfaces, so an edit to one has to answer to the other:
+
+| /platform row | Status text | Bounds it must keep |
+|---|---|---|
+| Gmail notification delivery | "Google Workspace · validated end to end for consultation summaries. Your firm chooses Gmail or Microsoft 365 for its client email." | The notification TYPE (one live run, 2026-08-09); the per-firm provider choice; no totalizing word; no claim that a firm's own mailbox is the sender — that is the Graph path's separately-backed claim, and the page's existing "sending from your own mailbox" line is about that path, not this row. |
+| Google Drive document storage | "Google Workspace · validated end to end. Documents land in a Google shared drive your firm controls, under a folder you name — GuideHerd keeps a reference, not the file." | Both halves of the real access boundary (shared-drive membership + the configured root folder), and the custody fact that GuideHerd deletes its own copy after verified placement. |
+
+Neither row carries a date, and the section is pinned against dates
+(test/claims.test.js): chronology stays on /resources so the two surfaces
+cannot drift into two histories.
+
 ## Deliberately absent
 
 Recorded so their absence is a decision, not an oversight (owner approval,
