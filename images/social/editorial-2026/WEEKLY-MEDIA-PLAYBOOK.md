@@ -27,3 +27,11 @@ Source: Claude's "GuideHerd Social: Brief for Image Partner" dated 2026-10-27. P
 - Place PNG/JPG assets in root images/social/, append filename/category/theme/format to root manifest.csv, verify live public URL and content before handing filenames to Claude.
 - Claude owns publishing, live media checks and logging. ChatGPT owns image generation, asset QA and repository upload.
 - No unapproved change to the schedule, credit purchases, product claims, or publishing privileges.
+
+## Cross-industry positioning (owner direction)
+- GuideHerd is positioned as general business automation across industries, not as a law-firm-only solution. Current law-firm deployments are examples, not the brand boundary.
+- Core message: **The work between conversations** — scheduling, follow-ups, documents, records, routing, and handoffs after calls, meetings, and requests.
+- Creative themes: invisible workload; people remain in charge; practical connected operations.
+- Default to universal office-object imagery and cross-industry scenarios. Do not use gavels, courthouses, scales of justice, or legal-exclusive cues in general-audience creative.
+- Illustrative scenarios in other verticals are hypothetical unless publicly verified. Do not imply customers, deployments, certifications, integrations, regulated-data compliance, or capabilities that have not been established.
+- Preserve platform-specific copy and visual variation; test performance against the cross-industry positioning.
