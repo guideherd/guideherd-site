@@ -35,3 +35,15 @@ Source: Claude's "GuideHerd Social: Brief for Image Partner" dated 2026-10-27. P
 - Default to universal office-object imagery and cross-industry scenarios. Do not use gavels, courthouses, scales of justice, or legal-exclusive cues in general-audience creative.
 - Illustrative scenarios in other verticals are hypothetical unless publicly verified. Do not imply customers, deployments, certifications, integrations, regulated-data compliance, or capabilities that have not been established.
 - Preserve platform-specific copy and visual variation; test performance against the cross-industry positioning.
+
+## Bold campaign: platform-native execution (owner direction, Oct 2026)
+- New creative direction: bold concise headlines, polished dimensional illustrations, strong contrast, clever business-process metaphors, inspired by effective productivity-company social design without copying branding or artwork. Industry-neutral: the work between conversations.
+- Each platform must have a **distinct creative treatment**; do not merely resize the same image and repost the same caption. Prepare separate platform-specific briefs and assets, with native copy, hooks, crops/compositions, and calls to conversation.
+- **X:** short pointed observation, under 280 characters, punchy and provocative; visual on Monday and Friday, Wednesday text-only under current posting rule; no hashtags or links.
+- **Threads:** warm, conversational, witty or reflective 200–450 characters; invite discussion; different visual composition from X; 0–1 hashtag.
+- **Facebook:** practical owner/manager story or lesson, 100–180 words, one image, no hashtags; links only in first comment.
+- **Instagram:** most visual/polished version; bold typography/strong visual storytelling, 3–6 short caption lines, weekly 2–3 panel carousel, no links and at most 3 hashtags.
+- Bold editorial typography is **intentionally allowed** in this new approved creative family. Previous blanket no-text restriction applies only to felt/paper-craft image-generation style, not approved editorial graphics. Check typography legibility and claims before publishing.
+- Four initial concepts: “The call ended. The work didn't.”, “Who owns the next step?”, “Less chasing. More doing.”, “The work between conversations.” These are **concepts, not permission to publish unreviewed assets**.
+- Publishing safety: use only public, tested image URLs listed in root images/social/manifest.csv. No implied integrations, client results, unsupported claims or fabricated metrics. Maintain existing 275-credit weekly cap and fallback behavior. Never route social work to engineering wood chipper or Jarvis.
+- Track per-platform impressions/views, engagement, comments, and creative variant. Compare to each platform's own baseline; do not assume results from another platform transfer.
