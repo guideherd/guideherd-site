@@ -1,0 +1,31 @@
+name: Publish approved social SVG as PNG
+on:
+  push:
+    paths:
+      - 'images/social/ready-svg/*.svg'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Render compliant images and update manifest
+        run: |
+          python -m pip install --disable-pip-version-check cairosvg pillow
+          python scripts/render_social_assets.py
+      - name: Commit rendered images and manifest
+        run: |
+          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard images/social)" ]; then
+            git config user.name "guideherd-social-assets"
+            git config user.email "actions@users.noreply.github.com"
+            git add images/social/manifest.csv images/social/*.png
+            git commit -m "Render approved social image sources to PNG"
+            git push
+          fi
