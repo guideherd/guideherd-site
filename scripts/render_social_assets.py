@@ -14,7 +14,7 @@ existing = {r["filename"] for r in rows}
 for src in sorted(source.glob("*.svg")):
     text = src.read_text(encoding="utf-8")
     # A render is not approval: reject sources with literal text or linked resources.
-    if re.search(r"<\\s*(?:text|foreignObject|image|script)\\b|(?:href|xlink:href)\\s*=", text, re.I):
+    if re.search(r"<\s*(?:text|foreignObject|image|script)\b|(?:href|xlink:href)\s*=", text, re.I):
         raise SystemExit(f"Disallowed element or external resource in {src}")
     out = root / (src.stem + ".png")
     png = cairosvg.svg2png(bytestring=text.encode(), output_width=1080, output_height=1080)
