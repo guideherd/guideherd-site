@@ -9,7 +9,8 @@
 //             not yet live-validated (server/integrations/clio/clio-matter-provider.js).
 //   Filevine  sign-in and account discovery only; no client or matter write path.
 //   Orion     live client search (#831); writes held (standing authorization 4).
-//   Lex       held for every customer: PLATFORM_HOLDS.lex in server/operations/rollout.js (#795).
+//   Lex       live for every customer firm in production since #905 (register entry 38; production
+//             deployment:verify reports production-lex=composed at 4e9712e8), on Baseten only.
 //   Drafting  off for every customer tenant in production (docs/operations/attorney-drafting.md).
 // When any of these changes, change the pin and the page together, with that evidence.
 const test = require('node:test');
@@ -44,10 +45,10 @@ test('the matter-opening step names no vendor, and does not promise a write ever
   assert.doesNotMatch(step, /Clio|Filevine|Orion/, 'step 4 names no vendor (#904 acceptance 5)');
 });
 
-test('held capabilities are labelled, not presented as available', () => {
+test('held capabilities are labelled, and Lex (live since #905) is not', () => {
   const lex = HOME.slice(HOME.indexOf('id="lex"'), HOME.indexOf('id="how"'));
-  assert.match(text(lex), /Lex Coming soon/, 'Lex is held for every customer (#795): the section says so');
-  assert.match(text(lex), /not yet available to firms/, 'and so does the screenshot caption');
+  // #905: Lex is live in production for every customer firm, so its section carries no availability caveat.
+  assert.doesNotMatch(text(lex), /coming soon|not yet available/i, 'Lex is available (#905): no coming-soon label');
   assert.match(HOME, /Drafting, coming soon:/, 'drafting is off for customer tenants: its caption says so');
   assert.match(VISIBLE, /Word templates coming soon/, 'the Word templates tile follows drafting');
 });
