@@ -132,7 +132,10 @@ test('prefers-reduced-motion is honoured by the entrance animations', async () =
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 },
       reducedMotion: reduced ? 'reduce' : 'no-preference' });
     const tab = await ctx.newPage();
-    await tab.goto(`${server.origin}/index.html`, { waitUntil: 'domcontentloaded' });
+    // GitLab #904 (stale target rewritten, intent kept): the homepage no longer has entrance
+    // animations (the approved design has none), so the preference is checked on /platform,
+    // which still carries the site's reveal elements.
+    await tab.goto(`${server.origin}/platform.html`, { waitUntil: 'domcontentloaded' });
     // The stagger applies its transition to children progressively, so a
     // single element read early says nothing — measured on this site, one
     // element reports 0s at 250ms while five siblings already animate. The

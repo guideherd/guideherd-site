@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GuideHerd — AI Operations Platform</title>
-<meta name="description" content="An intelligence platform that turns conversations into completed work. GuideHerd coordinates the work every conversation creates, and keeps the record.">
+<title>GuideHerd — from first call to opened matter</title>
+<meta name="description" content="GuideHerd runs intake, scheduling and matter opening for litigation firms, inside the software you already use.">
 <link rel="canonical" href="https://guideherd.ai/">
 <meta property="og:site_name" content="GuideHerd">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://guideherd.ai/">
-<meta property="og:title" content="GuideHerd — the work between conversations">
-<meta property="og:description" content="An intelligence platform that turns conversations into completed work. GuideHerd coordinates the work every conversation creates, and keeps the record.">
+<meta property="og:title" content="GuideHerd — from first call to opened matter">
+<meta property="og:description" content="GuideHerd runs intake, scheduling and matter opening for litigation firms, inside the software you already use.">
 <meta property="og:image" content="https://guideherd.ai/assets/social-card.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="GuideHerd — the work between conversations">
+<meta property="og:image:alt" content="GuideHerd — from first call to opened matter">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GuideHerd — the work between conversations">
-<meta name="twitter:description" content="An intelligence platform that turns conversations into completed work. GuideHerd coordinates the work every conversation creates, and keeps the record.">
+<meta name="twitter:title" content="GuideHerd — from first call to opened matter">
+<meta name="twitter:description" content="GuideHerd runs intake, scheduling and matter opening for litigation firms, inside the software you already use.">
 <meta name="twitter:image" content="https://guideherd.ai/assets/social-card.png">
-<meta name="twitter:image:alt" content="GuideHerd — the work between conversations">
+<meta name="twitter:image:alt" content="GuideHerd — from first call to opened matter">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/icon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/icon-16.png">
@@ -38,7 +38,7 @@
       "legalName": "GuideHerd LLC",
       "url": "https://guideherd.ai",
       "telephone": "+1-938-200-9202",
-      "description": "An intelligence platform that turns conversations into completed work. GuideHerd coordinates the work every conversation creates, and keeps the record.",
+      "description": "GuideHerd runs intake, scheduling and matter opening for litigation firms, inside the software you already use.",
       "logo": {
         "@type": "ImageObject",
         "url": "https://guideherd.ai/assets/icons/icon-512.png",
@@ -64,298 +64,419 @@
 </script>
 <meta name="theme-color" content="#071019">
 <link rel="stylesheet" href="/assets/fonts.css">
-
-<script src="/support.js"></script>
 <link rel="stylesheet" href="/assets/footer-social.css">
+<style>
+/* GitLab #904 — the litigation-first homepage, built from the approved handoff
+   (product repo docs/design/site-litigation-homepage.html). Tokens are the
+   handoff's: dark is the default; the light set applies when the visitor's
+   system prefers light, or when <html data-theme="light"> is set. */
+:root {
+  --bg: #09121B; --band: #0C1823; --navBg: rgba(9,18,27,0.88); --surface: #10202E; --surface2: #0D1A26;
+  --toastBg: #142636; --text: #E9E4D8; --dim: rgba(233,228,216,0.74); --line: rgba(233,228,216,0.12);
+  --lineStrong: rgba(233,228,216,0.24); --accent: #2FA4A0; --accentText: #4FC1BC; --btnBg: #2FA4A0;
+  --btnText: #06171A; --okBg: rgba(47,164,160,0.18); --warmBg: rgba(200,169,122,0.18); --warmText: #D9BE93;
+  --inputBg: #09121B; --paperBg: #0B1721; --page: #FBF8F1; --shadow: 0 40px 90px -30px rgba(0,0,0,0.75);
+  --toastShadow: 0 12px 32px rgba(0,0,0,0.45); --faintTile: rgba(233,228,216,0.04);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F5F2EA; --band: #EEE9DD; --navBg: rgba(245,242,234,0.9); --surface: #FFFFFF; --surface2: #F7F4EE;
+    --toastBg: #FFFFFF; --text: #0E2A3F; --dim: rgba(14,42,63,0.74); --line: rgba(14,42,63,0.12);
+    --lineStrong: rgba(14,42,63,0.22); --accent: #1E7C79; --accentText: #0E6D6A; --btnBg: #1E7C79;
+    --btnText: #FFFFFF; --okBg: rgba(47,164,160,0.14); --warmBg: rgba(200,169,122,0.26); --warmText: #7A5F32;
+    --inputBg: #FFFFFF; --paperBg: #EEE9DD; --page: #FFFFFF; --shadow: 0 40px 90px -40px rgba(14,42,63,0.4);
+    --toastShadow: 0 12px 32px rgba(14,42,63,0.18); --faintTile: rgba(14,42,63,0.04);
+    color-scheme: light;
+  }
+  :root:not([data-theme="dark"]) .only-dark { display: none !important; }
+  :root:not([data-theme="dark"]) .only-light { display: block !important; }
+  :root:not([data-theme="dark"]) .ft { color: var(--dim) !important; }
+}
+:root[data-theme="light"] {
+  --bg: #F5F2EA; --band: #EEE9DD; --navBg: rgba(245,242,234,0.9); --surface: #FFFFFF; --surface2: #F7F4EE;
+  --toastBg: #FFFFFF; --text: #0E2A3F; --dim: rgba(14,42,63,0.74); --line: rgba(14,42,63,0.12);
+  --lineStrong: rgba(14,42,63,0.22); --accent: #1E7C79; --accentText: #0E6D6A; --btnBg: #1E7C79;
+  --btnText: #FFFFFF; --okBg: rgba(47,164,160,0.14); --warmBg: rgba(200,169,122,0.26); --warmText: #7A5F32;
+  --inputBg: #FFFFFF; --paperBg: #EEE9DD; --page: #FFFFFF; --shadow: 0 40px 90px -40px rgba(14,42,63,0.4);
+  --toastShadow: 0 12px 32px rgba(14,42,63,0.18); --faintTile: rgba(14,42,63,0.04);
+  color-scheme: light;
+}
+.only-light { display: none !important; }
+:root[data-theme="light"] .only-dark { display: none !important; }
+:root[data-theme="light"] .only-light { display: block !important; }
+:root[data-theme="light"] .ft { color: var(--dim) !important; }
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 'Inter Tight', system-ui, sans-serif; overflow-x: hidden; }
+a { color: inherit; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Buttons */
+.btn { background: var(--btnBg); color: var(--btnText); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+.btn-lg { font-size: 16px; padding: 0 22px; min-height: 48px; border-radius: 10px; }
+
+/* Nav — the site's shared mobile-nav contract (nav[data-nav], [data-nav-toggle], [data-nav-links], .gh-open). */
+.site-head { position: sticky; top: 0; z-index: 60; background: var(--navBg); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+nav[data-nav] { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 32px; }
+.wordmark { text-decoration: none; color: var(--text); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+[data-nav-links] { flex: 1 1 auto; display: flex; align-items: center; gap: 26px; font-size: 15px; }
+[data-nav-links] a { color: var(--dim); text-decoration: none; }
+[data-nav-links] .nav-signin { margin-left: auto; }
+[data-nav-links] a.nav-demo { margin-left: 6px; } /* the design's 32px between Sign in and the button */
+[data-nav-links] a.nav-demo { background: var(--btnBg); color: var(--btnText); font-weight: 600; font-size: 14px; padding: 0 16px; min-height: 40px; border-radius: 8px; display: inline-flex; align-items: center; }
+[data-nav-toggle] { display: none; }
+@media (max-width: 760px) {
+  [data-nav-toggle] { margin-left: auto; width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--text); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; position: relative; z-index: 2; }
+  [data-nav-links] { position: fixed; left: 0; right: 0; top: 64px; bottom: 0; flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; background: var(--bg); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility .2s; }
+  nav.gh-open [data-nav-links] { opacity: 1; visibility: visible; pointer-events: auto; }
+  [data-nav-links] a { font-size: 22px; color: var(--text); padding: 8px 0; }
+  [data-nav-links] .nav-signin { margin-left: 0; }
+  [data-nav-links] a.nav-demo { margin-left: 0; margin-top: 16px; font-size: 16px; padding: 0 22px; min-height: 48px; border-radius: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { [data-nav-links] { transition: none; } }
+
+/* Product tabs */
+.gh-tab { min-height: 40px; padding: 0 18px; border-radius: 999px; cursor: pointer; font: 600 14px 'Inter Tight', system-ui, sans-serif; background: transparent; color: var(--dim); border: 1px solid var(--lineStrong); }
+.gh-tab[aria-selected="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.toast { position: absolute; right: 20px; top: 64px; max-width: 300px; background: var(--toastBg); color: var(--text); border: 1px solid var(--lineStrong); border-radius: 10px; box-shadow: var(--toastShadow); padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; }
+/* Below 1024px the overlay would hide the record it sits on, so it flows inside the window instead. */
+@media (max-width: 1023px) { .toast { position: static; max-width: none; margin: 0 16px 16px; } }
+
+/* Integrations: the tile field (wide) and the chips (phone) */
+.only-compact { display: none; }
+.field { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(5, 112px); gap: 16px; }
+.gh-tile { height: 100%; background: var(--surface); border: 1px solid var(--lineStrong); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 8px; text-align: center; }
+.gh-tile img { width: 40px; height: 40px; object-fit: contain; }
+.gh-tile-name { font-size: 13px; font-weight: 600; line-height: 1.2; }
+.gh-tile-note { font-size: 11px; font-weight: 500; color: var(--dim); }
+.gh-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--lineStrong); border-radius: 10px; padding: 8px 12px; font-size: 14px; font-weight: 600; }
+.gh-chip img { width: 22px; height: 22px; object-fit: contain; }
+@media (max-width: 760px) { .only-wide { display: none; } .only-compact { display: block; } }
+
+/* Footer — dark values are written inline for test/footer-contrast; .ft maps them to --dim in light. */
+.site-foot a { text-decoration: none; }
+</style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<style>
-html, body { margin:0; padding:0; background:#071019; color:#E9E4D8; font-family:'Inter Tight',ui-sans-serif,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
-a { color:#E9E4D8; text-decoration:none; transition:color .3s; }
-a:hover { color:#2FA4A0; }
-::selection { background:rgba(47,164,160,.3); }
-@keyframes gh-breathe { 0%,100% { opacity:.5; } 50% { opacity:1; } }
-@media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
 
-/* ── Narrow-viewport reachability (reseller feedback) ──────────────────────
-   Nothing here changes the desktop layout: every rule sits inside a
-   max-width query. Three real causes were measured, not guessed:
-     1. the nav's link row is a flex line that neither shrank nor scrolled,
-        so Academy / Resources / Company / Let's talk were clipped off the
-        right edge with no way to reach them;
-     2. sections carry a 56px desktop gutter — 112px of a 390px phone;
-     3. multi-column grids kept their desktop column counts on phones.
-   Layout is fixed first; the nav keeps deliberate, visible horizontal
-   scrolling because seven items will not fit a phone at a legible size. */
-/* Mobile navigation + nav surface (#370): the toggle exists only at
-   phone widths; the nav's own surface lives on the element so link text
-   can never paint through page content at any width. */
-[data-nav-toggle] { display:none; }
-/* The surface lives on a pseudo-element, NOT the nav itself: backdrop-filter
-   on the nav would make the nav the containing block for the fixed-position
-   mobile panel, pinning the panel to the bar instead of the viewport. */
-nav[data-nav]::before {
-  content:''; position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(180deg, rgba(7,16,25,.92), rgba(7,16,25,.78));
-  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-}
-
-@media (max-width: 720px) {
-  /* 1. Deliberate mobile navigation (#370). The bar keeps the wordmark
-        and a Menu toggle; the links become a full-screen panel in the
-        site's own idiom — no squeezed or sideways-scrolling desktop row. */
-  nav { padding:20px 20px !important; }
-  nav > a[href="/"] { position:relative; z-index:2; }
-  [data-nav-toggle] {
-    position:relative; z-index:2;
-    display:inline-flex; align-items:center;
-    background:none; border:1px solid rgba(233,228,216,.3); border-radius:999px;
-    color:#E9E4D8; font-family:'JetBrains Mono',monospace; font-size:11px;
-    letter-spacing:.18em; text-transform:uppercase; padding:11px 18px; cursor:pointer;
-  }
-  [data-nav-links] {
-    position:fixed; top:0; left:0; right:0; bottom:0; z-index:1;
-    flex-direction:column; align-items:flex-start; justify-content:center;
-    gap:4px; padding:96px 28px 48px; box-sizing:border-box;
-    background:rgba(7,16,25,.98);
-    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    opacity:0; visibility:hidden; pointer-events:none;
-    transition:opacity .25s ease, visibility .25s;
-  }
-  nav.gh-open [data-nav-links] { opacity:1; visibility:visible; pointer-events:auto; }
-  [data-nav-links] > a { font-size:24px !important; line-height:1.3; color:#E9E4D8 !important; padding:10px 0; }
-  [data-nav-links] > a[href="/lets-talk"] { margin-top:22px; font-size:15px !important; color:#071019 !important; padding:14px 28px !important; }
-
-  /* Sticky side layers (#370): in the collapsed single column their
-     sticky range is the whole grid, so they ride over every following
-     chapter. Unstuck, they read in normal flow above the content. */
-  [style*="position:sticky"][style*="top:140px"],
-  [style*="position: sticky"][style*="top: 140px"] { position:static !important; }
-
-  /* 2. Reclaim the desktop gutter. border-box matters here: several of these
-        are width:100% with side padding, so without it the padding is ADDED
-        to the full width and the block hangs off both edges. */
-  /* Anchored on ":56px" / " 56px" deliberately (#371): the runtime and the
-     reveal/parallax animations re-serialize style attributes every frame,
-     and a bare substring match flapped ON whenever an animated transform
-     value happened to contain "52px"/"56px" (translateY(-15.652px)...) —
-     20px of padding appeared for one frame and everything below bounced. A
-     padding list always has a colon or space before the value; an animated
-     number never does. */
-  [style*=":56px"], [style*=" 56px"], [style*=":52px"], [style*=" 52px"] {
-    box-sizing:border-box !important;
-    padding-left:20px !important;
-    padding-right:20px !important;
-  }
-
-  /* 3. Stack multi-column rows rather than clipping their right-hand columns. */
-  [style*="grid-template-columns"] { grid-template-columns:1fr !important; }
-  /* min-width:auto lets a child's intrinsic width (a form input's default
-     size, a long mono string) push the single column wider than the phone
-     itself — Linux fallback fonts ship wider intrinsics and showed it
-     first. The column shrinks; children stretch to it, never past it. */
-  [style*="grid-template-columns"] > * { min-width:0; }
-  input, textarea { min-width:0; }
-  [style*="text-align:right"] { text-align:left !important; }
-}
-
-@media (max-width: 360px) {
-  /* The display type clamps to a 64px FLOOR, which is wider than a 320px
-     phone once the gutter is gone, so the headline was clipped instead of
-     wrapping. Only the floor moves; the fluid middle and the desktop
-     ceiling are untouched. */
-  h1 { font-size:clamp(34px, 10vw, 64px) !important; }
-  h1, h2, p { overflow-wrap:anywhere; }
-}
-</style>
-</helmet>
-
-<div style="background:#071019; position:relative; overflow-x:clip;">
-
-<canvas data-field style="position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
-<div style="position:fixed; inset:0; z-index:1; pointer-events:none; background:radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(7,16,25,.55) 100%);"></div>
-
-<nav data-nav style="position:fixed; top:0; left:0; right:0; z-index:60; display:flex; align-items:center; justify-content:space-between; padding:28px 56px;">
-  <a href="/" style="display:inline-flex; align-items:flex-start; font-size:20px; font-weight:600; letter-spacing:-0.03em;">GuideHerd<span style="font-size:9.5px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:2px;">AI</span></a>
-  <button data-nav-toggle aria-expanded="false" aria-controls="gh-nav-links" aria-label="Menu">Menu</button>
-  <div data-nav-links id="gh-nav-links" style="display:flex; align-items:center; gap:26px; font-size:13.5px;">
-    <a href="/how-it-works" style="color:rgba(233,228,216,.6);">How it works</a>
-    <a href="/platform" style="color:rgba(233,228,216,.6);">Platform</a>
-    <a href="/solutions" style="color:rgba(233,228,216,.6);">Solutions</a>
-    <a href="/resources" style="color:rgba(233,228,216,.6);">Resources</a>
-    <a href="/company" style="color:rgba(233,228,216,.6);">Company</a>
-    <a data-magnetic href="/lets-talk" style="font-size:13.5px; font-weight:500; color:#071019; background:#E9E4D8; padding:11px 24px; border-radius:999px; display:inline-block; transition:background .3s;" style-hover="background:#2FA4A0; color:#071019;">Let's talk</a>
-  </div>
-</nav>
-<script>
-/* Mobile nav toggle (#370). Delegated from the document on purpose: the
-   page runtime re-mounts the body content after load, so listeners bound
-   to the original elements would be lost with the elements themselves. */
-(function () {
-  function nav() { return document.querySelector('nav[data-nav]'); }
-  function setOpen(n, open) {
-    n.classList.toggle('gh-open', open);
-    var b = n.querySelector('[data-nav-toggle]');
-    if (b) b.setAttribute('aria-expanded', String(open));
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-  }
-  document.addEventListener('click', function (e) {
-    var n = nav();
-    if (!n) return;
-    if (e.target.closest && e.target.closest('[data-nav-toggle]')) {
-      setOpen(n, !n.classList.contains('gh-open'));
-    } else if (e.target.closest && e.target.closest('[data-nav-links] a')) {
-      setOpen(n, false);
-    }
-  });
-  document.addEventListener('keydown', function (e) {
-    var n = nav();
-    if (n && e.key === 'Escape') setOpen(n, false);
-  });
-  window.addEventListener('resize', function () {
-    var n = nav();
-    if (n && window.innerWidth > 720) setOpen(n, false);
-  });
-})();
-</script>
-
-<div data-journey-rail style="position:fixed; right:40px; top:50%; transform:translateY(-50%); z-index:55; display:flex; flex-direction:column; gap:14px; opacity:0; transition:opacity .6s;">
-  <span data-rdot="0" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-  <span data-rdot="1" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-  <span data-rdot="2" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-  <span data-rdot="3" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-  <span data-rdot="4" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-  <span data-rdot="5" style="width:5px; height:5px; border-radius:50%; background:rgba(233,228,216,.22); transition:background .4s, transform .4s;"></span>
-</div>
-
-<!-- ══ ARRIVAL ══ -->
-<header data-screen-label="Arrival" style="position:relative; z-index:10; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 56px;">
-  <h1 style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(64px,9.5vw,160px); line-height:1.0; letter-spacing:-0.03em; max-width:1300px;">
-    <span data-stagger style="display:block;">Work happens</span>
-    <span data-stagger style="display:block;"><em style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:#2FA4A0;">between</em> conversations.</span>
-  </h1>
-  <p data-stagger style="margin:44px 0 0; max-width:460px; font-size:17px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.62); text-wrap:pretty;">An intelligence platform that turns conversations into completed work.</p>
-  <div data-stagger style="position:absolute; bottom:6vh; display:flex; flex-direction:column; align-items:center; gap:10px;">
-    <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:rgba(233,228,216,.58);">Watch it work</span>
-    <span style="width:1px; height:48px; background:linear-gradient(180deg, rgba(233,228,216,.5), transparent); animation:gh-breathe 2.4s ease-in-out infinite;"></span>
-  </div>
+<header class="site-head">
+  <nav data-nav aria-label="Primary">
+    <a href="/" class="wordmark">GuideHerd</a>
+    <button type="button" data-nav-toggle aria-expanded="false" aria-controls="gh-nav-links" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+    </button>
+    <div data-nav-links id="gh-nav-links">
+      <a href="#product">Product</a>
+      <a href="#legacy">Integrations</a>
+      <a href="#how">How it works</a>
+      <a href="/trust">Security</a>
+      <a href="https://app.guideherd.ai" class="nav-signin">Sign in</a>
+      <a href="/lets-talk" class="nav-demo">Book a demo</a>
+    </div>
+  </nav>
 </header>
 
-<!-- ══ THE JOURNEY ══ -->
-<section data-journey data-screen-label="Journey" style="position:relative; z-index:10; height:720vh;">
-  <div style="position:sticky; top:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;">
-    <div style="position:relative; width:100%; height:220px; display:flex; align-items:center; justify-content:center;">
-      <div data-word="0" style="position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">01</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Conversation</div></div>
-      <div data-word="1" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">02</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Understanding</div></div>
-      <div data-word="2" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">03</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Coordination</div></div>
-      <div data-word="3" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">04</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Execution</div></div>
-      <div data-word="4" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">05</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Completion</div></div>
-      <div data-word="5" style="opacity:0; position:absolute; text-align:center; will-change:transform,opacity,filter;"><div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.3em; color:rgba(233,228,216,.58);">06</div><div style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(52px,7.5vw,116px); letter-spacing:-0.025em; margin-top:14px;">Insight</div></div>
+<main>
+  <!-- Hero: centered, the only focal point -->
+  <section id="top" style="max-width: 900px; margin: 0 auto; padding: clamp(64px, 10vw, 128px) 24px 56px; text-align: center">
+    <h1 style="font-weight: 800; font-size: clamp(44px, 7vw, 84px); line-height: 1.02; letter-spacing: -0.035em; margin: 0 0 24px">From first call<br>to opened matter</h1>
+    <p style="font-size: clamp(18px, 2vw, 22px); color: var(--dim); max-width: 620px; margin: 0 auto 36px; line-height: 1.45">GuideHerd runs intake, scheduling and matter opening for litigation firms, inside the software you already use.</p>
+    <a href="/lets-talk" class="btn btn-lg">Book a demo
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </a>
+  </section>
+
+  <!-- Product showcase -->
+  <section id="product" aria-label="The product" style="max-width: 1120px; margin: 0 auto; padding: 0 24px clamp(72px, 9vw, 112px)">
+    <div role="tablist" aria-label="Product screens" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 24px">
+      <button type="button" role="tab" class="gh-tab" id="tab-intake" aria-controls="panel-intake" aria-selected="true" data-tab="intake">Client intake</button>
+      <button type="button" role="tab" class="gh-tab" id="tab-review" aria-controls="panel-review" aria-selected="false" tabindex="-1" data-tab="review">Intake review</button>
+      <button type="button" role="tab" class="gh-tab" id="tab-draft" aria-controls="panel-draft" aria-selected="false" tabindex="-1" data-tab="draft">Drafting</button>
     </div>
-    <div style="position:absolute; bottom:14vh; width:100%; display:flex; justify-content:center; padding:0 56px;">
-      <div style="position:relative; height:56px; max-width:520px; width:100%; text-align:center;">
-        <p data-sub="0" style="position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">A client calls. A person answers. Something now has to happen.</p>
-        <p data-sub="1" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The system gathers what was said — and what it means.</p>
-        <p data-sub="2" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">Calendars, records, and people fall into a single line of motion.</p>
-        <p data-sub="3" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">The work runs — booked, sent, confirmed — without a handoff.</p>
-        <p data-sub="4" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">It closes the loop. Nothing waits on whoever is at the desk.</p>
-        <p data-sub="5" style="opacity:0; position:absolute; inset:0; margin:0; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.58); will-change:opacity;">And every step is a record your organization can stand on.</p>
+
+    <div style="position: relative; background: var(--surface); border: 1px solid var(--lineStrong); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden">
+      <!-- window chrome -->
+      <div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--surface2)">
+        <span style="width: 11px; height: 11px; border-radius: 99px; background: #E5675A"></span>
+        <span style="width: 11px; height: 11px; border-radius: 99px; background: #E9B949"></span>
+        <span style="width: 11px; height: 11px; border-radius: 99px; background: #4FB466"></span>
+        <span style="flex: 1 1 auto; text-align: center; font-size: 12px; color: var(--dim)"><span id="screen-url">intake.guideherd.ai</span></span>
+      </div>
+
+      <!-- Screen 1: client intake (what the client sees) -->
+      <div role="tabpanel" id="panel-intake" aria-labelledby="tab-intake" data-panel="intake" tabindex="0">
+        <div style="display: flex; flex-wrap: wrap; min-height: 520px">
+          <div style="flex: 1 1 240px; padding: 32px; border-right: 1px solid var(--line); background: var(--surface2)">
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px">[Firm name]</div>
+            <div style="font-size: 13px; color: var(--dim); margin-bottom: 28px">New client intake</div>
+            <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; font-size: 14px">
+              <li style="display: flex; gap: 10px; align-items: center; color: var(--dim)"><span style="width: 22px; height: 22px; border-radius: 99px; background: var(--okBg); color: var(--accentText); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700" aria-hidden="true">✓</span>About you</li>
+              <li style="display: flex; gap: 10px; align-items: center; font-weight: 600"><span style="width: 22px; height: 22px; border-radius: 99px; background: var(--accent); color: var(--btnText); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700" aria-hidden="true">2</span>About your matter</li>
+              <li style="display: flex; gap: 10px; align-items: center; color: var(--dim)"><span style="width: 22px; height: 22px; border-radius: 99px; border: 1px solid var(--lineStrong); display: inline-flex; align-items: center; justify-content: center; font-size: 12px" aria-hidden="true">3</span>Documents</li>
+              <li style="display: flex; gap: 10px; align-items: center; color: var(--dim)"><span style="width: 22px; height: 22px; border-radius: 99px; border: 1px solid var(--lineStrong); display: inline-flex; align-items: center; justify-content: center; font-size: 12px" aria-hidden="true">4</span>Consent and acknowledgments</li>
+            </ol>
+          </div>
+          <div style="flex: 3 1 420px; min-width: 0; padding: 32px 40px; display: flex; flex-direction: column; gap: 18px">
+            <h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.01em">About your matter</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px">
+              <div style="flex: 1 1 180px"><div style="font-size: 13px; color: var(--dim); margin-bottom: 6px">Date of the incident</div><div style="border: 1px solid var(--lineStrong); border-radius: 8px; padding: 11px 14px; background: var(--inputBg)">09/14/2026</div></div>
+              <div style="flex: 1 1 180px"><div style="font-size: 13px; color: var(--dim); margin-bottom: 6px">Type of incident</div><div style="border: 1px solid var(--lineStrong); border-radius: 8px; padding: 11px 14px; background: var(--inputBg)">Motor vehicle collision</div></div>
+            </div>
+            <div><div style="font-size: 13px; color: var(--dim); margin-bottom: 6px">In your own words</div><div style="border: 1px solid var(--lineStrong); border-radius: 8px; padding: 12px 14px; background: var(--inputBg); min-height: 84px">I was stopped at a red light when the other driver hit the back of my car. I went to urgent care the next morning for neck pain.</div></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px">
+              <div style="flex: 1 1 180px"><div style="font-size: 13px; color: var(--dim); margin-bottom: 6px">Did police come to the scene?</div><div style="display: flex; gap: 8px"><span style="border: 1px solid var(--accent); background: var(--okBg); border-radius: 8px; padding: 9px 16px; font-weight: 600">Yes</span><span style="border: 1px solid var(--lineStrong); border-radius: 8px; padding: 9px 16px; color: var(--dim)">No</span></div></div>
+              <div style="flex: 1 1 180px"><div style="font-size: 13px; color: var(--dim); margin-bottom: 6px">Your insurance company</div><div style="border: 1px solid var(--lineStrong); border-radius: 8px; padding: 11px 14px; background: var(--inputBg)">[Carrier]</div></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line)">
+              <span style="font-size: 13px; color: var(--dim)">Step 2 of 4 · Next: Documents</span>
+              <span style="background: var(--btnBg); color: var(--btnText); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 8px">Continue</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen 2: intake review (what staff see) -->
+      <div role="tabpanel" id="panel-review" aria-labelledby="tab-review" data-panel="review" tabindex="0" hidden>
+        <div style="display: flex; flex-wrap: wrap; min-height: 520px">
+          <div style="flex: 1 1 260px; border-right: 1px solid var(--line); background: var(--surface2)">
+            <div style="padding: 18px 20px; font-size: 13px; font-weight: 600; color: var(--dim); border-bottom: 1px solid var(--line)">Intake queue · 4</div>
+            <div style="padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--okBg)"><div style="font-weight: 600">Dana Whitfield</div><div style="font-size: 13px; color: var(--dim)">Motor vehicle · submitted 11:08</div></div>
+            <div style="padding: 14px 20px; border-bottom: 1px solid var(--line)"><div style="font-weight: 600">Marcus Hale</div><div style="font-size: 13px; color: var(--dim)">Premises · submitted 9:51</div></div>
+            <div style="padding: 14px 20px; border-bottom: 1px solid var(--line)"><div style="font-weight: 600">Priya Natarajan</div><div style="font-size: 13px; color: var(--dim)">Employment · in progress</div></div>
+            <div style="padding: 14px 20px"><div style="font-weight: 600">Leon Ortega</div><div style="font-size: 13px; color: var(--dim)">Motor vehicle · in progress</div></div>
+          </div>
+          <div style="flex: 3 1 420px; min-width: 0; padding: 28px 36px; display: flex; flex-direction: column; gap: 18px">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px">
+              <div><h3 style="margin: 0; font-size: 24px; font-weight: 700">Dana Whitfield</h3><div style="color: var(--dim); font-size: 14px">Submitted by the client · 6 documents</div></div>
+              <span style="align-self: flex-start; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: var(--warmBg); color: var(--warmText)">Ready to review</span>
+            </div>
+            <div style="border: 1px solid var(--line); border-radius: 10px">
+              <div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line)"><span>Possible existing client in your firm's system</span><span style="color: var(--warmText); font-weight: 600; font-size: 13px">Verify</span></div>
+              <div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line)"><span>Matter type: Motor vehicle</span><span style="color: var(--accentText); font-weight: 600">✓</span></div>
+              <div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line)"><span>Assigned attorney: J. Martin</span><span style="color: var(--accentText); font-weight: 600">✓</span></div>
+              <div style="display: flex; justify-content: space-between; gap: 12px; padding: 13px 16px"><span>Opening checklist</span><span style="color: var(--dim); font-weight: 600; font-size: 13px">3 of 4 done</span></div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto">
+              <span style="background: var(--btnBg); color: var(--btnText); font-weight: 600; font-size: 14px; padding: 11px 18px; border-radius: 8px">Convert client and open matter</span>
+              <span style="border: 1px solid var(--lineStrong); font-weight: 500; font-size: 14px; padding: 11px 18px; border-radius: 8px">Request changes</span>
+            </div>
+          </div>
+        </div>
+        <!-- In-app confirmation, inside the window -->
+        <div class="toast">
+          <span style="width: 28px; height: 28px; border-radius: 7px; background: var(--okBg); color: var(--accentText); display: inline-flex; align-items: center; justify-content: center; flex: none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h6l2 2h10v10H3z"></path></svg>
+          </span>
+          <span style="font-size: 13px; line-height: 1.4"><strong>Filed to your office server</strong><br><span style="color: var(--dim)">Marcus Hale · folder confirmed by your office connector</span></span>
+        </div>
+      </div>
+
+      <!-- Screen 3: drafting -->
+      <div role="tabpanel" id="panel-draft" aria-labelledby="tab-draft" data-panel="draft" tabindex="0" hidden>
+        <div style="display: flex; flex-wrap: wrap; min-height: 520px">
+          <div style="flex: 1 1 220px; padding: 24px; border-right: 1px solid var(--line); background: var(--surface2); font-size: 14px">
+            <div style="font-size: 13px; font-weight: 600; color: var(--dim); margin-bottom: 12px">Your firm's templates</div>
+            <div style="padding: 10px 12px; border-radius: 8px; background: var(--okBg); font-weight: 600; margin-bottom: 4px">Demand letter (v4)</div>
+            <div style="padding: 10px 12px; color: var(--dim)">Engagement letter</div>
+            <div style="padding: 10px 12px; color: var(--dim)">Letter of representation</div>
+            <div style="padding: 10px 12px; color: var(--dim)">Records request</div>
+          </div>
+          <div style="flex: 3 1 360px; min-width: 0; padding: 28px; background: var(--paperBg); display: flex; justify-content: center">
+            <div style="background: var(--page); color: #1B2A36; width: 100%; max-width: 460px; padding: 36px 40px; border-radius: 4px; box-shadow: 0 6px 24px rgba(0,0,0,0.18); font-size: 13px; line-height: 1.7">
+              <div style="margin-bottom: 16px">November 7, 2026</div>
+              <div style="margin-bottom: 16px">Re: Our client <span style="background: #D6F0EE; padding: 0 3px">Dana Whitfield</span><br>Date of loss: <span style="background: #D6F0EE; padding: 0 3px">September 14, 2026</span></div>
+              <div style="margin-bottom: 12px">Dear Claims Representative:</div>
+              <div style="margin-bottom: 12px">This firm represents <span style="background: #D6F0EE; padding: 0 3px">Ms. Whitfield</span> for injuries sustained in a rear-end collision on <span style="background: #D6F0EE; padding: 0 3px">September 14, 2026</span>, while she was lawfully stopped at a signal.</div>
+              <div style="height: 8px; background: #E4E7EA; border-radius: 3px; margin-bottom: 8px"></div>
+              <div style="height: 8px; background: #E4E7EA; border-radius: 3px; width: 80%"></div>
+            </div>
+          </div>
+          <div style="flex: 1 1 220px; padding: 24px; border-left: 1px solid var(--line); font-size: 14px; display: flex; flex-direction: column; gap: 12px">
+            <div style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: var(--warmBg); color: var(--warmText); align-self: flex-start">Draft · attorney review required</div>
+            <div style="font-weight: 600">Checks</div>
+            <div style="display: flex; gap: 8px"><span style="color: var(--accentText)" aria-hidden="true">✓</span><span>9 facts filled, each showing where it came from</span></div>
+            <div style="display: flex; gap: 8px"><span style="color: var(--warmText)" aria-hidden="true">!</span><span>Treatment dates missing. Marked, not guessed</span></div>
+            <div style="font-size: 13px; color: var(--dim); margin-top: auto">GuideHerd never sends, signs or files a draft.</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+    <p style="text-align: center; font-size: 13px; color: var(--dim); margin: 20px 0 0"><span id="screen-caption" aria-live="polite">What your client sees: a guided intake on their phone, before the consultation. Sample data.</span></p>
+  </section>
 
-<!-- ══ THE SURFACE ══ -->
-<section data-screen-label="Surface" style="position:relative; z-index:10; padding:26vh 56px 0;">
-  <div data-reveal style="max-width:820px; margin:0 auto; text-align:center;">
-    <p style="margin:0; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(30px,3.6vw,52px); line-height:1.25; letter-spacing:-0.02em; text-wrap:balance;">This is what it looks like when the work is <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">already done.</em></p>
-  </div>
-  <div data-tilt style="position:relative; max-width:1200px; margin:90px auto 0; will-change:transform; transform-origin:50% 30%;">
-    <div style="position:absolute; inset:-80px -120px; background:radial-gradient(closest-side, rgba(47,164,160,.10), transparent 70%); filter:blur(50px); pointer-events:none;"></div>
-    <div style="position:relative; border-radius:16px; overflow:hidden; border:1px solid rgba(233,228,216,.13); box-shadow:0 70px 180px rgba(2,8,14,.85);">
-      <div style="position:relative; width:100%; padding-top:62.5%;"><img src="/images/ops-overview-dark.png" width="3200" height="2000" alt="The GuideHerd Operations Center Overview in dark mode: a KPI strip with pending, active, completed, and failed handoffs and overall health, system health detail, monthly usage, and scheduling readiness, populated with fictional sample data." style="position:absolute; top:0; left:0; width:100%; height:100%; display:block;"></div>
-    </div>
-  </div>
-  <p style="max-width:1200px; margin:22px auto 0; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(233,228,216,.58); display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;"><span>Shipped product · not a mockup</span><span>Sample data, fictional organization</span></p>
-</section>
+  <!-- Keep your software -->
+  <section id="legacy" aria-labelledby="legacy-title" style="background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)">
+    <div style="max-width: 1120px; margin: 0 auto; padding: clamp(72px, 9vw, 112px) 24px">
 
-<!-- ══ ANYWHERE ══ -->
-<section data-screen-label="Anywhere" style="position:relative; z-index:10; padding:34vh 56px 0; text-align:center;">
-  <div data-reveal>
-    <p style="margin:0; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; color:rgba(233,228,216,.58);">Wherever conversations create work</p>
-    <h2 style="margin:36px auto 0; max-width:1100px; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(44px,5.6vw,88px); line-height:1.06; letter-spacing:-0.025em;">First deployed in law.<br>Built for <em data-rotator style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0; display:inline-block; min-width:5.2em; text-align:left;">healthcare.</em></h2>
-    <p style="margin:36px auto 0; max-width:480px; font-size:16px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.6);">The platform doesn't know an industry. It knows intake, coordination, execution, and the record — the shape of work everywhere.</p>
-  </div>
-</section>
-
-<!-- ══ PRINCIPLES ══ -->
-<section data-screen-label="Principles" style="position:relative; z-index:10; padding:30vh 56px 0; max-width:1240px; margin:0 auto;">
-  <div data-reveal style="border-top:1px solid rgba(233,228,216,.14);">
-    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:38px 0; border-bottom:1px solid rgba(233,228,216,.1); transition:background .4s;">
-      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.58);">§ 01</span>
-      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.015em;">It never speaks for you.</span>
-      <span style="font-size:13.5px; color:rgba(233,228,216,.58); max-width:280px; text-align:right;">Your people decide. The platform prepares, performs, and records.</span>
-    </div>
-    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:38px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.58);">§ 02</span>
-      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.015em;">Every action has a name and a time.</span>
-      <span style="font-size:13.5px; color:rgba(233,228,216,.58); max-width:280px; text-align:right;">Versioned, audited, reversible — one change at a time.</span>
-    </div>
-    <div style="display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:baseline; padding:38px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-      <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:rgba(233,228,216,.58);">§ 03</span>
-      <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(24px,2.6vw,36px); letter-spacing:-0.015em;">A failure stops. It never invents.</span>
-      <span style="font-size:13.5px; color:rgba(233,228,216,.58); max-width:280px; text-align:right;">The workflow halts and tells you — instead of guessing an answer.</span>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══ WHERE IT CONNECTS ══ -->
-<section id="integrations" data-screen-label="Connections" style="position:relative; z-index:10; padding:30vh 56px 0; max-width:1240px; margin:0 auto;">
-  <div data-reveal>
-    <p style="margin:0 0 34px; font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.28em; text-transform:uppercase; color:rgba(233,228,216,.58);">Where it connects</p>
-    <p style="margin:0 0 40px; max-width:640px; font-size:15.5px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.65);">GuideHerd works inside the systems your organization already runs on. Every connection is labelled with where it actually stands — <a href="/platform" style="color:#2FA4A0; border-bottom:1px solid rgba(47,164,160,.4); padding-bottom:1px;">named product by product on the platform page</a>.</p>
-    <div style="border-top:1px solid rgba(233,228,216,.14);">
-      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Connected calendars</span>
-        <span style="font-size:13.5px; color:rgba(233,228,216,.58); text-align:right;">Booked on the calendar your people already keep</span>
+      <!-- Wide: the headline in the middle of a field of the firm's systems -->
+      <div class="only-wide">
+        <div class="field">
+          <div class="gh-tile" style="grid-column: 2; grid-row: 1"><img class="only-dark" src="/images/integrations/clio-dark.png" width="40" height="40" alt=""><img class="only-light" src="/images/integrations/clio-light.png" width="40" height="40" alt=""><span class="gh-tile-name">Clio</span></div>
+          <div class="gh-tile" style="grid-column: 4; grid-row: 1"><img class="only-dark" src="/images/integrations/filevine-dark.png" width="40" height="40" alt=""><img class="only-light" src="/images/integrations/filevine-light.png" width="40" height="40" alt=""><span class="gh-tile-name">Filevine<br><span class="gh-tile-note">coming soon</span></span></div>
+          <div class="gh-tile" style="grid-column: 7; grid-row: 1"><img src="/images/integrations/orion.png" width="40" height="40" alt=""><span class="gh-tile-name">Orion<br><span class="gh-tile-note">client lookup</span></span></div>
+          <div class="gh-tile" style="grid-column: 1; grid-row: 2"><img src="/images/integrations/outlook.svg" width="40" height="40" alt=""><span class="gh-tile-name">Outlook &amp; Exchange Online</span></div>
+          <div class="gh-tile" style="grid-column: 8; grid-row: 2"><img src="/images/integrations/word.svg" width="40" height="40" alt=""><span class="gh-tile-name">Word templates<br><span class="gh-tile-note">coming soon</span></span></div>
+          <div class="gh-tile" style="grid-column: 2; grid-row: 3"><img src="/images/integrations/microsoft.svg" width="40" height="40" alt=""><span class="gh-tile-name">Microsoft 365</span></div>
+          <div class="gh-tile" style="grid-column: 7; grid-row: 3"><img src="/images/integrations/gmail.svg" width="40" height="40" alt=""><span class="gh-tile-name">Gmail</span></div>
+          <div class="gh-tile" style="grid-column: 1; grid-row: 4"><img src="/images/integrations/google-calendar.svg" width="40" height="40" alt=""><span class="gh-tile-name">Google Calendar</span></div>
+          <div class="gh-tile" style="grid-column: 8; grid-row: 4"><img src="/images/integrations/google-drive.svg" width="40" height="40" alt=""><span class="gh-tile-name">Google Drive</span></div>
+          <div class="gh-tile" style="grid-column: 3; grid-row: 5"><img src="/images/integrations/google.svg" width="40" height="40" alt=""><span class="gh-tile-name">Google sign-in</span></div>
+          <div class="gh-tile" style="grid-column: 6; grid-row: 5"><img src="/images/integrations/windows.svg" width="40" height="40" alt=""><span class="gh-tile-name">Windows file server</span></div>
+          <div style="grid-column: 3 / 7; grid-row: 2 / 5; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 16px">
+            <h2 id="legacy-title" style="font-weight: 800; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px">Keep your software.<br>Add GuideHerd.</h2>
+            <p style="font-size: 18px; color: var(--dim); margin: 0 0 24px; max-width: 460px">It works inside the practice-management system, calendars, templates and file server your firm already runs.</p>
+            <a href="/lets-talk" class="btn" style="font-size: 15px; padding: 0 18px; min-height: 44px; border-radius: 10px">See it with your systems</a>
+          </div>
+        </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Cloud-connected communications</span>
-        <span style="font-size:13.5px; color:rgba(233,228,216,.58); text-align:right;">Sent from your own mailbox, not ours</span>
+
+      <!-- Phone: the headline, then the systems as wrapped chips -->
+      <div class="only-compact" style="text-align: center">
+        <p aria-hidden="true" style="font-weight: 800; font-size: 36px; line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px">Keep your software.<br>Add GuideHerd.</p>
+        <p style="font-size: 17px; color: var(--dim); margin: 0 0 28px">It works inside the practice-management system, calendars, templates and file server your firm already runs.</p>
+        <ul aria-label="Systems GuideHerd works with" style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px">
+          <li class="gh-chip"><img class="only-dark" src="/images/integrations/clio-dark.png" width="22" height="22" alt=""><img class="only-light" src="/images/integrations/clio-light.png" width="22" height="22" alt="">Clio</li>
+          <li class="gh-chip"><img class="only-dark" src="/images/integrations/filevine-dark.png" width="22" height="22" alt=""><img class="only-light" src="/images/integrations/filevine-light.png" width="22" height="22" alt="">Filevine · coming soon</li>
+          <li class="gh-chip"><img src="/images/integrations/orion.png" width="22" height="22" alt="">Orion · client lookup</li>
+          <li class="gh-chip"><img src="/images/integrations/outlook.svg" width="22" height="22" alt="">Outlook &amp; Exchange Online</li>
+          <li class="gh-chip"><img src="/images/integrations/word.svg" width="22" height="22" alt="">Word templates · coming soon</li>
+          <li class="gh-chip"><img src="/images/integrations/microsoft.svg" width="22" height="22" alt="">Microsoft 365</li>
+          <li class="gh-chip"><img src="/images/integrations/gmail.svg" width="22" height="22" alt="">Gmail</li>
+          <li class="gh-chip"><img src="/images/integrations/google-calendar.svg" width="22" height="22" alt="">Google Calendar</li>
+          <li class="gh-chip"><img src="/images/integrations/google-drive.svg" width="22" height="22" alt="">Google Drive</li>
+          <li class="gh-chip"><img src="/images/integrations/google.svg" width="22" height="22" alt="">Google sign-in</li>
+          <li class="gh-chip"><img src="/images/integrations/windows.svg" width="22" height="22" alt="">Windows file server</li>
+        </ul>
       </div>
-      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Business systems of record</span>
-        <span style="font-size:13.5px; color:rgba(233,228,216,.58); text-align:right;">The record lands where your organization keeps it</span>
-      </div>
-      <div style="display:grid; grid-template-columns:1fr auto; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid rgba(233,228,216,.1);">
-        <span style="font-family:'Fraunces',serif; font-weight:300; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.015em;">Enterprise identity</span>
-        <span style="font-size:13.5px; color:rgba(233,228,216,.58); text-align:right;">Your people sign in the way they already do</span>
+
+      <!-- Three promises, one card each -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 56px">
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 40px">
+          <span style="width: 40px; height: 40px; border-radius: 10px; background: var(--okBg); color: var(--accentText); display: inline-flex; align-items: center; justify-content: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v12H4zM4 7l3-3h10l3 3"></path></svg>
+          </span>
+          <div>
+            <h3 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 10px">No migration</h3>
+            <p style="margin: 0; color: var(--dim)">Clients, matters and documents stay in the systems they live in today.</p>
+          </div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 40px">
+          <span style="width: 40px; height: 40px; border-radius: 10px; background: var(--okBg); color: var(--accentText); display: inline-flex; align-items: center; justify-content: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg>
+          </span>
+          <div>
+            <h3 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 10px">No firewall changes</h3>
+            <p style="margin: 0; color: var(--dim)">The office connector only calls out. No VPN, no open ports.</p>
+          </div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 40px">
+          <span style="width: 40px; height: 40px; border-radius: 10px; background: var(--okBg); color: var(--accentText); display: inline-flex; align-items: center; justify-content: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 14l2 2 4-4"></path></svg>
+          </span>
+          <div>
+            <h3 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 10px">Nothing overwritten</h3>
+            <p style="margin: 0; color: var(--dim)">GuideHerd adds new files and records. It never overwrites or deletes the ones your firm already has.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══ FINALE ══ -->
-<section id="contact" data-screen-label="Finale" style="position:relative; z-index:10; padding:36vh 56px 16vh; text-align:center;">
-  <div data-reveal>
-    <h2 style="margin:0 auto; max-width:1000px; font-family:'Fraunces',serif; font-weight:300; font-size:clamp(56px,8vw,140px); line-height:1.0; letter-spacing:-0.03em;">See it <em style="font-family:'Instrument Serif',serif; font-style:italic; color:#2FA4A0;">run.</em></h2>
-    <p style="margin:36px auto 0; max-width:440px; font-size:16px; font-weight:300; line-height:1.7; color:rgba(233,228,216,.6);">Half an hour, walked through end to end on real systems. Then an honest conversation about fit.</p>
-    <!--email_off--><a data-magnetic href="mailto:hello@guideherd.ai" style="display:inline-block; margin-top:44px; font-size:15.5px; font-weight:500; color:#071019; background:#2FA4A0; padding:17px 36px; border-radius:999px; transition:box-shadow .35s;" style-hover="box-shadow:0 18px 70px rgba(47,164,160,.45); color:#071019;">Contact us for a demo</a><!--email_on-->
-    <p style="margin-top:22px; font-size:13px; color:rgba(233,228,216,.58);">A person replies within two business days.</p>
-    <p style="margin-top:10px; font-size:13px; color:rgba(233,228,216,.58);">Or call GuideHerd at <a href="tel:+19382009202" aria-label="Call GuideHerd at 938.200.9202" style="color:rgba(233,228,216,.8); border-bottom:1px solid rgba(47,164,160,.5); padding-bottom:1px;">938.200.9202</a>.</p>
-  </div>
-</section>
+  <!-- Lex -->
+  <section id="lex" style="max-width: 1120px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) 24px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+    <div style="flex: 1 1 420px; min-width: 0">
+      <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px">
+        <span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 8px; background: #5B4FD6; color: #FFFFFF; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">L</span>
+        <span style="font-weight: 700; font-size: 17px">Lex</span>
+        <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--lineStrong); color: var(--dim)">Coming soon</span>
+      </div>
+      <h2 style="font-weight: 800; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 18px">Ask about any file, get an answer with its source</h2>
+      <p style="font-size: 19px; color: var(--dim); margin: 0 0 28px">Lex is the assistant built into GuideHerd. Ask what's still missing before a matter can open, or when the engagement letter went out. It answers from your firm's own records and shows where each answer came from.</p>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px">
+        <li style="display: flex; gap: 12px"><span style="color: var(--accentText); font-weight: 700" aria-hidden="true">✓</span><span><strong>Cites the record.</strong> <span style="color: var(--dim)">Answers from your records link to the intake, checklist or document they used.</span></span></li>
+        <li style="display: flex; gap: 12px"><span style="color: var(--accentText); font-weight: 700" aria-hidden="true">✓</span><span><strong>Reads only.</strong> <span style="color: var(--dim)">Lex can't change anything. Your staff make every change.</span></span></li>
+        <li style="display: flex; gap: 12px"><span style="color: var(--accentText); font-weight: 700" aria-hidden="true">✓</span><span><strong>Says when it doesn't know.</strong> <span style="color: var(--dim)">No source, no confident answer. A thumbs-down goes to a person for review.</span></span></li>
+      </ul>
+    </div>
+    <div style="flex: 1 1 380px; min-width: 0; display: flex; justify-content: center">
+      <figure style="margin: 0; width: 100%; max-width: 420px">
+        <img class="only-dark" src="/images/lex/lex-panel-dark.png" width="420" height="631" alt="The Lex panel answering what is still missing before a matter can open, citing the intake checklist" style="display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--lineStrong); box-shadow: var(--shadow)">
+        <img class="only-light" src="/images/lex/lex-panel-light.png" width="420" height="631" alt="The Lex panel answering what is still missing before a matter can open, citing the intake checklist" style="width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--lineStrong); box-shadow: var(--shadow)">
+        <figcaption style="text-align: center; font-size: 13px; color: var(--dim); margin-top: 16px">The Lex panel in GuideHerd, not yet available to firms. Synthetic demo data.</figcaption>
+      </figure>
+    </div>
+  </section>
 
-<footer style="position:relative; z-index:10; border-top:1px solid rgba(233,228,216,.1); padding:38px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-  <span style="display:inline-flex; align-items:flex-start; font-size:15px; font-weight:600; letter-spacing:-0.02em;">GuideHerd<span style="font-size:8px; font-weight:600; letter-spacing:.08em; color:#2FA4A0; margin-left:2px; margin-top:1px;">AI</span></span>
-  <span style="font-size:13px; color:rgba(233,228,216,.58);">The work between conversations</span>
-  <span style="font-size:13px; display:inline-flex; gap:18px;"><a href="/trust" style="color:rgba(233,228,216,.6);">Trust</a><a href="/privacy" style="color:rgba(233,228,216,.6);">Privacy</a><a href="/terms" style="color:rgba(233,228,216,.6);">Terms</a></span>
-  <span style="font-size:13px; color:rgba(233,228,216,.58);">© 2026 GuideHerd LLC</span>
-  <nav class="footer-social" aria-label="GuideHerd social accounts">
-    <a href="https://www.instagram.com/guideherd/" aria-label="GuideHerd on Instagram" title="GuideHerd on Instagram">
+  <!-- How a new case comes in -->
+  <section id="how" style="max-width: 1120px; margin: 0 auto; padding: clamp(72px, 9vw, 120px) 24px; border-top: 1px solid var(--line)">
+    <div style="text-align: center; max-width: 720px; margin: 0 auto 56px">
+      <h2 style="font-weight: 800; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 16px">How a new case comes in</h2>
+      <p style="font-size: 19px; color: var(--dim); margin: 0">From the first ring to an opened matter, with a person in charge at every step.</p>
+    </div>
+    <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+      <li style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: var(--okBg); color: var(--accentText); font-weight: 800; display: inline-flex; align-items: center; justify-content: center">1</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--lineStrong); color: var(--dim)">Reception Guide</span>
+        </div>
+        <h3 style="font-size: 21px; font-weight: 700; margin: 0">The call is answered</h3>
+        <p style="margin: 0; color: var(--dim)" data-copy="reception">Your receptionist answers. GuideHerd's reception console helps them note who's calling and why, start the client's intake while they're on the line, and pass the call to scheduling with those details filled in.</p>
+      </li>
+      <li style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: var(--okBg); color: var(--accentText); font-weight: 800; display: inline-flex; align-items: center; justify-content: center">2</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--lineStrong); color: var(--dim)">Scheduling Guide</span>
+        </div>
+        <h3 style="font-size: 21px; font-weight: 700; margin: 0">Booked before they hang up</h3>
+        <p style="margin: 0; color: var(--dim)">Scheduling picks up with the caller's details already filled in. It offers real times from the right attorney's calendar and books the consultation, so the caller leaves with a confirmed appointment.</p>
+      </li>
+      <li style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: var(--okBg); color: var(--accentText); font-weight: 800; display: inline-flex; align-items: center; justify-content: center">3</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--lineStrong); color: var(--dim)">Intake Guide</span>
+        </div>
+        <h3 style="font-size: 21px; font-weight: 700; margin: 0">The client does the intake</h3>
+        <p style="margin: 0; color: var(--dim)">Before the meeting, the client fills in the intake on their phone and uploads files and photos.</p>
+      </li>
+      <li style="background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: var(--okBg); color: var(--accentText); font-weight: 800; display: inline-flex; align-items: center; justify-content: center">4</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--okBg); color: var(--accentText)">Your staff approve</span>
+        </div>
+        <h3 style="font-size: 21px; font-weight: 700; margin: 0">The matter opens</h3>
+        <p style="margin: 0; color: var(--dim)">Staff review and approve. The client and matter are set up in your practice-management system, or staged for your staff to enter, and the documents are filed to your file server or Google Drive.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Closing call to action -->
+  <section id="demo" style="background: var(--band); border-top: 1px solid var(--line)">
+    <div style="max-width: 760px; margin: 0 auto; padding: clamp(80px, 10vw, 128px) 24px; text-align: center">
+      <h2 style="font-weight: 800; font-size: clamp(36px, 5vw, 60px); line-height: 1.04; letter-spacing: -0.03em; margin: 0 0 20px">See it on your own systems</h2>
+      <a href="/lets-talk" class="btn btn-lg">Book a demo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
+      <p style="font-size: 14px; color: var(--dim); margin: 20px 0 0">Or call <a href="tel:+19382009202" aria-label="Call GuideHerd at 938.200.9202" style="color: var(--text)">938.200.9202</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot" style="border-top: 1px solid var(--line)">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 14px">
+    <span style="font-weight: 700; color: var(--text); font-size: 17px">GuideHerd</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px">
+      <a href="/trust" class="ft" style="color: rgba(233,228,216,.74)">Trust</a>
+      <a href="/privacy" class="ft" style="color: rgba(233,228,216,.74)">Privacy</a>
+      <a href="/terms" class="ft" style="color: rgba(233,228,216,.74)">Terms</a>
+      <a href="/status/" class="ft" style="color: rgba(233,228,216,.74)">Status</a>
+    </div>
+    <span class="ft" style="color: rgba(233,228,216,.74)">© 2026 GuideHerd LLC · Not a law firm; no legal advice.</span>
+    <nav class="footer-social" aria-label="GuideHerd social accounts">
+      <a href="https://www.instagram.com/guideherd/" aria-label="GuideHerd on Instagram" title="GuideHerd on Instagram">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false">
   <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
 </svg>
@@ -375,254 +496,61 @@ nav[data-nav]::before {
   <path d="M6.321 6.016c-.27-.18-1.166-.802-1.166-.802.756-1.081 1.753-1.502 3.132-1.502.975 0 1.803.327 2.394.948s.928 1.509 1.005 2.644q.492.207.905.484c1.109.745 1.719 1.86 1.719 3.137 0 2.716-2.226 5.075-6.256 5.075C4.594 16 1 13.987 1 7.994 1 2.034 4.482 0 8.044 0 9.69 0 13.55.243 15 5.036l-1.36.353C12.516 1.974 10.163 1.43 8.006 1.43c-3.565 0-5.582 2.171-5.582 6.79 0 4.143 2.254 6.343 5.63 6.343 2.777 0 4.847-1.443 4.847-3.556 0-1.438-1.208-2.127-1.27-2.127-.236 1.234-.868 3.31-3.644 3.31-1.618 0-3.013-1.118-3.013-2.582 0-2.09 1.984-2.847 3.55-2.847.586 0 1.294.04 1.663.114 0-.637-.54-1.728-1.9-1.728-1.25 0-1.566.405-1.967.868ZM8.716 8.19c-2.04 0-2.304.87-2.304 1.416 0 .878 1.043 1.168 1.6 1.168 1.02 0 2.067-.282 2.232-2.423a6.2 6.2 0 0 0-1.528-.161"/>
 </svg>
     </a>
-  </nav>
+    </nav>
+  </div>
 </footer>
 
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Experience&quot;}, &quot;density&quot;: {&quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.4, &quot;max&quot;: 1.6, &quot;step&quot;: 0.2, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;Experience&quot;}}">
-class Component extends DCLogic {
-  componentDidMount() {
-    this.cleanup = [];
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const motion = (this.props.motion ?? true) && !reduced;
-    const $ = (s) => Array.from(document.querySelectorAll(s));
-    const density = this.props.density ?? 1;
-
-    // ---- hero load-in ----
-    $('[data-stagger]').forEach((el, i) => {
-      if (!motion) return;
-      el.style.opacity = '0'; el.style.transform = 'translateY(36px)'; el.style.filter = 'blur(8px)';
-      setTimeout(() => {
-        el.style.transition = 'opacity 1.3s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1), filter 1.3s ease';
-        el.style.opacity = '1'; el.style.transform = 'translateY(0)'; el.style.filter = 'blur(0)';
-      }, 400 + i * 160);
-    });
-
-    // ---- scroll reveals ----
-    if (motion) {
-      const io = new IntersectionObserver((es) => es.forEach((e) => {
-        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; io.unobserve(e.target); }
-      }), { threshold: 0.12 });
-      $('[data-reveal]').forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-        el.style.opacity = '0'; el.style.transform = 'translateY(50px)';
-        el.style.transition = 'opacity 1.3s cubic-bezier(.2,.7,.2,1), transform 1.3s cubic-bezier(.2,.7,.2,1)';
-        io.observe(el);
-      });
-      this.cleanup.push(() => io.disconnect());
-    }
-
-    // ---- magnetic ----
-    $('[data-magnetic]').forEach((el) => {
-      const move = (e) => { const r = el.getBoundingClientRect(); el.style.transform = 'translate(' + (e.clientX - r.left - r.width / 2) * 0.18 + 'px,' + (e.clientY - r.top - r.height / 2) * 0.3 + 'px)'; };
-      const leave = () => { el.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; el.style.transform = 'translate(0,0)'; setTimeout(() => { el.style.transition = ''; }, 500); };
-      el.addEventListener('mousemove', move); el.addEventListener('mouseleave', leave);
-      this.cleanup.push(() => { el.removeEventListener('mousemove', move); el.removeEventListener('mouseleave', leave); });
-    });
-
-    // ---- industry rotator ----
-    const rot = document.querySelector('[data-rotator]');
-    if (rot) {
-      const words = ['healthcare.', 'construction.', 'finance.', 'logistics.', 'government.', 'education.', 'manufacturing.', 'retail.'];
-      let wi = 0;
-      rot.style.transition = 'opacity .5s ease, filter .5s ease';
-      const tick = setInterval(() => {
-        rot.style.opacity = '0'; rot.style.filter = 'blur(6px)';
-        setTimeout(() => { wi = (wi + 1) % words.length; rot.textContent = words[wi]; rot.style.opacity = '1'; rot.style.filter = 'blur(0)'; }, 500);
-      }, 2600);
-      this.cleanup.push(() => clearInterval(tick));
-    }
-
-    // ---- particle field ----
-    const cv = document.querySelector('[data-field]');
-    const ctx = cv.getContext('2d');
-    let W, H, dpr;
-    const N = Math.round(150 * density);
-    const P = [];
-    const rand = (a, b) => a + Math.random() * (b - a);
-    // per-stage target layouts (recomputed on resize)
-    let layouts = [];
-    const computeLayouts = () => {
-      layouts = [];
-      const cx = W / 2, cy = H / 2;
-      const L0 = [], L1 = [], L2 = [], L4 = [], L5 = [];
-      const clusters = [];
-      for (let c = 0; c < 5; c++) clusters.push([cx + rand(-W * 0.3, W * 0.3), cy + rand(-H * 0.28, H * 0.28)]);
-      const cols = Math.ceil(Math.sqrt(N * (W / H)));
-      const rows = Math.ceil(N / cols);
-      const gw = Math.min(W * 0.7, 900), gh = Math.min(H * 0.55, 520);
-      for (let i = 0; i < N; i++) {
-        L0.push([rand(W * 0.05, W * 0.95), rand(H * 0.08, H * 0.95)]);
-        const cl = clusters[i % 5];
-        const a = rand(0, Math.PI * 2), rr = rand(10, Math.min(W, H) * 0.09);
-        L1.push([cl[0] + Math.cos(a) * rr, cl[1] + Math.sin(a) * rr]);
-        const lane = i % 5;
-        const t = (Math.floor(i / 5) / Math.ceil(N / 5));
-        const lx = W * 0.06 + t * W * 0.88;
-        L2.push([lx, cy + (lane - 2) * H * 0.11 + Math.sin(t * Math.PI * 2 + lane) * H * 0.03]);
-        const ra = (i / N) * Math.PI * 2 - Math.PI / 2;
-        const R = Math.min(W, H) * 0.3;
-        L4.push([cx + Math.cos(ra) * R, cy + Math.sin(ra) * R]);
-        const gc = i % cols, gr = Math.floor(i / cols);
-        L5.push([cx - gw / 2 + (cols > 1 ? gc / (cols - 1) : 0.5) * gw, cy - gh / 2 + (rows > 1 ? gr / (rows - 1) : 0.5) * gh]);
-      }
-      layouts = [L0, L1, L2, L2, L4, L5];
-    };
-    const resize = () => {
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      W = window.innerWidth; H = window.innerHeight;
-      cv.width = W * dpr; cv.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      computeLayouts();
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    this.cleanup.push(() => window.removeEventListener('resize', resize));
-    for (let i = 0; i < N; i++) P.push({ x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, ph: rand(0, Math.PI * 2), warm: i % 11 === 0 });
-
-    const mouse = { x: -9999, y: -9999 };
-    const onMouse = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
-    window.addEventListener('mousemove', onMouse);
-    this.cleanup.push(() => window.removeEventListener('mousemove', onMouse));
-
-    // stage envelopes: link alpha, pulse energy, dot brightness, jitter
-    const LINK = [0.05, 0.22, 0.6, 0.85, 0.5, 0.3];
-    const PULSE = [0, 0, 0.25, 1, 0.35, 0];
-    const JITTER = [1, 0.55, 0.3, 0.35, 0.15, 0.08];
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const ease = (t) => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
-
-    const journey = document.querySelector('[data-journey]');
-    const words = $('[data-word]');
-    const subs = $('[data-sub]');
-    const rdots = $('[data-rdot]');
-    const rail = document.querySelector('[data-journey-rail]');
-    const tilt = document.querySelector('[data-tilt]');
-    let raf, time = 0;
-
-    const loop = () => {
-      time += 0.016;
-      // journey progress
-      let fp = 0, inJourney = false;
-      if (journey) {
-        const r = journey.getBoundingClientRect();
-        const total = r.height - window.innerHeight;
-        const p = Math.min(1, Math.max(0, -r.top / total));
-        inJourney = r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
-        fp = p * 5; // 0..5 across six stages
-      }
-      const s0 = Math.min(4, Math.floor(fp)), s1 = Math.min(5, s0 + 1);
-      const st = ease(fp - s0);
-      const linkA = lerp(LINK[s0], LINK[s1], st);
-      const pulseE = lerp(PULSE[s0], PULSE[s1], st);
-      const jit = lerp(JITTER[s0], JITTER[s1], st);
-
-      // words overlay
-      if (motion) {
-        words.forEach((w, i) => {
-          const d = fp - i;
-          // plateau: hold each stage in full focus for ~60% of its scroll span
-          const dd = Math.sign(d) * Math.max(0, Math.abs(d) - 0.3) / 0.7;
-          const vis = inJourney || (i === 0 && fp < 0.01) ? Math.max(0, 1 - Math.abs(dd) * 1.25) : 0;
-          w.style.opacity = String(vis);
-          w.style.transform = 'translateY(' + (-dd * 70) + 'px)';
-          w.style.filter = 'blur(' + Math.min(14, Math.abs(dd) * 10) + 'px)';
-          if (subs[i]) subs[i].style.opacity = String(inJourney ? Math.max(0, 1 - Math.abs(dd) * 1.6) : 0);
-          if (rdots[i]) { rdots[i].style.background = Math.abs(d) < 0.5 ? '#2FA4A0' : 'rgba(233,228,216,.22)'; rdots[i].style.transform = Math.abs(d) < 0.5 ? 'scale(1.6)' : 'scale(1)'; }
-        });
-        if (rail) rail.style.opacity = inJourney ? '1' : '0';
-        if (tilt) {
-          const r = tilt.getBoundingClientRect();
-          const p = Math.min(1, Math.max(0, 1 - (r.top - window.innerHeight * 0.1) / (window.innerHeight * 0.8)));
-          tilt.style.transform = 'perspective(1500px) rotateX(' + (18 * (1 - p)) + 'deg) scale(' + (0.92 + 0.08 * p) + ')';
-          tilt.style.opacity = String(0.3 + 0.7 * p);
-        }
-      }
-
-      // field physics
-      ctx.clearRect(0, 0, W, H);
-      const dim = inJourney ? 1 : 0.45;
-      for (let i = 0; i < N; i++) {
-        const p = P[i];
-        const A = layouts[s0][i], B = layouts[s1][i];
-        const tx = lerp(A[0], B[0], st), ty = lerp(A[1], B[1], st);
-        const nx = tx + Math.sin(time * 0.7 + p.ph) * 26 * jit + Math.cos(time * 0.4 + p.ph * 2) * 18 * jit;
-        const ny = ty + Math.cos(time * 0.6 + p.ph) * 22 * jit + Math.sin(time * 0.5 + p.ph * 3) * 14 * jit;
-        p.vx = (p.vx + (nx - p.x) * 0.02) * 0.9;
-        p.vy = (p.vy + (ny - p.y) * 0.02) * 0.9;
-        // gentle mouse repulsion
-        const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
-        const md2 = mdx * mdx + mdy * mdy;
-        if (md2 < 16900) { const f = (1 - Math.sqrt(md2) / 130) * 0.6; p.vx += mdx * 0.01 * f; p.vy += mdy * 0.01 * f; }
-        p.x += p.vx; p.y += p.vy;
-      }
-      // links + pulses
-      if (linkA > 0.06) {
-        ctx.lineWidth = 1;
-        for (let i = 0; i < N; i++) {
-          for (let j = i + 1; j < N; j++) {
-            const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < 8100) {
-              const d = Math.sqrt(d2);
-              const a = (1 - d / 90) * linkA * 0.5 * dim;
-              ctx.strokeStyle = 'rgba(47,164,160,' + a.toFixed(3) + ')';
-              ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke();
-              if (pulseE > 0.05 && (i + j) % 7 === 0) {
-                const pt = (time * 0.7 + (i * 13 + j) * 0.618) % 1;
-                const px = lerp(P[i].x, P[j].x, pt), py = lerp(P[i].y, P[j].y, pt);
-                ctx.fillStyle = 'rgba(233,228,216,' + (pulseE * 0.9 * dim).toFixed(3) + ')';
-                ctx.beginPath(); ctx.arc(px, py, 1.6, 0, Math.PI * 2); ctx.fill();
-              }
-            }
-          }
-        }
-      }
-      // dots
-      for (let i = 0; i < N; i++) {
-        const p = P[i];
-        const tw = 0.55 + Math.sin(time * 1.4 + p.ph * 4) * 0.25;
-        if (p.warm) { ctx.fillStyle = 'rgba(200,169,122,' + (tw * 0.9 * dim).toFixed(3) + ')'; }
-        else { ctx.fillStyle = 'rgba(47,164,160,' + (tw * 0.8 * dim).toFixed(3) + ')'; }
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.warm ? 2.2 : 1.7, 0, Math.PI * 2); ctx.fill();
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    if (motion) { raf = requestAnimationFrame(loop); this.cleanup.push(() => cancelAnimationFrame(raf)); }
-    if (!motion) {
-      // Reduced motion (#370): the journey still narrates stage by stage —
-      // scroll position selects exactly one word and one sub-line, with no
-      // transforms and no animation. Without this branch nothing ever set
-      // the layer opacities, so every absolutely-positioned stage rendered
-      // at once, stacked, for reduced-motion (and failed-script) visitors.
-      const setStage = () => {
-        let fp = 0, inJourney = false;
-        if (journey) {
-          const r = journey.getBoundingClientRect();
-          const total = r.height - window.innerHeight;
-          const p = Math.min(1, Math.max(0, -r.top / total));
-          inJourney = r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
-          fp = p * 5;
-        }
-        const cur = Math.min(5, Math.max(0, Math.round(fp)));
-        words.forEach((w, i) => { w.style.opacity = i === cur ? '1' : '0'; });
-        subs.forEach((s, i) => { s.style.opacity = i === cur ? '1' : '0'; });
-        rdots.forEach((d, i) => { d.style.background = i === cur ? '#2FA4A0' : 'rgba(233,228,216,.22)'; });
-        if (rail) rail.style.opacity = inJourney ? '1' : '0';
-      };
-      setStage();
-      window.addEventListener('scroll', setStage, { passive: true });
-      this.cleanup.push(() => window.removeEventListener('scroll', setStage));
-    }
-    else {
-      // static composed frame for reduced motion
-      words.forEach((w, i) => { w.style.opacity = i === 2 ? '1' : '0'; });
-    }
+<script>
+(function () {
+  // Mobile nav: the site's shared contract — toggle, Escape, and link clicks close it.
+  var nav = document.querySelector('nav[data-nav]');
+  var toggle = nav.querySelector('[data-nav-toggle]');
+  function setOpen(open) {
+    nav.classList.toggle('gh-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
   }
-  componentWillUnmount() { (this.cleanup || []).forEach((fn) => fn()); }
-  renderVals() { return {}; }
-}
+  toggle.addEventListener('click', function () { setOpen(!nav.classList.contains('gh-open')); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('gh-open')) { setOpen(false); toggle.focus(); }
+  });
+  nav.querySelectorAll('[data-nav-links] a').forEach(function (a) {
+    a.addEventListener('click', function () { setOpen(false); });
+  });
+
+  // Product tabs: an ARIA tablist — arrow keys, Home and End.
+  var urls = { intake: 'intake.guideherd.ai', review: 'app.guideherd.ai \u00b7 Intake review', draft: 'app.guideherd.ai \u00b7 Drafting' };
+  var caps = {
+    intake: 'What your client sees: a guided intake on their phone, before the consultation. Sample data.',
+    review: 'What your staff see: every intake checked and ready to open as a matter. Sample data.',
+    draft: 'Drafting, coming soon: a first draft from your own template, marked for attorney review. Sample data.'
+  };
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.gh-tab'));
+  var url = document.getElementById('screen-url');
+  var cap = document.getElementById('screen-caption');
+  function select(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById('panel-' + t.dataset.tab).hidden = !on;
+    });
+    url.textContent = urls[tab.dataset.tab];
+    cap.textContent = caps[tab.dataset.tab];
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t, false); });
+    t.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      else if (e.key === 'Home') next = tabs[0];
+      else if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); select(next, true); }
+    });
+  });
+})();
 </script>
 </body>
 </html>
