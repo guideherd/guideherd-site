@@ -39,7 +39,8 @@ test('every mailto anchor is wrapped in email_off guards on every shipped page',
 // returns to the page is still bound by the guard test above.
 test('the homepage contact CTA reaches the contact page', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  const ctas = [...html.matchAll(/<a href="([^"]+)"[^>]*>\s*Book a demo/g)].map((m) => m[1]);
+  const ctas = [...html.matchAll(/<a\b([^>]*)>\s*Book a demo/g)]
+    .map((m) => (m[1].match(/\bhref="([^"]*)"/) || [])[1]);
   assert.ok(ctas.length >= 3, 'index.html: Book a demo appears in the nav, the hero and the close (' + ctas.length + ')');
   for (const href of ctas) assert.equal(href, '/lets-talk', 'index.html: every Book a demo reaches /lets-talk');
   assert.ok(fs.existsSync(path.join(__dirname, '..', 'lets-talk.html')), 'the contact page ships');

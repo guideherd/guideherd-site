@@ -4,7 +4,9 @@
 // functionality as live"), and the design's structure that a copy edit could silently lose.
 //
 // Evidence behind each claim pin (product repo, main at the time of writing):
-//   Clio      creates the client and matter; validated against a Clio trial tenant.
+//   Clio      creates a matter (under a "GuideHerd Intake" contact that staff reassign to the real
+//             client), validated against a Clio trial tenant (rung 3); the client-creating adapter is
+//             not yet live-validated (server/integrations/clio/clio-matter-provider.js).
 //   Filevine  sign-in and account discovery only; no client or matter write path.
 //   Orion     live client search (#831); writes held (standing authorization 4).
 //   Lex       held for every customer: PLATFORM_HOLDS.lex in server/operations/rollout.js (#795).
@@ -38,6 +40,7 @@ test('the matter-opening step names no vendor, and does not promise a write ever
   const step = VISIBLE.slice(VISIBLE.indexOf('The matter opens'), VISIBLE.indexOf('The matter opens') + 400);
   assert.match(step, /your practice-management system/);
   assert.match(step, /or staged for your staff to enter/, 'systems without a write path stage the intake');
+  assert.doesNotMatch(step, /\bclient\b/i, 'no system has a validated path that creates the client record');
   assert.doesNotMatch(step, /Clio|Filevine|Orion/, 'step 4 names no vendor (#904 acceptance 5)');
 });
 

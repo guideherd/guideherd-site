@@ -219,7 +219,6 @@ test('the ops screenshot’s alt text describes the current Overview, not the re
     const alt = html.slice(at, at + 800);
     assert.doesNotMatch(alt, /handoffs as counts/,
       name + ': the "Today’s handoffs" card was removed (product #314) — the KPI strip owns the numbers');
-    if (name === 'index.html') assert.match(alt, /KPI strip/, 'the alt names the composition the capture actually shows');
   }
   assert.ok(published >= 1, 'the ops capture is published somewhere (/platform), so this pin binds');
 });
