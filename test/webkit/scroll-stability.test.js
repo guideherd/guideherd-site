@@ -37,7 +37,9 @@ test.after(async () => {
 });
 
 // The pages that embed the product screenshot — the element that flickered.
-const PAGES = ['platform.html', 'index.html'];
+// GitLab #904: the homepage no longer publishes the ops capture (its product window is HTML),
+// so it leaves this list; /platform still publishes it.
+const PAGES = ['platform.html'];
 
 test('WebKit: the product-screenshot box is scroll-stable — no transient collapse, nothing below it bounces', { timeout: 300000 }, async (t) => {
   if (!browser) { t.skip('webkit browser not installed'); return; }

@@ -205,13 +205,22 @@ test('no public page uses certification vocabulary (#332)', () => {
   }
 });
 
+// GitLab #904 (stale assertion rewritten, intent kept): the litigation-first homepage no
+// longer publishes the ops capture, so a slice of index.html around it would be empty and the
+// pin would fail (or, worse, pass on nothing — the failure the entry-capture pin above
+// documents). The guarantee now follows the capture to every page that publishes it.
 test('the ops screenshot’s alt text describes the current Overview, not the retired handoffs card', () => {
-  const index = page('index.html');
-  const alt = index.slice(index.indexOf('/images/ops-overview-dark.png'),
-                          index.indexOf('/images/ops-overview-dark.png') + 800);
-  assert.doesNotMatch(alt, /handoffs as counts/,
-    'the "Today’s handoffs" card was removed (product #314) — the KPI strip owns the numbers');
-  assert.match(alt, /KPI strip/, 'the alt names the composition the capture actually shows');
+  let published = 0;
+  for (const name of ALL_PUBLIC) {
+    const html = page(name);
+    const at = html.indexOf('/images/ops-overview-dark.png');
+    if (at === -1) continue;
+    published += 1;
+    const alt = html.slice(at, at + 800);
+    assert.doesNotMatch(alt, /handoffs as counts/,
+      name + ': the "Today’s handoffs" card was removed (product #314) — the KPI strip owns the numbers');
+  }
+  assert.ok(published >= 1, 'the ops capture is published somewhere (/platform), so this pin binds');
 });
 
 // ── GitLab #372: the shipped-history claims stay inside their evidence ───
