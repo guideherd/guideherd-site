@@ -45,12 +45,19 @@ test('the matter-opening step names no vendor, and does not promise a write ever
   assert.doesNotMatch(step, /Clio|Filevine|Orion/, 'step 4 names no vendor (#904 acceptance 5)');
 });
 
-test('held capabilities are labelled, and Lex (live since #905) is not', () => {
+test('held capabilities are labelled; Lex (#905) and drafting (#906) are not', () => {
   const lex = HOME.slice(HOME.indexOf('id="lex"'), HOME.indexOf('id="how"'));
   // #905: Lex is live in production for every customer firm, so its section carries no availability caveat.
   assert.doesNotMatch(text(lex), /coming soon|not yet available/i, 'Lex is available (#905): no coming-soon label');
-  assert.match(HOME, /Drafting, coming soon:/, 'drafting is off for customer tenants: its caption says so');
-  assert.match(VISIBLE, /Word templates coming soon/, 'the Word templates tile follows drafting');
+  // Stale assertion rewritten (#906, DJ 2026-11-08: "update the homepage to remove drafting coming soon"): drafting
+  // from a firm's own Word templates is live in production (Martinson & Beason). Intent kept: a capability's label
+  // matches whether customers have it — drafting and its Word templates carry no coming-soon label, Filevine still does.
+  const draft = HOME.slice(HOME.indexOf('id="panel-draft"'), HOME.indexOf('</div>', HOME.indexOf('GuideHerd never sends, signs or files a draft.')));
+  assert.doesNotMatch(text(draft), /coming soon|not yet available/i, 'drafting is available (#906): no coming-soon label in its panel');
+  assert.match(HOME, /draft: 'Drafting: a first draft from your own template, marked for attorney review\. Sample data\.'/, 'the drafting caption states the capability without a caveat');
+  assert.doesNotMatch(HOME, /Drafting, coming soon/);
+  assert.doesNotMatch(VISIBLE, /Word templates\W*coming soon/i, 'the Word templates tile and chip follow drafting');
+  assert.match(VISIBLE, /Word templates/);
 });
 
 test('the Reception Guide card makes no voice claim and promises no transfer', () => {
